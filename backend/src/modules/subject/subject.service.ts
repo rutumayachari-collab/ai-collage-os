@@ -814,6 +814,10 @@ export class SubjectService {
     return subjectRepository.recommendLearningResources(subjectId, limit);
   }
 
+  public async listLearningResources(subjectId: string, type?: string): Promise<SubjectDocument | null> {
+    return subjectRepository.listLearningResources(subjectId, type);
+  }
+
   public async getSubjectStatistics(subjectId: string): Promise<SubjectDocument | null> {
     return subjectRepository.getSubjectStatistics(subjectId);
   }
