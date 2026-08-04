@@ -5,5 +5,6 @@ import { studentModule } from '../modules/student';
 import { departmentModule } from '../modules/department';
 import { courseModule } from '../modules/course';
 import { facultyModule } from '../modules/faculty';
+import { subjectModule } from '../modules/subject';
 
-export const featureModules: readonly FeatureModule[] = [healthModule, authModule, studentModule, departmentModule, courseModule, facultyModule];
+export const featureModules: readonly FeatureModule[] = [healthModule, authModule, studentModule, departmentModule, courseModule, facultyModule, subjectModule];

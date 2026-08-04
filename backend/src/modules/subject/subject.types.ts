@@ -103,11 +103,11 @@ export interface SubjectSnapshot {
   prerequisiteSubjectIds: string[];
   outcomeMapping?: OutcomeMapping;
   learningResources: LearningResource[];
-  documents: SubjectDocument[];
+  documents: SubjectDocumentRecord[];
   aiMetadata: AiMetadataSnapshot;
 }
 
-export interface SubjectDocument {
+export interface SubjectDocumentRecord {
   id: string;
   name: string;
   type: DocumentType;
@@ -211,7 +211,7 @@ export interface SubjectSchemaType {
   outcomeMapping?: OutcomeMapping;
   currentVersion?: string;
   versionHistory: SubjectVersion[];
-  documents: SubjectDocument[];
+  documents: SubjectDocumentRecord[];
   learningResources: LearningResource[];
   predictedDifficulty?: DifficultyLevel;
   predictedPassRate?: number;
