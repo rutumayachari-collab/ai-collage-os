@@ -7,7 +7,12 @@ import quad from "@/assets/campus-quad.jpg";
 import sports from "@/assets/campus-sports.jpg";
 
 const TILES = [
-  { src: aerial, alt: "Aerial view of the campus", label: "Main Campus", span: "md:col-span-2 md:row-span-2" },
+  {
+    src: aerial,
+    alt: "Aerial view of the campus",
+    label: "Main Campus",
+    span: "md:col-span-2 md:row-span-2",
+  },
   { src: library, alt: "Central library", label: "Central Library", span: "" },
   { src: quad, alt: "University quad", label: "Student Quad", span: "" },
   { src: sports, alt: "Sports complex", label: "Sports Arena", span: "md:col-span-2" },

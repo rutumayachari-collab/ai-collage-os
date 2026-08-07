@@ -4,9 +4,27 @@ import { Container } from "./Container";
 import { SectionTitle } from "./SectionTitle";
 
 const NEWS = [
-  { tag: "Event", date: "Mar 14", title: "AI Innovation Summit 2026 — registrations open", desc: "Three days of talks, demos and hackathons with 40+ industry speakers.", tone: "bg-sky/15 text-sky" },
-  { tag: "News", date: "Mar 08", title: "Placement season closes with a 96% placement rate", desc: "Median CTC rises 18% year-over-year across engineering and management.", tone: "bg-emerald-400/15 text-emerald-500" },
-  { tag: "Admissions", date: "Feb 27", title: "Early admissions round for 2026-27 batch begins", desc: "Priority scholarships and hostel allocation for applicants before Apr 15.", tone: "bg-amber-400/15 text-amber-500" },
+  {
+    tag: "Event",
+    date: "Mar 14",
+    title: "AI Innovation Summit 2026 — registrations open",
+    desc: "Three days of talks, demos and hackathons with 40+ industry speakers.",
+    tone: "bg-sky/15 text-sky",
+  },
+  {
+    tag: "News",
+    date: "Mar 08",
+    title: "Placement season closes with a 96% placement rate",
+    desc: "Median CTC rises 18% year-over-year across engineering and management.",
+    tone: "bg-emerald-400/15 text-emerald-500",
+  },
+  {
+    tag: "Admissions",
+    date: "Feb 27",
+    title: "Early admissions round for 2026-27 batch begins",
+    desc: "Priority scholarships and hostel allocation for applicants before Apr 15.",
+    tone: "bg-amber-400/15 text-amber-500",
+  },
 ];
 
 export function News() {
@@ -37,7 +55,9 @@ export function News() {
               className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-elegant"
             >
               <div className="flex items-center gap-2">
-                <span className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${n.tone}`}>{n.tag}</span>
+                <span className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${n.tone}`}>
+                  {n.tag}
+                </span>
                 <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                   <HiOutlineCalendar className="h-3.5 w-3.5" /> {n.date}
                 </span>
@@ -47,7 +67,8 @@ export function News() {
               </h3>
               <p className="mt-2 text-sm text-muted-foreground">{n.desc}</p>
               <button className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-navy hover:text-sky">
-                Read more <HiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                Read more{" "}
+                <HiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             </motion.article>
           ))}

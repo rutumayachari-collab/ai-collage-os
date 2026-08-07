@@ -27,11 +27,15 @@ export function ChatButton() {
             </div>
             <div className="space-y-3 p-4 text-sm">
               <div className="max-w-[85%] rounded-2xl bg-muted p-3 text-foreground">
-                Hi! I'm your admission assistant. Ask me about programmes, fees or the application process.
+                Hi! I'm your admission assistant. Ask me about programmes, fees or the application
+                process.
               </div>
               <div className="flex flex-wrap gap-2">
                 {["Explore courses", "Check eligibility", "Scholarships"].map((s) => (
-                  <button key={s} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:border-sky hover:text-sky">
+                  <button
+                    key={s}
+                    className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:border-sky hover:text-sky"
+                  >
                     {s}
                   </button>
                 ))}

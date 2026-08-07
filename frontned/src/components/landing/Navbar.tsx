@@ -3,8 +3,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "./Button";
 import {
-  HiMenu, HiX, HiOutlineSparkles, HiOutlineUser, HiOutlineAcademicCap,
-  HiOutlineShieldCheck, HiOutlineIdentification, HiChevronDown,
+  HiMenu,
+  HiX,
+  HiOutlineSparkles,
+  HiOutlineUser,
+  HiOutlineAcademicCap,
+  HiOutlineShieldCheck,
+  HiOutlineIdentification,
+  HiChevronDown,
 } from "react-icons/hi";
 
 const NAV_LINKS = [
@@ -19,16 +25,40 @@ const NAV_LINKS = [
 type PortalItem = { icon: React.ReactNode; label: string; hint: string };
 
 const STUDENT_ITEMS: PortalItem[] = [
-  { icon: <HiOutlineUser className="h-4 w-4" />, label: "Student Portal", hint: "Applications, fees, timetable" },
-  { icon: <HiOutlineAcademicCap className="h-4 w-4" />, label: "Applicant Login", hint: "Track your admission status" },
+  {
+    icon: <HiOutlineUser className="h-4 w-4" />,
+    label: "Student Portal",
+    hint: "Applications, fees, timetable",
+  },
+  {
+    icon: <HiOutlineAcademicCap className="h-4 w-4" />,
+    label: "Applicant Login",
+    hint: "Track your admission status",
+  },
 ];
 
 const ADMIN_ITEMS: PortalItem[] = [
-  { icon: <HiOutlineShieldCheck className="h-4 w-4" />, label: "Admin Console", hint: "Manage admissions & staff" },
-  { icon: <HiOutlineIdentification className="h-4 w-4" />, label: "Counsellor Login", hint: "Review inquiries & documents" },
+  {
+    icon: <HiOutlineShieldCheck className="h-4 w-4" />,
+    label: "Admin Console",
+    hint: "Manage admissions & staff",
+  },
+  {
+    icon: <HiOutlineIdentification className="h-4 w-4" />,
+    label: "Counsellor Login",
+    hint: "Review inquiries & documents",
+  },
 ];
 
-function LoginDropdown({ label, items, primary = false }: { label: string; items: PortalItem[]; primary?: boolean }) {
+function LoginDropdown({
+  label,
+  items,
+  primary = false,
+}: {
+  label: string;
+  items: PortalItem[];
+  primary?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -76,7 +106,9 @@ function LoginDropdown({ label, items, primary = false }: { label: string; items
             ))}
             <div className="mt-1 border-t border-white/5 p-3 text-xs text-white/50">
               New here?{" "}
-              <a href="#admission" className="text-sky hover:underline">Create an account</a>
+              <a href="#admission" className="text-sky hover:underline">
+                Create an account
+              </a>
             </div>
           </motion.div>
         )}
@@ -116,9 +148,7 @@ export function Navbar() {
             <span className="grid h-9 w-9 place-items-center rounded-xl bg-sky text-navy-deep shadow-glow">
               <HiOutlineSparkles className="h-5 w-5" />
             </span>
-            <span className="font-heading text-lg font-semibold text-white">
-              AI-CollegeOS
-            </span>
+            <span className="font-heading text-lg font-semibold text-white">AI-CollegeOS</span>
           </a>
 
           <nav className="hidden items-center gap-1 md:flex">
@@ -168,8 +198,12 @@ export function Navbar() {
                 ))}
               </nav>
               <div className="mt-3 grid grid-cols-2 gap-2">
-                <Button variant="outline" size="sm">Student Login</Button>
-                <Button variant="primary" size="sm">Admin Login</Button>
+                <Button variant="outline" size="sm">
+                  Student Login
+                </Button>
+                <Button variant="primary" size="sm">
+                  Admin Login
+                </Button>
               </div>
             </motion.div>
           )}

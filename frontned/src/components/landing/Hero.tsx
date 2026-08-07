@@ -1,12 +1,21 @@
 import { motion } from "framer-motion";
-import { HiArrowRight, HiOutlineChat, HiOutlineShieldCheck, HiOutlineLightningBolt } from "react-icons/hi";
+import {
+  HiArrowRight,
+  HiOutlineChat,
+  HiOutlineShieldCheck,
+  HiOutlineLightningBolt,
+} from "react-icons/hi";
+import { Link } from "@tanstack/react-router";
 import heroImg from "@/assets/hero-ai-students.jpg";
 import { Button } from "./Button";
 import { Container } from "./Container";
 
 export function Hero() {
   return (
-    <section id="home" className="gradient-hero relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28">
+    <section
+      id="home"
+      className="gradient-hero relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28"
+    >
       {/* Floating shapes */}
       <div className="pointer-events-none absolute inset-0">
         <div className="animate-float absolute left-[6%] top-24 h-24 w-24 rounded-3xl bg-sky/20 blur-2xl" />
@@ -32,20 +41,31 @@ export function Hero() {
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
-              Streamline enrolments end-to-end — from inquiry to confirmation — with an intelligent assistant that guides students, verifies documents and helps your team convert faster.
+              Streamline enrolments end-to-end — from inquiry to confirmation — with an intelligent
+              assistant that guides students, verifies documents and helps your team convert faster.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Button size="lg" rightIcon={<HiArrowRight className="h-5 w-5" />}>Apply Now</Button>
+              <Link to="/login">
+                <Button size="lg" rightIcon={<HiArrowRight className="h-5 w-5" />}>
+                  Apply Now
+                </Button>
+              </Link>
               <Button size="lg" variant="outline" leftIcon={<HiOutlineChat className="h-5 w-5" />}>
                 Talk to AI Assistant
               </Button>
             </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/60">
-              <div className="flex items-center gap-2"><HiOutlineShieldCheck className="h-5 w-5 text-sky" /> Verified profiles</div>
-              <div className="flex items-center gap-2"><HiOutlineLightningBolt className="h-5 w-5 text-sky" /> 3-minute onboarding</div>
-              <div className="flex items-center gap-2"><HiOutlineChat className="h-5 w-5 text-sky" /> 24/7 AI support</div>
+              <div className="flex items-center gap-2">
+                <HiOutlineShieldCheck className="h-5 w-5 text-sky" /> Verified profiles
+              </div>
+              <div className="flex items-center gap-2">
+                <HiOutlineLightningBolt className="h-5 w-5 text-sky" /> 3-minute onboarding
+              </div>
+              <div className="flex items-center gap-2">
+                <HiOutlineChat className="h-5 w-5 text-sky" /> 24/7 AI support
+              </div>
             </div>
           </motion.div>
 

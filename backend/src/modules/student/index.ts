@@ -9,7 +9,7 @@ export const studentModule: FeatureModule = {
 };
 
 export * from './student.types';
-export * from './student.model';
+export { StudentDocument, StudentSchemaType } from './student.model';
 export * from './student.repository';
 export * from './student.service';
 export * from './student.controller';

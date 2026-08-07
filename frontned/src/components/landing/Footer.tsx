@@ -1,4 +1,9 @@
-import { HiOutlineSparkles, HiOutlineMail, HiOutlineLocationMarker, HiOutlinePhone } from "react-icons/hi";
+import {
+  HiOutlineSparkles,
+  HiOutlineMail,
+  HiOutlineLocationMarker,
+  HiOutlinePhone,
+} from "react-icons/hi";
 import { FaTwitter, FaLinkedinIn, FaInstagram, FaYoutube } from "react-icons/fa";
 import { Container } from "./Container";
 import { Button } from "./Button";
@@ -50,13 +55,21 @@ export function Footer() {
               <span className="font-heading text-lg font-semibold text-white">AI-CollegeOS</span>
             </a>
             <p className="mt-4 max-w-sm text-sm">
-              The intelligent operating system for modern higher education — starting with admissions.
+              The intelligent operating system for modern higher education — starting with
+              admissions.
             </p>
 
             <ul className="mt-6 space-y-2 text-sm">
-              <li className="flex items-center gap-2"><HiOutlineLocationMarker className="h-4 w-4 text-sky" /> Knowledge Park, Bengaluru 560100</li>
-              <li className="flex items-center gap-2"><HiOutlinePhone className="h-4 w-4 text-sky" /> +91 80 4567 8900</li>
-              <li className="flex items-center gap-2"><HiOutlineMail className="h-4 w-4 text-sky" /> hello@ai-collegeos.edu</li>
+              <li className="flex items-center gap-2">
+                <HiOutlineLocationMarker className="h-4 w-4 text-sky" /> Knowledge Park, Bengaluru
+                560100
+              </li>
+              <li className="flex items-center gap-2">
+                <HiOutlinePhone className="h-4 w-4 text-sky" /> +91 80 4567 8900
+              </li>
+              <li className="flex items-center gap-2">
+                <HiOutlineMail className="h-4 w-4 text-sky" /> hello@ai-collegeos.edu
+              </li>
             </ul>
 
             <div className="mt-6 flex items-center gap-3">
@@ -78,7 +91,9 @@ export function Footer() {
               <ul className="mt-4 space-y-2 text-sm">
                 {c.links.map((l) => (
                   <li key={l}>
-                    <a href="#" className="transition hover:text-sky">{l}</a>
+                    <a href="#" className="transition hover:text-sky">
+                      {l}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -89,10 +104,18 @@ export function Footer() {
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs sm:flex-row sm:items-center">
           <div>© {new Date().getFullYear()} AI-CollegeOS. All rights reserved.</div>
           <div className="flex flex-wrap gap-6">
-            <a href="#" className="hover:text-sky">Privacy Policy</a>
-            <a href="#" className="hover:text-sky">Terms of Service</a>
-            <a href="#" className="hover:text-sky">Cookie Preferences</a>
-            <a href="#" className="hover:text-sky">Accessibility</a>
+            <a href="#" className="hover:text-sky">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-sky">
+              Terms of Service
+            </a>
+            <a href="#" className="hover:text-sky">
+              Cookie Preferences
+            </a>
+            <a href="#" className="hover:text-sky">
+              Accessibility
+            </a>
           </div>
         </div>
       </Container>

@@ -1,8 +1,18 @@
 import { Container } from "./Container";
 
 const LOGOS = [
-  "Google", "Microsoft", "Amazon", "Infosys", "TCS", "Deloitte",
-  "Accenture", "Wipro", "Adobe", "Flipkart", "Zomato", "Razorpay",
+  "Google",
+  "Microsoft",
+  "Amazon",
+  "Infosys",
+  "TCS",
+  "Deloitte",
+  "Accenture",
+  "Wipro",
+  "Adobe",
+  "Flipkart",
+  "Zomato",
+  "Razorpay",
 ];
 
 export function Recruiters() {

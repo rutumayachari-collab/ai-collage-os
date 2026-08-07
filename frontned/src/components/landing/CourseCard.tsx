@@ -1,7 +1,13 @@
 import { motion } from "framer-motion";
 import {
-  HiArrowRight, HiOutlineClock, HiOutlineUserGroup, HiOutlineCurrencyRupee,
-  HiOutlineStar, HiOutlineBriefcase, HiOutlineChip, HiOutlineHeart,
+  HiArrowRight,
+  HiOutlineClock,
+  HiOutlineUserGroup,
+  HiOutlineCurrencyRupee,
+  HiOutlineStar,
+  HiOutlineBriefcase,
+  HiOutlineChip,
+  HiOutlineHeart,
 } from "react-icons/hi";
 
 export type CourseTag = "Popular" | "New" | "AI Track" | "Scholarship";
@@ -28,8 +34,17 @@ const TAG_STYLES: Record<CourseTag, string> = {
 };
 
 export function CourseCard({
-  image, name, category, duration, seats, fees,
-  rating = 4.8, placement = "96%", highlights = [], tag, index = 0,
+  image,
+  name,
+  category,
+  duration,
+  seats,
+  fees,
+  rating = 4.8,
+  placement = "96%",
+  highlights = [],
+  tag,
+  index = 0,
 }: Props) {
   return (
     <motion.article
@@ -58,7 +73,9 @@ export function CourseCard({
 
         {/* Tag */}
         {tag && (
-          <span className={`absolute right-4 top-4 rounded-full px-2.5 py-1 text-[11px] font-semibold shadow-sm ${TAG_STYLES[tag]}`}>
+          <span
+            className={`absolute right-4 top-4 rounded-full px-2.5 py-1 text-[11px] font-semibold shadow-sm ${TAG_STYLES[tag]}`}
+          >
             {tag}
           </span>
         )}
@@ -80,9 +97,7 @@ export function CourseCard({
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="font-heading text-lg font-semibold leading-snug text-foreground">
-          {name}
-        </h3>
+        <h3 className="font-heading text-lg font-semibold leading-snug text-foreground">{name}</h3>
 
         {highlights.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
@@ -99,9 +114,21 @@ export function CourseCard({
         )}
 
         <div className="mt-4 grid grid-cols-3 gap-2 text-xs">
-          <Meta icon={<HiOutlineClock className="h-4 w-4 text-sky" />} value={duration} label="Duration" />
-          <Meta icon={<HiOutlineUserGroup className="h-4 w-4 text-sky" />} value={String(seats)} label="Seats" />
-          <Meta icon={<HiOutlineCurrencyRupee className="h-4 w-4 text-sky" />} value={fees} label="Fees / yr" />
+          <Meta
+            icon={<HiOutlineClock className="h-4 w-4 text-sky" />}
+            value={duration}
+            label="Duration"
+          />
+          <Meta
+            icon={<HiOutlineUserGroup className="h-4 w-4 text-sky" />}
+            value={String(seats)}
+            label="Seats"
+          />
+          <Meta
+            icon={<HiOutlineCurrencyRupee className="h-4 w-4 text-sky" />}
+            value={fees}
+            label="Fees / yr"
+          />
         </div>
 
         {/* Placement bar */}
@@ -125,7 +152,8 @@ export function CourseCard({
 
         <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
           <button className="inline-flex items-center gap-1.5 text-sm font-medium text-navy transition hover:text-sky">
-            Learn more <HiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            Learn more{" "}
+            <HiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </button>
           <button className="rounded-full bg-navy px-4 py-1.5 text-xs font-medium text-white transition hover:bg-navy-deep">
             Apply

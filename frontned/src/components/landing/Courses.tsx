@@ -23,24 +23,56 @@ type Course = {
 
 const COURSES: Course[] = [
   {
-    image: cs, name: "B.Tech · Computer Science & AI", category: "Undergraduate",
-    duration: "4 yrs", seats: 180, fees: "₹1.8L", rating: 4.9, placement: "98%",
-    highlights: ["Machine Learning", "Cloud", "Cyber"], tag: "AI Track", stream: "Engineering",
+    image: cs,
+    name: "B.Tech · Computer Science & AI",
+    category: "Undergraduate",
+    duration: "4 yrs",
+    seats: 180,
+    fees: "₹1.8L",
+    rating: 4.9,
+    placement: "98%",
+    highlights: ["Machine Learning", "Cloud", "Cyber"],
+    tag: "AI Track",
+    stream: "Engineering",
   },
   {
-    image: mba, name: "MBA · Business Analytics", category: "Postgraduate",
-    duration: "2 yrs", seats: 120, fees: "₹3.2L", rating: 4.8, placement: "95%",
-    highlights: ["Analytics", "Finance", "Strategy"], tag: "Popular", stream: "Management",
+    image: mba,
+    name: "MBA · Business Analytics",
+    category: "Postgraduate",
+    duration: "2 yrs",
+    seats: 120,
+    fees: "₹3.2L",
+    rating: 4.8,
+    placement: "95%",
+    highlights: ["Analytics", "Finance", "Strategy"],
+    tag: "Popular",
+    stream: "Management",
   },
   {
-    image: mech, name: "B.Tech · Mechanical & Robotics", category: "Undergraduate",
-    duration: "4 yrs", seats: 120, fees: "₹1.6L", rating: 4.7, placement: "92%",
-    highlights: ["Robotics", "CAD", "IoT"], tag: "New", stream: "Engineering",
+    image: mech,
+    name: "B.Tech · Mechanical & Robotics",
+    category: "Undergraduate",
+    duration: "4 yrs",
+    seats: 120,
+    fees: "₹1.6L",
+    rating: 4.7,
+    placement: "92%",
+    highlights: ["Robotics", "CAD", "IoT"],
+    tag: "New",
+    stream: "Engineering",
   },
   {
-    image: bio, name: "B.Sc · Biotechnology", category: "Undergraduate",
-    duration: "3 yrs", seats: 90, fees: "₹1.2L", rating: 4.6, placement: "88%",
-    highlights: ["Genomics", "Bioinformatics"], tag: "Scholarship", stream: "Sciences",
+    image: bio,
+    name: "B.Sc · Biotechnology",
+    category: "Undergraduate",
+    duration: "3 yrs",
+    seats: 90,
+    fees: "₹1.2L",
+    rating: 4.6,
+    placement: "88%",
+    highlights: ["Genomics", "Bioinformatics"],
+    tag: "Scholarship",
+    stream: "Sciences",
   },
 ];
 
@@ -79,7 +111,9 @@ export function Courses() {
         </div>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {list.map((c, i) => <CourseCard key={c.name} {...c} index={i} />)}
+          {list.map((c, i) => (
+            <CourseCard key={c.name} {...c} index={i} />
+          ))}
         </div>
       </Container>
     </section>

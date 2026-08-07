@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { AppProviders } from "@/app/providers/AppProviders";
 
 function NotFoundComponent() {
   return (
@@ -77,11 +78,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "AI-CollegeOS — AI-Powered College Admission Automation" },
+      {
+        name: "description",
+        content:
+          "AI-CollegeOS automates college admissions end-to-end — from inquiry to confirmation — with a 24/7 AI assistant, instant document verification and smart scholarship matching.",
+      },
+      { property: "og:title", content: "AI-CollegeOS — AI-Powered College Admission Automation" },
+      {
+        property: "og:description",
+        content:
+          "Streamline enrolments with an intelligent SaaS platform: admissions today, and Student, Faculty, Placement, Library, Hostel and Finance modules next.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -125,9 +133,10 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
-    </QueryClientProvider>
+    <AppProviders>
+      <QueryClientProvider client={queryClient}>
+        <Outlet />
+      </QueryClientProvider>
+    </AppProviders>
   );
 }

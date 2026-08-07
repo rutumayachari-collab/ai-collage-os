@@ -1,13 +1,20 @@
 import { motion } from "framer-motion";
 import {
-  HiOutlineShieldCheck, HiOutlineAcademicCap, HiOutlineGlobe,
-  HiOutlineBadgeCheck, HiOutlineStar,
+  HiOutlineShieldCheck,
+  HiOutlineAcademicCap,
+  HiOutlineGlobe,
+  HiOutlineBadgeCheck,
+  HiOutlineStar,
 } from "react-icons/hi";
 import { Container } from "./Container";
 
 const BADGES = [
   { icon: <HiOutlineBadgeCheck className="h-5 w-5" />, label: "NAAC A++", note: "Accredited" },
-  { icon: <HiOutlineShieldCheck className="h-5 w-5" />, label: "NBA", note: "Programme accredited" },
+  {
+    icon: <HiOutlineShieldCheck className="h-5 w-5" />,
+    label: "NBA",
+    note: "Programme accredited",
+  },
   { icon: <HiOutlineStar className="h-5 w-5" />, label: "NIRF Top 25", note: "Engineering 2025" },
   { icon: <HiOutlineAcademicCap className="h-5 w-5" />, label: "AICTE", note: "Approved" },
   { icon: <HiOutlineGlobe className="h-5 w-5" />, label: "QS Ranked", note: "Global Top 500" },
@@ -19,7 +26,9 @@ export function Accreditation() {
       <Container>
         <div className="grid gap-8 lg:grid-cols-[1fr_2fr] lg:items-center">
           <div>
-            <div className="text-xs font-medium uppercase tracking-widest text-sky">Accredited & Ranked</div>
+            <div className="text-xs font-medium uppercase tracking-widest text-sky">
+              Accredited & Ranked
+            </div>
             <h3 className="mt-2 font-heading text-2xl font-semibold sm:text-3xl">
               Recognised by the institutions that matter
             </h3>

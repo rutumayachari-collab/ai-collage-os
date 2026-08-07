@@ -10,33 +10,439 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as ApplicantsRouteImport } from './routes/applicants'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as FacultyRouteImport } from './routes/faculty'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as InquiriesRouteImport } from './routes/inquiries'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
+import { Route as AdminReportsRouteImport } from './routes/admin.reports'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdmissionsIdRouteImport } from './routes/admissions.$id'
+import { Route as AiCopilotRouteImport } from './routes/ai.copilot'
+import { Route as AiOcrRouteImport } from './routes/ai.ocr'
+import { Route as ApplicantsIdRouteImport } from './routes/applicants.$id'
+import { Route as ApplicantsNewRouteImport } from './routes/applicants.new'
+import { Route as DocumentsUploadRouteImport } from './routes/documents.upload'
+import { Route as FacultyAdmissionsRouteImport } from './routes/faculty.admissions'
+import { Route as FacultyApplicantsRouteImport } from './routes/faculty.applicants'
+import { Route as FacultyEligibilityRouteImport } from './routes/faculty.eligibility'
+import { Route as FacultyNotificationsRouteImport } from './routes/faculty.notifications'
+import { Route as FacultyVerificationRouteImport } from './routes/faculty.verification'
+import { Route as InquiriesIdRouteImport } from './routes/inquiries.$id'
+import { Route as InquiriesNewRouteImport } from './routes/inquiries.new'
+import { Route as PaymentsHistoryRouteImport } from './routes/payments.history'
+import { Route as PaymentsSummaryRouteImport } from './routes/payments.summary'
+import { Route as FacultyAiCopilotApplicantIdRouteImport } from './routes/faculty.ai-copilot.$applicantId'
+import { Route as InquiriesIdEditRouteImport } from './routes/inquiries.$id.edit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantsRoute = ApplicantsRouteImport.update({
+  id: '/applicants',
+  path: '/applicants',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FacultyRoute = FacultyRouteImport.update({
+  id: '/faculty',
+  path: '/faculty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InquiriesRoute = InquiriesRouteImport.update({
+  id: '/inquiries',
+  path: '/inquiries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReportsRoute = AdminReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdmissionsIdRoute = AdmissionsIdRouteImport.update({
+  id: '/admissions/$id',
+  path: '/admissions/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiCopilotRoute = AiCopilotRouteImport.update({
+  id: '/ai/copilot',
+  path: '/ai/copilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiOcrRoute = AiOcrRouteImport.update({
+  id: '/ai/ocr',
+  path: '/ai/ocr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantsIdRoute = ApplicantsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApplicantsRoute,
+} as any)
+const ApplicantsNewRoute = ApplicantsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => ApplicantsRoute,
+} as any)
+const DocumentsUploadRoute = DocumentsUploadRouteImport.update({
+  id: '/upload',
+  path: '/upload',
+  getParentRoute: () => DocumentsRoute,
+} as any)
+const FacultyAdmissionsRoute = FacultyAdmissionsRouteImport.update({
+  id: '/admissions',
+  path: '/admissions',
+  getParentRoute: () => FacultyRoute,
+} as any)
+const FacultyApplicantsRoute = FacultyApplicantsRouteImport.update({
+  id: '/applicants',
+  path: '/applicants',
+  getParentRoute: () => FacultyRoute,
+} as any)
+const FacultyEligibilityRoute = FacultyEligibilityRouteImport.update({
+  id: '/eligibility',
+  path: '/eligibility',
+  getParentRoute: () => FacultyRoute,
+} as any)
+const FacultyNotificationsRoute = FacultyNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => FacultyRoute,
+} as any)
+const FacultyVerificationRoute = FacultyVerificationRouteImport.update({
+  id: '/verification',
+  path: '/verification',
+  getParentRoute: () => FacultyRoute,
+} as any)
+const InquiriesIdRoute = InquiriesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => InquiriesRoute,
+} as any)
+const InquiriesNewRoute = InquiriesNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => InquiriesRoute,
+} as any)
+const PaymentsHistoryRoute = PaymentsHistoryRouteImport.update({
+  id: '/payments/history',
+  path: '/payments/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentsSummaryRoute = PaymentsSummaryRouteImport.update({
+  id: '/payments/summary',
+  path: '/payments/summary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FacultyAiCopilotApplicantIdRoute =
+  FacultyAiCopilotApplicantIdRouteImport.update({
+    id: '/ai-copilot/$applicantId',
+    path: '/ai-copilot/$applicantId',
+    getParentRoute: () => FacultyRoute,
+  } as any)
+const InquiriesIdEditRoute = InquiriesIdEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => InquiriesIdRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/applicants': typeof ApplicantsRouteWithChildren
+  '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRouteWithChildren
+  '/faculty': typeof FacultyRouteWithChildren
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/inquiries': typeof InquiriesRouteWithChildren
+  '/login': typeof LoginRoute
+  '/notifications': typeof NotificationsRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/settings': typeof SettingsRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admissions/$id': typeof AdmissionsIdRoute
+  '/ai/copilot': typeof AiCopilotRoute
+  '/ai/ocr': typeof AiOcrRoute
+  '/applicants/$id': typeof ApplicantsIdRoute
+  '/applicants/new': typeof ApplicantsNewRoute
+  '/documents/upload': typeof DocumentsUploadRoute
+  '/faculty/admissions': typeof FacultyAdmissionsRoute
+  '/faculty/applicants': typeof FacultyApplicantsRoute
+  '/faculty/eligibility': typeof FacultyEligibilityRoute
+  '/faculty/notifications': typeof FacultyNotificationsRoute
+  '/faculty/verification': typeof FacultyVerificationRoute
+  '/inquiries/$id': typeof InquiriesIdRouteWithChildren
+  '/inquiries/new': typeof InquiriesNewRoute
+  '/payments/history': typeof PaymentsHistoryRoute
+  '/payments/summary': typeof PaymentsSummaryRoute
+  '/faculty/ai-copilot/$applicantId': typeof FacultyAiCopilotApplicantIdRoute
+  '/inquiries/$id/edit': typeof InquiriesIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/applicants': typeof ApplicantsRouteWithChildren
+  '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRouteWithChildren
+  '/faculty': typeof FacultyRouteWithChildren
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/inquiries': typeof InquiriesRouteWithChildren
+  '/login': typeof LoginRoute
+  '/notifications': typeof NotificationsRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/settings': typeof SettingsRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admissions/$id': typeof AdmissionsIdRoute
+  '/ai/copilot': typeof AiCopilotRoute
+  '/ai/ocr': typeof AiOcrRoute
+  '/applicants/$id': typeof ApplicantsIdRoute
+  '/applicants/new': typeof ApplicantsNewRoute
+  '/documents/upload': typeof DocumentsUploadRoute
+  '/faculty/admissions': typeof FacultyAdmissionsRoute
+  '/faculty/applicants': typeof FacultyApplicantsRoute
+  '/faculty/eligibility': typeof FacultyEligibilityRoute
+  '/faculty/notifications': typeof FacultyNotificationsRoute
+  '/faculty/verification': typeof FacultyVerificationRoute
+  '/inquiries/$id': typeof InquiriesIdRouteWithChildren
+  '/inquiries/new': typeof InquiriesNewRoute
+  '/payments/history': typeof PaymentsHistoryRoute
+  '/payments/summary': typeof PaymentsSummaryRoute
+  '/faculty/ai-copilot/$applicantId': typeof FacultyAiCopilotApplicantIdRoute
+  '/inquiries/$id/edit': typeof InquiriesIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/applicants': typeof ApplicantsRouteWithChildren
+  '/dashboard': typeof DashboardRoute
+  '/documents': typeof DocumentsRouteWithChildren
+  '/faculty': typeof FacultyRouteWithChildren
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/inquiries': typeof InquiriesRouteWithChildren
+  '/login': typeof LoginRoute
+  '/notifications': typeof NotificationsRoute
+  '/register': typeof RegisterRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/settings': typeof SettingsRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/reports': typeof AdminReportsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admissions/$id': typeof AdmissionsIdRoute
+  '/ai/copilot': typeof AiCopilotRoute
+  '/ai/ocr': typeof AiOcrRoute
+  '/applicants/$id': typeof ApplicantsIdRoute
+  '/applicants/new': typeof ApplicantsNewRoute
+  '/documents/upload': typeof DocumentsUploadRoute
+  '/faculty/admissions': typeof FacultyAdmissionsRoute
+  '/faculty/applicants': typeof FacultyApplicantsRoute
+  '/faculty/eligibility': typeof FacultyEligibilityRoute
+  '/faculty/notifications': typeof FacultyNotificationsRoute
+  '/faculty/verification': typeof FacultyVerificationRoute
+  '/inquiries/$id': typeof InquiriesIdRouteWithChildren
+  '/inquiries/new': typeof InquiriesNewRoute
+  '/payments/history': typeof PaymentsHistoryRoute
+  '/payments/summary': typeof PaymentsSummaryRoute
+  '/faculty/ai-copilot/$applicantId': typeof FacultyAiCopilotApplicantIdRoute
+  '/inquiries/$id/edit': typeof InquiriesIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/applicants'
+    | '/dashboard'
+    | '/documents'
+    | '/faculty'
+    | '/forgot-password'
+    | '/inquiries'
+    | '/login'
+    | '/notifications'
+    | '/register'
+    | '/reset-password'
+    | '/settings'
+    | '/admin/analytics'
+    | '/admin/reports'
+    | '/admin/settings'
+    | '/admissions/$id'
+    | '/ai/copilot'
+    | '/ai/ocr'
+    | '/applicants/$id'
+    | '/applicants/new'
+    | '/documents/upload'
+    | '/faculty/admissions'
+    | '/faculty/applicants'
+    | '/faculty/eligibility'
+    | '/faculty/notifications'
+    | '/faculty/verification'
+    | '/inquiries/$id'
+    | '/inquiries/new'
+    | '/payments/history'
+    | '/payments/summary'
+    | '/faculty/ai-copilot/$applicantId'
+    | '/inquiries/$id/edit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/applicants'
+    | '/dashboard'
+    | '/documents'
+    | '/faculty'
+    | '/forgot-password'
+    | '/inquiries'
+    | '/login'
+    | '/notifications'
+    | '/register'
+    | '/reset-password'
+    | '/settings'
+    | '/admin/analytics'
+    | '/admin/reports'
+    | '/admin/settings'
+    | '/admissions/$id'
+    | '/ai/copilot'
+    | '/ai/ocr'
+    | '/applicants/$id'
+    | '/applicants/new'
+    | '/documents/upload'
+    | '/faculty/admissions'
+    | '/faculty/applicants'
+    | '/faculty/eligibility'
+    | '/faculty/notifications'
+    | '/faculty/verification'
+    | '/inquiries/$id'
+    | '/inquiries/new'
+    | '/payments/history'
+    | '/payments/summary'
+    | '/faculty/ai-copilot/$applicantId'
+    | '/inquiries/$id/edit'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/applicants'
+    | '/dashboard'
+    | '/documents'
+    | '/faculty'
+    | '/forgot-password'
+    | '/inquiries'
+    | '/login'
+    | '/notifications'
+    | '/register'
+    | '/reset-password'
+    | '/settings'
+    | '/admin/analytics'
+    | '/admin/reports'
+    | '/admin/settings'
+    | '/admissions/$id'
+    | '/ai/copilot'
+    | '/ai/ocr'
+    | '/applicants/$id'
+    | '/applicants/new'
+    | '/documents/upload'
+    | '/faculty/admissions'
+    | '/faculty/applicants'
+    | '/faculty/eligibility'
+    | '/faculty/notifications'
+    | '/faculty/verification'
+    | '/inquiries/$id'
+    | '/inquiries/new'
+    | '/payments/history'
+    | '/payments/summary'
+    | '/faculty/ai-copilot/$applicantId'
+    | '/inquiries/$id/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  ApplicantsRoute: typeof ApplicantsRouteWithChildren
+  DashboardRoute: typeof DashboardRoute
+  DocumentsRoute: typeof DocumentsRouteWithChildren
+  FacultyRoute: typeof FacultyRouteWithChildren
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  InquiriesRoute: typeof InquiriesRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  NotificationsRoute: typeof NotificationsRoute
+  RegisterRoute: typeof RegisterRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  SettingsRoute: typeof SettingsRoute
+  AdmissionsIdRoute: typeof AdmissionsIdRoute
+  AiCopilotRoute: typeof AiCopilotRoute
+  AiOcrRoute: typeof AiOcrRoute
+  PaymentsHistoryRoute: typeof PaymentsHistoryRoute
+  PaymentsSummaryRoute: typeof PaymentsSummaryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +454,339 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicants': {
+      id: '/applicants'
+      path: '/applicants'
+      fullPath: '/applicants'
+      preLoaderRoute: typeof ApplicantsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faculty': {
+      id: '/faculty'
+      path: '/faculty'
+      fullPath: '/faculty'
+      preLoaderRoute: typeof FacultyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inquiries': {
+      id: '/inquiries'
+      path: '/inquiries'
+      fullPath: '/inquiries'
+      preLoaderRoute: typeof InquiriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reports': {
+      id: '/admin/reports'
+      path: '/reports'
+      fullPath: '/admin/reports'
+      preLoaderRoute: typeof AdminReportsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admissions/$id': {
+      id: '/admissions/$id'
+      path: '/admissions/$id'
+      fullPath: '/admissions/$id'
+      preLoaderRoute: typeof AdmissionsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/copilot': {
+      id: '/ai/copilot'
+      path: '/ai/copilot'
+      fullPath: '/ai/copilot'
+      preLoaderRoute: typeof AiCopilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/ocr': {
+      id: '/ai/ocr'
+      path: '/ai/ocr'
+      fullPath: '/ai/ocr'
+      preLoaderRoute: typeof AiOcrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicants/$id': {
+      id: '/applicants/$id'
+      path: '/$id'
+      fullPath: '/applicants/$id'
+      preLoaderRoute: typeof ApplicantsIdRouteImport
+      parentRoute: typeof ApplicantsRoute
+    }
+    '/applicants/new': {
+      id: '/applicants/new'
+      path: '/new'
+      fullPath: '/applicants/new'
+      preLoaderRoute: typeof ApplicantsNewRouteImport
+      parentRoute: typeof ApplicantsRoute
+    }
+    '/documents/upload': {
+      id: '/documents/upload'
+      path: '/upload'
+      fullPath: '/documents/upload'
+      preLoaderRoute: typeof DocumentsUploadRouteImport
+      parentRoute: typeof DocumentsRoute
+    }
+    '/faculty/admissions': {
+      id: '/faculty/admissions'
+      path: '/admissions'
+      fullPath: '/faculty/admissions'
+      preLoaderRoute: typeof FacultyAdmissionsRouteImport
+      parentRoute: typeof FacultyRoute
+    }
+    '/faculty/applicants': {
+      id: '/faculty/applicants'
+      path: '/applicants'
+      fullPath: '/faculty/applicants'
+      preLoaderRoute: typeof FacultyApplicantsRouteImport
+      parentRoute: typeof FacultyRoute
+    }
+    '/faculty/eligibility': {
+      id: '/faculty/eligibility'
+      path: '/eligibility'
+      fullPath: '/faculty/eligibility'
+      preLoaderRoute: typeof FacultyEligibilityRouteImport
+      parentRoute: typeof FacultyRoute
+    }
+    '/faculty/notifications': {
+      id: '/faculty/notifications'
+      path: '/notifications'
+      fullPath: '/faculty/notifications'
+      preLoaderRoute: typeof FacultyNotificationsRouteImport
+      parentRoute: typeof FacultyRoute
+    }
+    '/faculty/verification': {
+      id: '/faculty/verification'
+      path: '/verification'
+      fullPath: '/faculty/verification'
+      preLoaderRoute: typeof FacultyVerificationRouteImport
+      parentRoute: typeof FacultyRoute
+    }
+    '/inquiries/$id': {
+      id: '/inquiries/$id'
+      path: '/$id'
+      fullPath: '/inquiries/$id'
+      preLoaderRoute: typeof InquiriesIdRouteImport
+      parentRoute: typeof InquiriesRoute
+    }
+    '/inquiries/new': {
+      id: '/inquiries/new'
+      path: '/new'
+      fullPath: '/inquiries/new'
+      preLoaderRoute: typeof InquiriesNewRouteImport
+      parentRoute: typeof InquiriesRoute
+    }
+    '/payments/history': {
+      id: '/payments/history'
+      path: '/payments/history'
+      fullPath: '/payments/history'
+      preLoaderRoute: typeof PaymentsHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payments/summary': {
+      id: '/payments/summary'
+      path: '/payments/summary'
+      fullPath: '/payments/summary'
+      preLoaderRoute: typeof PaymentsSummaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faculty/ai-copilot/$applicantId': {
+      id: '/faculty/ai-copilot/$applicantId'
+      path: '/ai-copilot/$applicantId'
+      fullPath: '/faculty/ai-copilot/$applicantId'
+      preLoaderRoute: typeof FacultyAiCopilotApplicantIdRouteImport
+      parentRoute: typeof FacultyRoute
+    }
+    '/inquiries/$id/edit': {
+      id: '/inquiries/$id/edit'
+      path: '/edit'
+      fullPath: '/inquiries/$id/edit'
+      preLoaderRoute: typeof InquiriesIdEditRouteImport
+      parentRoute: typeof InquiriesIdRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminReportsRoute: typeof AdminReportsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminReportsRoute: AdminReportsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface ApplicantsRouteChildren {
+  ApplicantsIdRoute: typeof ApplicantsIdRoute
+  ApplicantsNewRoute: typeof ApplicantsNewRoute
+}
+
+const ApplicantsRouteChildren: ApplicantsRouteChildren = {
+  ApplicantsIdRoute: ApplicantsIdRoute,
+  ApplicantsNewRoute: ApplicantsNewRoute,
+}
+
+const ApplicantsRouteWithChildren = ApplicantsRoute._addFileChildren(
+  ApplicantsRouteChildren,
+)
+
+interface DocumentsRouteChildren {
+  DocumentsUploadRoute: typeof DocumentsUploadRoute
+}
+
+const DocumentsRouteChildren: DocumentsRouteChildren = {
+  DocumentsUploadRoute: DocumentsUploadRoute,
+}
+
+const DocumentsRouteWithChildren = DocumentsRoute._addFileChildren(
+  DocumentsRouteChildren,
+)
+
+interface FacultyRouteChildren {
+  FacultyAdmissionsRoute: typeof FacultyAdmissionsRoute
+  FacultyApplicantsRoute: typeof FacultyApplicantsRoute
+  FacultyEligibilityRoute: typeof FacultyEligibilityRoute
+  FacultyNotificationsRoute: typeof FacultyNotificationsRoute
+  FacultyVerificationRoute: typeof FacultyVerificationRoute
+  FacultyAiCopilotApplicantIdRoute: typeof FacultyAiCopilotApplicantIdRoute
+}
+
+const FacultyRouteChildren: FacultyRouteChildren = {
+  FacultyAdmissionsRoute: FacultyAdmissionsRoute,
+  FacultyApplicantsRoute: FacultyApplicantsRoute,
+  FacultyEligibilityRoute: FacultyEligibilityRoute,
+  FacultyNotificationsRoute: FacultyNotificationsRoute,
+  FacultyVerificationRoute: FacultyVerificationRoute,
+  FacultyAiCopilotApplicantIdRoute: FacultyAiCopilotApplicantIdRoute,
+}
+
+const FacultyRouteWithChildren =
+  FacultyRoute._addFileChildren(FacultyRouteChildren)
+
+interface InquiriesIdRouteChildren {
+  InquiriesIdEditRoute: typeof InquiriesIdEditRoute
+}
+
+const InquiriesIdRouteChildren: InquiriesIdRouteChildren = {
+  InquiriesIdEditRoute: InquiriesIdEditRoute,
+}
+
+const InquiriesIdRouteWithChildren = InquiriesIdRoute._addFileChildren(
+  InquiriesIdRouteChildren,
+)
+
+interface InquiriesRouteChildren {
+  InquiriesIdRoute: typeof InquiriesIdRouteWithChildren
+  InquiriesNewRoute: typeof InquiriesNewRoute
+}
+
+const InquiriesRouteChildren: InquiriesRouteChildren = {
+  InquiriesIdRoute: InquiriesIdRouteWithChildren,
+  InquiriesNewRoute: InquiriesNewRoute,
+}
+
+const InquiriesRouteWithChildren = InquiriesRoute._addFileChildren(
+  InquiriesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  ApplicantsRoute: ApplicantsRouteWithChildren,
+  DashboardRoute: DashboardRoute,
+  DocumentsRoute: DocumentsRouteWithChildren,
+  FacultyRoute: FacultyRouteWithChildren,
+  ForgotPasswordRoute: ForgotPasswordRoute,
+  InquiriesRoute: InquiriesRouteWithChildren,
+  LoginRoute: LoginRoute,
+  NotificationsRoute: NotificationsRoute,
+  RegisterRoute: RegisterRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  SettingsRoute: SettingsRoute,
+  AdmissionsIdRoute: AdmissionsIdRoute,
+  AiCopilotRoute: AiCopilotRoute,
+  AiOcrRoute: AiOcrRoute,
+  PaymentsHistoryRoute: PaymentsHistoryRoute,
+  PaymentsSummaryRoute: PaymentsSummaryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

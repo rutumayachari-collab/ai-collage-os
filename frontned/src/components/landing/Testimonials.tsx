@@ -5,9 +5,27 @@ import { Container } from "./Container";
 import { SectionTitle } from "./SectionTitle";
 
 const ITEMS = [
-  { name: "Aarav Sharma", role: "B.Tech CSE, 2nd Year", quote: "The AI assistant walked me through every step. My admission was confirmed in 48 hours — no queues, no paperwork chaos.", initials: "AS" },
-  { name: "Priya Menon", role: "MBA Analytics, Alumna 2024", quote: "AI-CollegeOS made scholarship matching effortless. I discovered a diversity grant I didn't even know I qualified for.", initials: "PM" },
-  { name: "Rohan Iyer", role: "B.Sc Biotech, 3rd Year", quote: "From inquiry to hostel allotment, everything was on one dashboard. The most polished admission experience I've seen.", initials: "RI" },
+  {
+    name: "Aarav Sharma",
+    role: "B.Tech CSE, 2nd Year",
+    quote:
+      "The AI assistant walked me through every step. My admission was confirmed in 48 hours — no queues, no paperwork chaos.",
+    initials: "AS",
+  },
+  {
+    name: "Priya Menon",
+    role: "MBA Analytics, Alumna 2024",
+    quote:
+      "AI-CollegeOS made scholarship matching effortless. I discovered a diversity grant I didn't even know I qualified for.",
+    initials: "PM",
+  },
+  {
+    name: "Rohan Iyer",
+    role: "B.Sc Biotech, 3rd Year",
+    quote:
+      "From inquiry to hostel allotment, everything was on one dashboard. The most polished admission experience I've seen.",
+    initials: "RI",
+  },
 ];
 
 export function Testimonials() {
@@ -31,7 +49,9 @@ export function Testimonials() {
                 transition={{ duration: 0.35 }}
               >
                 <div className="flex gap-1 text-sky">
-                  {Array.from({ length: 5 }).map((_, k) => <HiStar key={k} className="h-5 w-5" />)}
+                  {Array.from({ length: 5 }).map((_, k) => (
+                    <HiStar key={k} className="h-5 w-5" />
+                  ))}
                 </div>
                 <blockquote className="mt-5 font-heading text-xl leading-relaxed text-foreground sm:text-2xl">
                   "{item.quote}"
@@ -49,7 +69,11 @@ export function Testimonials() {
             </AnimatePresence>
           </div>
           <div className="mt-6 flex items-center justify-center gap-3">
-            <button onClick={prev} aria-label="Previous" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card hover:bg-muted">
+            <button
+              onClick={prev}
+              aria-label="Previous"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card hover:bg-muted"
+            >
               <HiOutlineChevronLeft className="h-5 w-5" />
             </button>
             <div className="flex gap-1.5">
@@ -62,7 +86,11 @@ export function Testimonials() {
                 />
               ))}
             </div>
-            <button onClick={next} aria-label="Next" className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card hover:bg-muted">
+            <button
+              onClick={next}
+              aria-label="Next"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card hover:bg-muted"
+            >
               <HiOutlineChevronRight className="h-5 w-5" />
             </button>
           </div>
