@@ -23,6 +23,8 @@ import {
 import { useInquiries } from "@/app/hooks/queries/useInquiries";
 import type { CreateApplicantDto } from "@/app/types/applicant";
 
+const GENDERS = ["MALE", "FEMALE", "OTHER", "PREFER_NOT_TO_SAY"] as const;
+const QUALIFICATIONS = ["HIGH_SCHOOL", "INTERMEDIATE", "DIPLOMA", "BACHELORS", "MASTERS", "PHD", "OTHER"] as const;
 const COURSES = [
   "Computer Science",
   "Mechanical Engineering",
@@ -45,35 +47,89 @@ export function ApplicantForm() {
   const { data: inquiries = [] } = useInquiries({ status: "QUALIFIED" });
 
   const [formData, setFormData] = useState<CreateApplicantDto>({
+    applicationNumber: `APP-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 999999)).padStart(6, "0")}`,
+    fullName: "",
     firstName: "",
     lastName: "",
     email: "",
     phone: "",
+    applicationDate: new Date().toISOString(),
     dateOfBirth: "",
-    gender: "",
+    gender: undefined,
+    nationality: "",
     address: "",
-    city: "",
-    state: "",
-    country: "India",
-    pincode: "",
-    courseId: "",
+    qualification: undefined,
+    boardOrUniversity: "",
+    passingYear: undefined,
+    percentage: undefined,
+    cgpa: undefined,
+    category: "",
+    specialization: "",
+    preferredCourseId: "",
+    alternativeCourseIds: [],
+    preferredDepartmentId: "",
+    preferredCampus: "",
+    preferredAdmissionYear: "",
+    budgetRange: "",
+    hostelRequired: false,
+    transportRequired: false,
+    source: "",
+    campaign: "",
+    medium: "ONLINE",
+    referralSource: "",
+    utmSource: "",
+    utmMedium: "",
+    utmCampaign: "",
+    campaignId: "",
+    leadSource: "WEBSITE",
+    applicationChannel: "ONLINE",
+    status: "NEW",
+    priority: "MEDIUM",
+    admissionRound: undefined,
   });
 
   useEffect(() => {
     if (applicant) {
       setFormData({
+        applicationNumber: applicant.applicationNumber,
+        fullName: applicant.fullName,
         firstName: applicant.firstName,
         lastName: applicant.lastName,
         email: applicant.email,
         phone: applicant.phone,
+        applicationDate: applicant.applicationDate,
         dateOfBirth: applicant.dateOfBirth,
         gender: applicant.gender,
+        nationality: applicant.nationality,
         address: applicant.address,
-        city: applicant.city,
-        state: applicant.state,
-        country: applicant.country,
-        pincode: applicant.pincode,
-        courseId: applicant.courseId,
+        qualification: applicant.qualification,
+        boardOrUniversity: applicant.boardOrUniversity,
+        passingYear: applicant.passingYear,
+        percentage: applicant.percentage,
+        cgpa: applicant.cgpa,
+        category: applicant.category,
+        specialization: applicant.specialization,
+        preferredCourseId: applicant.preferredCourseId,
+        alternativeCourseIds: applicant.alternativeCourseIds,
+        preferredDepartmentId: applicant.preferredDepartmentId,
+        preferredCampus: applicant.preferredCampus,
+        preferredAdmissionYear: applicant.preferredAdmissionYear,
+        budgetRange: applicant.budgetRange,
+        hostelRequired: applicant.hostelRequired,
+        transportRequired: applicant.transportRequired,
+        source: applicant.source,
+        campaign: applicant.campaign,
+        medium: applicant.medium,
+        referralSource: applicant.referralSource,
+        utmSource: applicant.utmSource,
+        utmMedium: applicant.utmMedium,
+        utmCampaign: applicant.utmCampaign,
+        campaignId: applicant.campaignId,
+        leadSource: applicant.leadSource,
+        applicationChannel: applicant.applicationChannel,
+        status: applicant.status,
+        priority: applicant.priority,
+        admissionRound: applicant.admissionRound,
       });
     }
   }, [applicant]);
@@ -167,34 +223,26 @@ export function ApplicantForm() {
                       type="date"
                       value={formData.dateOfBirth}
                       onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                      required
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="gender">Gender</Label>
                     <Select
                       value={formData.gender}
-                      onValueChange={(value) => setFormData({ ...formData, gender: value })}
+                      onValueChange={(value) => setFormData({ ...formData, gender: value as CreateApplicantDto["gender"] })}
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Select gender" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="Male">Male</SelectItem>
-                        <SelectItem value="Female">Female</SelectItem>
-                        <SelectItem value="Other">Other</SelectItem>
+                        {GENDERS.map((g) => (
+                          <SelectItem key={g} value={g}>{g.replace(/_/g, " ")}</SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Address</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="address">Address</Label>
                   <Textarea
@@ -202,44 +250,73 @@ export function ApplicantForm() {
                     value={formData.address}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                     rows={3}
-                    required
                   />
                 </div>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Academic Information</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="city">City</Label>
+                    <Label htmlFor="qualification">Qualification</Label>
+                    <Select
+                      value={formData.qualification}
+                      onValueChange={(value) => setFormData({ ...formData, qualification: value as CreateApplicantDto["qualification"] })}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select qualification" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {QUALIFICATIONS.map((q) => (
+                          <SelectItem key={q} value={q}>{q.replace(/_/g, " ")}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="boardOrUniversity">Board / University</Label>
                     <Input
-                      id="city"
-                      value={formData.city}
-                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                      required
+                      id="boardOrUniversity"
+                      value={formData.boardOrUniversity}
+                      onChange={(e) => setFormData({ ...formData, boardOrUniversity: e.target.value })}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-3">
+                  <div className="space-y-2">
+                    <Label htmlFor="passingYear">Passing Year</Label>
+                    <Input
+                      id="passingYear"
+                      type="number"
+                      value={formData.passingYear}
+                      onChange={(e) => setFormData({ ...formData, passingYear: e.target.value ? Number(e.target.value) : undefined })}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="state">State</Label>
+                    <Label htmlFor="percentage">Percentage</Label>
                     <Input
-                      id="state"
-                      value={formData.state}
-                      onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                      required
+                      id="percentage"
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={formData.percentage}
+                      onChange={(e) => setFormData({ ...formData, percentage: e.target.value ? Number(e.target.value) : undefined })}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="country">Country</Label>
+                    <Label htmlFor="cgpa">CGPA</Label>
                     <Input
-                      id="country"
-                      value={formData.country}
-                      onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="pincode">Pincode</Label>
-                    <Input
-                      id="pincode"
-                      value={formData.pincode}
-                      onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                      required
+                      id="cgpa"
+                      type="number"
+                      min="0"
+                      max="10"
+                      value={formData.cgpa}
+                      onChange={(e) => setFormData({ ...formData, cgpa: e.target.value ? Number(e.target.value) : undefined })}
                     />
                   </div>
                 </div>
@@ -254,23 +331,31 @@ export function ApplicantForm() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-2">
-                  <Label htmlFor="courseId">Course</Label>
+                  <Label htmlFor="preferredCourseId">Preferred Course</Label>
                   <Select
-                    value={formData.courseId}
-                    onValueChange={(value) => setFormData({ ...formData, courseId: value })}
+                    value={formData.preferredCourseId}
+                    onValueChange={(value) => setFormData({ ...formData, preferredCourseId: value })}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select a course" />
                     </SelectTrigger>
                     <SelectContent>
                       {COURSES.map((course) => (
-                        <SelectItem key={course} value={course}>
-                          {course}
-                        </SelectItem>
+                        <SelectItem key={course} value={course}>{course}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Application Number</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">Auto-generated application number.</p>
+                <p className="text-lg font-mono font-bold mt-2">{formData.applicationNumber}</p>
               </CardContent>
             </Card>
 
@@ -280,8 +365,8 @@ export function ApplicantForm() {
                   <CardTitle>Convert from Inquiry</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    This applicant was created from an inquiry.
+                  <p className="text-sm text-muted-foreground">
+                    Select an inquiry to pre-fill applicant data.
                   </p>
                 </CardContent>
               </Card>

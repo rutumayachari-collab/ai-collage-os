@@ -6,7 +6,7 @@ import { DocumentUpload } from "@/app/pages/documents/DocumentUpload";
 export const Route = createFileRoute("/documents/upload")({
   head: () => ({
     meta: [
-      { title: "Upload Document — AI-CollegeOS" },
+      { title: "Upload Document — NEXORA AI CAMPUSOS" },
       { name: "description", content: "Upload a document" },
     ],
   }),

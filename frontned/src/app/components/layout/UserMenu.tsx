@@ -34,7 +34,7 @@ export function UserMenu() {
 
   if (!user) return null;
 
-  const initials = `${user.firstName?.[0] || ""}${user.lastName?.[0] || ""}`.toUpperCase();
+  const initials = `${user.fullName?.split(" ").map((n) => n[0]).join("") || ""}`.toUpperCase();
 
   return (
     <div ref={ref} className="relative">
@@ -47,7 +47,7 @@ export function UserMenu() {
         </div>
         <div className="hidden text-left md:block">
           <p className="text-sm font-medium">
-            {user.firstName} {user.lastName}
+            {user.fullName}
           </p>
           <p className="text-xs text-muted-foreground capitalize">
             {user.role.replace("_", " ").toLowerCase()}
@@ -58,7 +58,7 @@ export function UserMenu() {
         <div className="absolute right-0 top-full z-50 mt-2 w-56 rounded-lg border bg-card p-1 shadow-lg">
           <div className="border-b px-3 py-2">
             <p className="text-sm font-medium">
-              {user.firstName} {user.lastName}
+              {user.fullName}
             </p>
             <p className="text-xs text-muted-foreground">{user.email}</p>
           </div>

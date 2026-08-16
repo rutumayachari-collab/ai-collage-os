@@ -1,7 +1,10 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { HiOutlineStar, HiOutlineHeart, HiOutlineGlobeAlt, HiArrowRight } from "react-icons/hi";
 import { Container } from "./Container";
 import { SectionTitle } from "./SectionTitle";
+import { Link } from "@tanstack/react-router";
 
 const SCHOLARSHIPS = [
   {
@@ -59,9 +62,13 @@ export function Scholarships() {
                   {s.title}
                 </h3>
                 <p className="mt-3 text-sm text-muted-foreground">{s.description}</p>
-                <button className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-navy hover:text-sky">
+                <Link
+                  to="/login"
+                  search={{ redirect: "/eligibility" }}
+                  className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-navy hover:text-sky"
+                >
                   Check eligibility <HiArrowRight className="h-4 w-4" />
-                </button>
+                </Link>
               </div>
             </motion.div>
           ))}

@@ -3,40 +3,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-
-const API_BASE = import.meta.env.VITE_API_URL || "";
-
-type Payment = {
-  paymentId: string;
-  applicantId: string;
-  applicantName: string;
-  courseId: string;
-  courseName: string;
-  amount: number;
-  status: "PENDING" | "COMPLETED" | "FAILED" | "REFUNDED" | "CANCELLED";
-  method: "CASH" | "CARD" | "UPI" | "NET_BANKING" | "CHEQUE" | "OTHER";
-  provider: "RAZORPAY" | "STRIPE" | "PAYU" | "MANUAL";
-  paidAt?: string;
-  createdAt: string;
-};
-
-type PaymentSummary = {
-  totalCollected: number;
-  totalPending: number;
-  totalRefunded: number;
-  totalFailed: number;
-  byMethod: Record<string, number>;
-  byStatus: Record<string, number>;
-};
+import { paymentService } from "@/app/services/payment.service";
+import type { Payment } from "@/app/types/payment";
 
 export function PaymentHistory() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["payments"],
-    queryFn: async (): Promise<{ items: Payment[]; total: number }> => {
-      const res = await fetch(`${API_BASE}/payments`);
-      if (!res.ok) throw new Error("Failed to fetch payments");
-      return res.json();
-    },
+    queryFn: () => paymentService.getAll(),
   });
 
   if (isLoading) return <div className="text-muted-foreground">Loading payments...</div>;
@@ -76,7 +49,7 @@ export function PaymentHistory() {
                   <div className="flex items-center gap-2">
                     <Badge
                       variant={
-                        payment.status === "COMPLETED"
+                         payment.status === "PAID"
                           ? "default"
                           : payment.status === "PENDING"
                             ? "secondary"

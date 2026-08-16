@@ -7,7 +7,7 @@ import { DataTable } from "@/app/components/tables/DataTable";
 import { StatusBadge } from "@/app/components/common/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useDocuments, useDocumentsByApplicant } from "@/app/hooks/queries/useDocuments";
+import { useDocuments, useDocumentsByApplicant, useApproveDocument } from "@/app/hooks/queries/useDocuments";
 import { useAuth } from "@/app/hooks/useAuth";
 import { HiOutlineMagnifyingGlass, HiOutlineCloudArrowUp, HiOutlineEye } from "react-icons/hi2";
 import type { Document } from "@/app/types/document";
@@ -25,6 +25,7 @@ export function DocumentList() {
 
   const canUpload = user?.permissions.includes("documents:create");
   const canVerify = user?.permissions.includes("documents:verify");
+  const approveMutation = useApproveDocument();
 
   const columns = [
     { key: "name", header: "Document Name" },
@@ -54,14 +55,14 @@ export function DocumentList() {
   const actions = (row: Document) => [
     {
       label: "View",
-      onClick: () => window.open(row.url, "_blank"),
+      onClick: () => window.open(row.fileUrl, "_blank"),
     },
     ...(canVerify && row.status === "UPLOADED"
       ? [
           {
             label: "Verify",
             onClick: async () => {
-              await fetch(`/api/v1/documents/${row.id}/verify`, { method: "POST" });
+              await approveMutation.mutateAsync(row.id);
             },
           },
         ]

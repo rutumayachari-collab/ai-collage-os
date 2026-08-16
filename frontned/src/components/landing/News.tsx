@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { HiOutlineCalendar, HiArrowRight } from "react-icons/hi";
 import { Container } from "./Container";

@@ -16,14 +16,6 @@ export class AdmissionService extends BaseService {
   async getByApplicant(applicantId: string): Promise<Admission> {
     return this.get<Admission>(`${API_ENDPOINTS.ADMISSIONS}`, { params: { applicantId } });
   }
-
-  async getStages(id: string): Promise<AdmissionStage[]> {
-    return this.get<AdmissionStage[]>(`${API_ENDPOINTS.ADMISSIONS}/${id}/stages`);
-  }
-
-  async updateStage(id: string, stage: string): Promise<Admission> {
-    return this.patch<Admission>(`${API_ENDPOINTS.ADMISSIONS}/${id}/stages`, { stage });
-  }
 }
 
 export const admissionService = new AdmissionService();

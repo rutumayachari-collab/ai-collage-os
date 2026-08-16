@@ -8,8 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { HiOutlineSparkles } from "react-icons/hi";
+import { useAuth } from "@/app/hooks/useAuth";
 
 export function ForgotPasswordPage() {
+  const { forgotPassword } = useAuth();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,8 +25,7 @@ export function ForgotPasswordPage() {
     const email = formData.get("email") as string;
 
     try {
-      // TODO: Replace with actual API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await forgotPassword(email);
       setSuccess(true);
     } catch {
       setError("Failed to send reset email");

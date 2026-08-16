@@ -1,10 +1,18 @@
 import { NotFoundError } from '../../shared/utils/api-error.util';
-import type { NotificationRecipient, NotificationPayload, Notification, NotificationHistory, NotificationFilterInput, NotificationStats, NotificationChannel, NotificationPriority, NotificationStatus } from './notification.types';
+import { NotificationHistoryModel, NotificationModel } from './notification.model';
+import type {
+  Notification,
+  NotificationChannel,
+  NotificationFilterInput,
+  NotificationHistory,
+  NotificationPriority,
+  NotificationRecipient,
+  NotificationPayload,
+  NotificationStats,
+  NotificationStatus,
+} from './notification.types';
 
 export class NotificationService {
-  private notifications: Map<string, Notification> = new Map();
-  private history: Map<string, NotificationHistory> = new Map();
-
   async sendNotification(recipient: NotificationRecipient, payload: NotificationPayload, createdBy: string): Promise<Notification> {
     const notificationId = `NTF-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
 
@@ -20,105 +28,103 @@ export class NotificationService {
       updatedAt: new Date(),
     };
 
-    this.notifications.set(notificationId, notification);
-
-    await this.recordHistory(notification, 'PENDING');
-
-    return notification;
+    const saved = await NotificationModel.create(notification);
+    await this.recordHistory(saved.toObject() as Notification, 'PENDING');
+    return saved.toObject() as Notification;
   }
 
   async getNotification(notificationId: string): Promise<Notification | null> {
-    return this.notifications.get(notificationId) || null;
+    const notification = await NotificationModel.findOne({ notificationId }).lean<Notification | null>();
+    return notification ?? null;
   }
 
   async listNotifications(filter: NotificationFilterInput): Promise<{ items: Notification[]; total: number }> {
-    let items = Array.from(this.notifications.values());
+    const query: Record<string, unknown> = {};
 
     if (filter.recipientId) {
-      items = items.filter((n) => n.recipient.userId === filter.recipientId);
+      query['recipient.userId'] = filter.recipientId;
     }
     if (filter.channel) {
-      items = items.filter((n) => n.payload.channel === filter.channel);
+      query['payload.channel'] = filter.channel;
     }
     if (filter.status) {
-      items = items.filter((n) => n.status === filter.status);
+      query.status = filter.status;
     }
     if (filter.priority) {
-      items = items.filter((n) => n.payload.priority === filter.priority);
+      query['payload.priority'] = filter.priority;
     }
     if (filter.type) {
-      items = items.filter((n) => n.payload.type === filter.type);
+      query['payload.type'] = filter.type;
     }
     if (filter.isRead !== undefined) {
-      items = items.filter((n) => (filter.isRead ? n.readAt !== undefined : n.readAt === undefined));
+      query.readAt = filter.isRead ? { $ne: null } : { $eq: null };
     }
     if (filter.startDate || filter.endDate) {
-      items = items.filter((n) => {
-        const date = n.createdAt;
-        if (filter.startDate && date < filter.startDate) return false;
-        if (filter.endDate && date > filter.endDate) return false;
-        return true;
-      });
+      query.createdAt = {} as Record<string, Date>;
+      if (filter.startDate) {
+        (query.createdAt as Record<string, Date>).$gte = filter.startDate;
+      }
+      if (filter.endDate) {
+        (query.createdAt as Record<string, Date>).$lte = filter.endDate;
+      }
     }
 
-    return { items, total: items.length };
+    const [items, total] = await Promise.all([
+      NotificationModel.find(query).sort({ createdAt: -1 }).lean<Notification[]>(),
+      NotificationModel.countDocuments(query),
+    ]);
+
+    return { items, total };
   }
 
   async markAsRead(notificationId: string): Promise<Notification | null> {
-    const notification = this.notifications.get(notificationId);
-    if (!notification) {
+    const updated = await NotificationModel.findOneAndUpdate(
+      { notificationId },
+      { $set: { status: 'READ', readAt: new Date(), updatedAt: new Date() } },
+      { new: true, runValidators: true },
+    ).lean<Notification | null>();
+
+    if (!updated) {
       throw new NotFoundError('Notification not found');
     }
 
-    notification.status = 'READ';
-    notification.readAt = new Date();
-    notification.updatedAt = new Date();
-
-    this.notifications.set(notificationId, notification);
-    await this.recordHistory(notification, 'READ');
-
-    return notification;
+    await this.recordHistory(updated as Notification, 'READ');
+    return updated as Notification;
   }
 
   async markAsDelivered(notificationId: string): Promise<Notification | null> {
-    const notification = this.notifications.get(notificationId);
-    if (!notification) {
+    const updated = await NotificationModel.findOneAndUpdate(
+      { notificationId },
+      { $set: { status: 'DELIVERED', deliveredAt: new Date(), updatedAt: new Date() } },
+      { new: true, runValidators: true },
+    ).lean<Notification | null>();
+
+    if (!updated) {
       throw new NotFoundError('Notification not found');
     }
 
-    notification.status = 'DELIVERED';
-    notification.deliveredAt = new Date();
-    notification.updatedAt = new Date();
-
-    this.notifications.set(notificationId, notification);
-    await this.recordHistory(notification, 'DELIVERED');
-
-    return notification;
+    await this.recordHistory(updated as Notification, 'DELIVERED');
+    return updated as Notification;
   }
 
   async markAsFailed(notificationId: string, reason: string): Promise<Notification | null> {
-    const notification = this.notifications.get(notificationId);
-    if (!notification) {
+    const updated = await NotificationModel.findOneAndUpdate(
+      { notificationId },
+      { $set: { status: 'FAILED', failedAt: new Date(), failureReason: reason, updatedAt: new Date() } },
+      { new: true, runValidators: true },
+    ).lean<Notification | null>();
+
+    if (!updated) {
       throw new NotFoundError('Notification not found');
     }
 
-    notification.status = 'FAILED';
-    notification.failedAt = new Date();
-    notification.failureReason = reason;
-    notification.updatedAt = new Date();
-
-    this.notifications.set(notificationId, notification);
-    await this.recordHistory(notification, 'FAILED');
-
-    return notification;
+    await this.recordHistory(updated as Notification, 'FAILED');
+    return updated as Notification;
   }
 
   async getStats(recipientId?: string): Promise<NotificationStats> {
-    let items = Array.from(this.notifications.values());
-
-    if (recipientId) {
-      items = items.filter((n) => n.recipient.userId === recipientId);
-    }
+    const query: Record<string, unknown> = recipientId ? { 'recipient.userId': recipientId } : {};
+    const items = await NotificationModel.find(query).lean<Notification[]>();
 
     const byChannel: Record<NotificationChannel, number> = {
       IN_APP: 0,
@@ -134,16 +140,16 @@ export class NotificationService {
       URGENT: 0,
     };
 
-    items.forEach((n) => {
-      byChannel[n.payload.channel]++;
-      byPriority[n.payload.priority]++;
+    items.forEach((notification) => {
+      byChannel[notification.payload.channel] += 1;
+      byPriority[notification.payload.priority] += 1;
     });
 
     return {
       total: items.length,
-      unread: items.filter((n) => n.readAt === undefined).length,
-      read: items.filter((n) => n.readAt !== undefined).length,
-      failed: items.filter((n) => n.status === 'FAILED').length,
+      unread: items.filter((notification) => notification.readAt === undefined).length,
+      read: items.filter((notification) => notification.readAt !== undefined).length,
+      failed: items.filter((notification) => notification.status === 'FAILED').length,
       byChannel,
       byPriority,
     };
@@ -159,13 +165,13 @@ export class NotificationService {
       status,
       recipient: notification.recipient.userId,
       subject: notification.payload.subject,
-      sentAt: notification.sentAt || notification.createdAt,
+      sentAt: notification.sentAt ?? notification.createdAt,
       deliveredAt: notification.deliveredAt,
       readAt: notification.readAt,
       failureReason: notification.failureReason,
     };
 
-    this.history.set(historyId, history);
+    await NotificationHistoryModel.create(history);
     return history;
   }
 }

@@ -4,6 +4,7 @@ import { HttpStatus } from '../../shared/constants';
 import { asyncHandler, sendSuccess } from '../../shared/utils';
 import { DocumentVerificationService, documentVerificationService } from './documentVerification.service';
 import { NotFoundError, UnauthorizedError } from '../../shared/utils/api-error.util';
+import type { DocumentVerificationDocument } from './documentVerification.model';
 import {
   createDocumentVerificationSchema,
   updateDocumentVerificationSchema,
@@ -24,6 +25,23 @@ import {
   type RejectDocumentInput,
   type ReuploadDocumentInput,
 } from './documentVerification.validator';
+
+const toDocument = (doc: DocumentVerificationDocument) => ({
+  id: String(doc._id),
+  applicantId: doc.applicantId,
+  applicationNumber: doc.applicationNumber,
+  documentId: doc.documentId,
+  type: doc.documentType,
+  name: doc.documentName,
+  url: doc.fileUrl,
+  status: doc.verificationStatus,
+  description: doc.description,
+  priority: doc.priority,
+  currentVersion: doc.currentVersion,
+  ocrStatus: doc.ocrResult?.status,
+  createdAt: doc.createdAt,
+  updatedAt: doc.updatedAt,
+});
 
 // TODO: API versioning - consider prefixing these routes under /api/v2/document-verifications for future breaking changes.
 // TODO: OpenAPI/Swagger - document all document verification endpoints.
@@ -54,7 +72,7 @@ export class DocumentVerificationController {
     const documentVerification = await this.service.createDocumentVerification(input, user.id);
     sendSuccess(res, {
       message: 'Document verification record created successfully',
-      data: documentVerification,
+      data: toDocument(documentVerification),
       statusCode: HttpStatus.CREATED,
     });
   });
@@ -78,7 +96,7 @@ export class DocumentVerificationController {
     if (!documentVerification) {
       throw new NotFoundError('Document verification record not found');
     }
-    sendSuccess(res, { message: 'Document verification record updated successfully', data: documentVerification });
+    sendSuccess(res, { message: 'Document verification record updated successfully', data: toDocument(documentVerification) });
   });
 
   /**
@@ -94,7 +112,7 @@ export class DocumentVerificationController {
     if (!documentVerification) {
       throw new NotFoundError('Document verification record not found');
     }
-    sendSuccess(res, { message: 'Document verification record fetched successfully', data: documentVerification });
+    sendSuccess(res, { message: 'Document verification record fetched successfully', data: toDocument(documentVerification) });
   });
 
   /**
@@ -133,7 +151,7 @@ export class DocumentVerificationController {
     if (!documentVerification) {
       throw new NotFoundError('Document verification record not found');
     }
-    sendSuccess(res, { message: 'Document verification record restored successfully', data: documentVerification });
+    sendSuccess(res, { message: 'Document verification record restored successfully', data: toDocument(documentVerification) });
   });
 
   // ─── VERIFICATION WORKFLOW ────────────────────────────────────────────────
@@ -157,7 +175,7 @@ export class DocumentVerificationController {
     if (!documentVerification) {
       throw new NotFoundError('Document verification record not found');
     }
-    sendSuccess(res, { message: 'Document approved successfully', data: documentVerification });
+    sendSuccess(res, { message: 'Document approved successfully', data: toDocument(documentVerification) });
   });
 
   /**
@@ -179,7 +197,7 @@ export class DocumentVerificationController {
     if (!documentVerification) {
       throw new NotFoundError('Document verification record not found');
     }
-    sendSuccess(res, { message: 'Document rejected successfully', data: documentVerification });
+    sendSuccess(res, { message: 'Document rejected successfully', data: toDocument(documentVerification) });
   });
 
   /**
@@ -199,7 +217,7 @@ export class DocumentVerificationController {
     if (!documentVerification) {
       throw new NotFoundError('Document verification record not found');
     }
-    sendSuccess(res, { message: 'Document marked as under review', data: documentVerification });
+    sendSuccess(res, { message: 'Document marked as under review', data: toDocument(documentVerification) });
   });
 
   // ─── RE-UPLOAD WORKFLOW ──────────────────────────────────────────────────
@@ -223,7 +241,7 @@ export class DocumentVerificationController {
     if (!documentVerification) {
       throw new NotFoundError('Document verification record not found');
     }
-    sendSuccess(res, { message: 'Document re-uploaded successfully', data: documentVerification });
+    sendSuccess(res, { message: 'Document re-uploaded successfully', data: toDocument(documentVerification) });
   });
 
   // ─── SEARCH & FILTER ─────────────────────────────────────────────────────
@@ -239,7 +257,7 @@ export class DocumentVerificationController {
     const { items, total } = await this.service.listDocumentVerifications(query);
     sendSuccess(res, {
       message: 'Document verifications fetched successfully',
-      data: items,
+      data: items.map(toDocument),
       meta: {
         page: query.page,
         limit: query.limit,
@@ -262,7 +280,7 @@ export class DocumentVerificationController {
     const { items, total } = await this.service.searchDocumentVerifications(query.search || '', query.page, query.limit);
     sendSuccess(res, {
       message: 'Search results fetched successfully',
-      data: items,
+      data: items.map(toDocument),
       meta: {
         page: query.page,
         limit: query.limit,
@@ -393,7 +411,7 @@ export class DocumentVerificationController {
     if (!documentVerification) {
       throw new NotFoundError('Document verification record not found');
     }
-    sendSuccess(res, { message: 'Document verification record archived successfully', data: documentVerification });
+    sendSuccess(res, { message: 'Document verification record archived successfully', data: toDocument(documentVerification) });
   });
 
   /**
@@ -414,7 +432,7 @@ export class DocumentVerificationController {
     if (!documentVerification) {
       throw new NotFoundError('Document verification record not found');
     }
-    sendSuccess(res, { message: 'Document verification record restored successfully', data: documentVerification });
+    sendSuccess(res, { message: 'Document verification record restored successfully', data: toDocument(documentVerification) });
   });
 }
 

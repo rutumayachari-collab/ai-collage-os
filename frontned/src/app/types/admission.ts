@@ -1,16 +1,21 @@
 export type AdmissionStatus =
-  "PENDING" | "APPROVED" | "REJECTED" | "WAITLISTED" | "CONFIRMED" | "CANCELLED";
+  | "PENDING"
+  | "APPROVED"
+  | "REJECTED"
+  | "WAITLISTED"
+  | "CONFIRMED"
+  | "CANCELLED";
 
 export interface Admission {
   id: string;
   applicantId: string;
-  applicantName: string;
-  courseId: string;
-  courseName: string;
+  applicantName?: string;
+  courseId?: string;
+  courseName?: string;
   status: AdmissionStatus;
-  stage: string;
-  feeStatus: string;
-  eligibilityStatus: string;
+  stage?: string;
+  feeStatus?: string;
+  eligibilityStatus?: string;
   aiRecommendation?: string;
   notes?: string;
   createdAt: string;

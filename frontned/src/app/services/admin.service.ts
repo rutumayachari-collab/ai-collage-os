@@ -2,16 +2,14 @@ import { BaseService } from "./base.service";
 import { API_ENDPOINTS } from "../constants";
 import type {
   AdminStats,
+  SettingsData,
   AdmissionFunnel,
-  DepartmentStat,
-  FacultyStat,
   RevenueData,
   ScholarshipData,
   TimelineData,
   ProcessingTimeData,
   AIAccuracyData,
   ReportConfig,
-  SettingsData,
 } from "../types/admin";
 
 export class AdminService extends BaseService {
@@ -23,12 +21,12 @@ export class AdminService extends BaseService {
     return this.get<AdmissionFunnel>(`${API_ENDPOINTS.ADMISSIONS}/admin/funnel`);
   }
 
-  async getDepartmentStats(): Promise<DepartmentStat[]> {
-    return this.get<DepartmentStat[]>(`${API_ENDPOINTS.DEPARTMENTS}/stats`);
+  async getDepartmentStats(): Promise<AdmissionFunnel[]> {
+    return this.get<AdmissionFunnel[]>(`${API_ENDPOINTS.DEPARTMENTS}/statistics`);
   }
 
-  async getFacultyStats(): Promise<FacultyStat[]> {
-    return this.get<FacultyStat[]>(`${API_ENDPOINTS.FACULTY}/stats`);
+  async getFacultyStats(): Promise<AdmissionFunnel[]> {
+    return this.get<AdmissionFunnel[]>(`${API_ENDPOINTS.FACULTY}/statistics`);
   }
 
   async getRevenue(): Promise<RevenueData[]> {

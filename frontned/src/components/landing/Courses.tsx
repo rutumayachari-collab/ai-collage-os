@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Container } from "./Container";
 import { SectionTitle } from "./SectionTitle";

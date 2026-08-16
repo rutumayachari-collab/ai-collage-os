@@ -22,13 +22,16 @@ import { ChatButton } from "@/components/landing/ChatButton";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AI-CollegeOS — AI-Powered College Admission Automation" },
+      { title: "NEXORA AI CAMPUSOS — AI-Powered College Admission Automation" },
       {
         name: "description",
         content:
-          "AI-CollegeOS automates college admissions end-to-end — from inquiry to confirmation — with a 24/7 AI assistant, instant document verification and smart scholarship matching.",
+          "NEXORA AI CAMPUSOS automates college admissions end-to-end — from inquiry to confirmation — with a 24/7 AI assistant, instant document verification and smart scholarship matching.",
       },
-      { property: "og:title", content: "AI-CollegeOS — AI-Powered College Admission Automation" },
+      {
+        property: "og:title",
+        content: "NEXORA AI CAMPUSOS — AI-Powered College Admission Automation",
+      },
       {
         property: "og:description",
         content:

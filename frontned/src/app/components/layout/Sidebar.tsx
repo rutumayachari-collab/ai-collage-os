@@ -22,6 +22,7 @@ import {
   HiOutlineBell,
   HiOutlineCog6Tooth,
 } from "react-icons/hi2";
+import { AnimatedBrand } from "@/app/components/brand/AnimatedBrand";
 
 const iconMap: Record<string, React.ReactNode> = {
   LayoutDashboard: <HiOutlineHome className="h-5 w-5" />,
@@ -63,11 +64,8 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
     <>
       {/* Desktop sidebar */}
       <aside className="hidden md:flex md:w-64 md:flex-col md:border-r md:bg-card">
-        <div className="flex h-16 items-center gap-2 border-b px-4">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
-            <HiOutlineSparkles className="h-5 w-5" />
-          </span>
-          <span className="font-heading text-lg font-semibold">AI-CollegeOS</span>
+        <div className="flex h-16 items-center gap-2 px-4">
+          <AnimatedBrand size="sm" />
         </div>
         <nav className="flex-1 space-y-1 overflow-y-auto p-3">
           <Link
@@ -113,10 +111,7 @@ export function Sidebar({ open, onClose }: { open: boolean; onClose: () => void 
       >
         <div className="flex h-16 items-center justify-between border-b px-4">
           <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
-              <HiOutlineSparkles className="h-5 w-5" />
-            </span>
-            <span className="font-heading text-lg font-semibold">AI-CollegeOS</span>
+            <AnimatedBrand size="sm" />
           </div>
           <button onClick={onClose} className="rounded-lg p-2 hover:bg-accent">
             <span className="sr-only">Close menu</span>

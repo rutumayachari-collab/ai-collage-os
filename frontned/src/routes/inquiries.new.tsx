@@ -6,7 +6,7 @@ import { InquiryForm } from "@/app/pages/inquiries/InquiryForm";
 export const Route = createFileRoute("/inquiries/new")({
   head: () => ({
     meta: [
-      { title: "New Inquiry — AI-CollegeOS" },
+      { title: "New Inquiry — NEXORA AI CAMPUSOS" },
       { name: "description", content: "Create a new inquiry" },
     ],
   }),

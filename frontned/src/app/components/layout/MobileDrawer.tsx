@@ -5,6 +5,7 @@ import { HiOutlineSparkles } from "react-icons/hi";
 import { APP_ROUTES } from "@/app/constants/routes";
 import { useRole } from "@/app/contexts/RoleContext";
 import { cn } from "@/lib/utils";
+import { AnimatedBrand } from "@/app/components/brand/AnimatedBrand";
 
 const iconMap: Record<string, React.ReactNode> = {
   LayoutDashboard: <span className="h-5 w-5" />,
@@ -52,10 +53,7 @@ export function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => 
       >
         <div className="flex h-16 items-center justify-between border-b px-4">
           <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
-              <HiOutlineSparkles className="h-5 w-5" />
-            </span>
-            <span className="font-heading text-lg font-semibold">AI-CollegeOS</span>
+            <AnimatedBrand size="sm" />
           </div>
           <button onClick={onClose} className="rounded-lg p-2 hover:bg-accent">
             <span className="sr-only">Close menu</span>

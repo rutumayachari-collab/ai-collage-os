@@ -6,7 +6,7 @@ import { AdminDashboard } from "@/app/pages/admin/AdminDashboard";
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Admin Dashboard — AI-CollegeOS" },
+      { title: "Admin Dashboard — NEXORA AI CAMPUSOS" },
       { name: "description", content: "Admin dashboard" },
     ],
   }),

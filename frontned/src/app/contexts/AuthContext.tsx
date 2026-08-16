@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useState, useCallback, useEffect, useContext } from "react";
-import type { AuthContextValue, User, LoginCredentials, AuthResponse } from "../types/auth";
+import type { AuthContextValue, User, LoginCredentials, RegisterCredentials, AuthResponse } from "../types/auth";
 import { authService } from "../services/auth.service";
 import { apiClient } from "../services/api/apiClient";
 import { useRoleContext } from "../hooks/useRole";
@@ -63,6 +63,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  const register = useCallback(async (credentials: RegisterCredentials) => {
+    const response = await authService.register(credentials);
+    const { user: userData, token: accessToken, refreshToken: refresh } = response;
+    setUser(userData);
+    setToken(accessToken);
+    setRefreshToken(refresh);
+    apiClient.setTokens(accessToken, refresh);
+    if (typeof window !== "undefined") {
+      localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
+    }
+  }, []);
+
+  const forgotPassword = useCallback(async (email: string) => {
+    await authService.forgotPassword(email);
+  }, []);
+
   const logout = useCallback(async () => {
     try {
       await authService.logout();
@@ -78,20 +94,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     }
   }, []);
-
-  const refreshUser = useCallback(async () => {
-    if (!token) return;
-    try {
-      const response = await authService.getCurrentUser();
-      const userData = response.data as User;
-      setUser(userData);
-      if (typeof window !== "undefined") {
-        localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(userData));
-      }
-    } catch {
-      await logout();
-    }
-  }, [token, logout]);
 
   const updateUser = useCallback((updatedUser: User) => {
     setUser(updatedUser);
@@ -131,8 +133,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isAuthenticated,
         isLoading,
         login,
+        register,
+        forgotPassword,
         logout,
-        refreshUser,
         updateUser,
       }}
     >

@@ -57,7 +57,7 @@ const documentVerificationRateLimiter = (req: Request, res: Response, next: Next
 // Self-service document upload. No authentication required.
 // Future integration: applicant portal, mobile app, WhatsApp bot.
 
-router.post('/', documentVerificationRateLimiter, validateRequest({ body: createDocumentVerificationSchema }), documentVerificationController.create);
+router.post('/', authenticate, documentVerificationRateLimiter, validateRequest({ body: createDocumentVerificationSchema }), documentVerificationController.create);
 
 // ─── VERIFIER ──────────────────────────────────────────────────────────────
 // Document verification, approval, rejection, and review endpoints for VERIFIER role.

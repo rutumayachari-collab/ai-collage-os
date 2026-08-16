@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiOutlineChevronLeft, HiOutlineChevronRight, HiStar } from "react-icons/hi";
@@ -16,7 +18,7 @@ const ITEMS = [
     name: "Priya Menon",
     role: "MBA Analytics, Alumna 2024",
     quote:
-      "AI-CollegeOS made scholarship matching effortless. I discovered a diversity grant I didn't even know I qualified for.",
+      "NEXORA AI CAMPUSOS made scholarship matching effortless. I discovered a diversity grant I didn't even know I qualified for.",
     initials: "PM",
   },
   {

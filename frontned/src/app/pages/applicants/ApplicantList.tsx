@@ -26,18 +26,10 @@ export function ApplicantList() {
     { key: "lastName", header: "Last Name" },
     { key: "email", header: "Email" },
     { key: "phone", header: "Phone" },
-    { key: "courseName", header: "Course" },
     {
       key: "status",
       header: "Status",
       cell: (row: Applicant) => <StatusBadge status={row.status} />,
-    },
-    {
-      key: "documentsVerified",
-      header: "Documents",
-      cell: (row: Applicant) => (
-        <StatusBadge status={row.documentsVerified ? "VERIFIED" : "PENDING"} />
-      ),
     },
     {
       key: "createdAt",

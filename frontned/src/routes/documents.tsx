@@ -6,7 +6,7 @@ import { DocumentList } from "@/app/pages/documents/DocumentList";
 export const Route = createFileRoute("/documents")({
   head: () => ({
     meta: [
-      { title: "Documents — AI-CollegeOS" },
+      { title: "Documents — NEXORA AI CAMPUSOS" },
       { name: "description", content: "Manage documents" },
     ],
   }),

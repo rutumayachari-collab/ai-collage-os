@@ -52,7 +52,7 @@ const inquiryRateLimiter = (req: Request, res: Response, next: NextFunction): vo
 // TODO: OpenAPI/Swagger - document public create endpoint.
 // TODO: Webhook/event - publish InquiryCreated event for downstream automation.
 
-router.post('/', inquiryRateLimiter, validateRequest({ body: createInquirySchema }), inquiryController.create);
+router.post('/', authenticate, inquiryRateLimiter, validateRequest({ body: createInquirySchema }), inquiryController.create);
 
 // ─── COUNSELOR ─────────────────────────────────────────────────────────────
 // Read, update, follow-up, and counseling endpoints for Admission Counselor / FACULTY role.

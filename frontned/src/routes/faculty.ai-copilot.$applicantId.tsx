@@ -6,7 +6,7 @@ import { AICopilotPage } from "@/app/pages/faculty/AICopilotPage";
 export const Route = createFileRoute("/faculty/ai-copilot/$applicantId")({
   head: () => ({
     meta: [
-      { title: "AI Copilot — AI-CollegeOS" },
+      { title: "AI Copilot — NEXORA AI CAMPUSOS" },
       { name: "description", content: "AI-powered insights" },
     ],
   }),

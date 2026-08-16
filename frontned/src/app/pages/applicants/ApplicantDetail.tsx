@@ -51,7 +51,7 @@ export function ApplicantDetail() {
 
   const completedSteps = [
     "Personal information completed",
-    `Course selected: ${applicant.courseName}`,
+    `Course selected: ${applicant.preferredCourseId || "Not selected"}`,
     documents.length > 0 ? `${documents.length} documents uploaded` : "No documents uploaded",
   ];
 
@@ -59,7 +59,7 @@ export function ApplicantDetail() {
     {
       id: "1",
       title: "Application Submitted",
-      description: `Applicant ${applicant.firstName} ${applicant.lastName} submitted application for ${applicant.courseName}`,
+      description: `Applicant ${applicant.firstName} ${applicant.lastName} submitted application`,
       timestamp: applicant.createdAt,
       status: "completed" as const,
     },
@@ -68,7 +68,7 @@ export function ApplicantDetail() {
       title: "Under Review",
       description: "Application is being reviewed by admissions team",
       timestamp: applicant.updatedAt,
-      status: applicant.status === "UNDER_REVIEW" ? ("current" as const) : ("pending" as const),
+      status: "pending" as const,
     },
   ];
 
@@ -127,7 +127,7 @@ export function ApplicantDetail() {
                   <div>
                     <p className="text-sm text-muted-foreground">Date of Birth</p>
                     <p className="font-medium">
-                      {new Date(applicant.dateOfBirth).toLocaleDateString()}
+                      {applicant.dateOfBirth ? new Date(applicant.dateOfBirth).toLocaleDateString() : "N/A"}
                     </p>
                   </div>
                   <div>
@@ -136,23 +136,7 @@ export function ApplicantDetail() {
                   </div>
                   <div className="sm:col-span-2">
                     <p className="text-sm text-muted-foreground">Address</p>
-                    <p className="font-medium">{applicant.address}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">City</p>
-                    <p className="font-medium">{applicant.city}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">State</p>
-                    <p className="font-medium">{applicant.state}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Country</p>
-                    <p className="font-medium">{applicant.country}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Pincode</p>
-                    <p className="font-medium">{applicant.pincode}</p>
+                    <p className="font-medium">{applicant.address || "N/A"}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -170,12 +154,12 @@ export function ApplicantDetail() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Documents</p>
-                    <StatusBadge status={applicant.documentsVerified ? "VERIFIED" : "PENDING"} />
+                    <StatusBadge status={applicant.admissionChecklist?.documentsVerified ? "VERIFIED" : "PENDING"} />
                   </div>
-                  {applicant.eligibilityScore !== undefined && (
+                  {applicant.aiEligibilityScore !== undefined && (
                     <div>
                       <p className="text-sm text-muted-foreground">Eligibility Score</p>
-                      <p className="text-2xl font-bold">{applicant.eligibilityScore}%</p>
+                      <p className="text-2xl font-bold">{applicant.aiEligibilityScore}%</p>
                     </div>
                   )}
                 </CardContent>
@@ -204,8 +188,7 @@ export function ApplicantDetail() {
               <div className="flex items-center gap-3">
                 <HiOutlineAcademicCap className="h-8 w-8 text-primary" />
                 <div>
-                  <p className="font-medium">{applicant.courseName}</p>
-                  <p className="text-sm text-muted-foreground">Course ID: {applicant.courseId}</p>
+                  <p className="font-medium">{applicant.preferredCourseId || "Not selected"}</p>
                 </div>
               </div>
             </CardContent>

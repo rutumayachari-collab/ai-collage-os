@@ -11,7 +11,7 @@ import { documentVerificationRoutes } from './documentVerification.routes';
 
 export const documentVerificationModule: FeatureModule = {
   name: 'DocumentVerification',
-  basePath: 'document-verifications',
+  basePath: 'documents',
   router: documentVerificationRoutes,
   enabled: true,
 };

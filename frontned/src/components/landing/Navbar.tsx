@@ -1,7 +1,10 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "./Button";
+import { Link } from "@tanstack/react-router";
 import {
   HiMenu,
   HiX,
@@ -12,6 +15,7 @@ import {
   HiOutlineIdentification,
   HiChevronDown,
 } from "react-icons/hi";
+import { AnimatedBrand } from "@/app/components/brand/AnimatedBrand";
 
 const NAV_LINKS = [
   { label: "Home", href: "#home" },
@@ -90,8 +94,9 @@ function LoginDropdown({
             className="absolute right-0 top-[calc(100%+8px)] w-72 overflow-hidden rounded-2xl border border-white/10 bg-navy-deep/95 p-2 shadow-elegant backdrop-blur-xl"
           >
             {items.map((it) => (
-              <button
+              <Link
                 key={it.label}
+                to="/login"
                 onClick={() => setOpen(false)}
                 className="flex w-full items-start gap-3 rounded-xl p-3 text-left transition hover:bg-white/5"
               >
@@ -102,13 +107,13 @@ function LoginDropdown({
                   <span className="block text-sm font-medium text-white">{it.label}</span>
                   <span className="block text-xs text-white/60">{it.hint}</span>
                 </span>
-              </button>
+              </Link>
             ))}
             <div className="mt-1 border-t border-white/5 p-3 text-xs text-white/50">
               New here?{" "}
-              <a href="#admission" className="text-sky hover:underline">
+              <Link to="/register" onClick={() => setOpen(false)} className="text-sky hover:underline">
                 Create an account
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}
@@ -144,12 +149,7 @@ export function Navbar() {
               : "border-white/5 bg-white/[0.02] px-3 py-2 backdrop-blur-md",
           )}
         >
-          <a href="#home" className="flex items-center gap-2 pl-1">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-sky text-navy-deep shadow-glow">
-              <HiOutlineSparkles className="h-5 w-5" />
-            </span>
-            <span className="font-heading text-lg font-semibold text-white">AI-CollegeOS</span>
-          </a>
+          <AnimatedBrand size="sm" />
 
           <nav className="hidden items-center gap-1 md:flex">
             {NAV_LINKS.map((l) => (
@@ -198,12 +198,16 @@ export function Navbar() {
                 ))}
               </nav>
               <div className="mt-3 grid grid-cols-2 gap-2">
-                <Button variant="outline" size="sm">
-                  Student Login
-                </Button>
-                <Button variant="primary" size="sm">
-                  Admin Login
-                </Button>
+                <Link to="/login" onClick={() => setOpen(false)}>
+                  <Button variant="outline" size="sm" className="w-full">
+                    Student Login
+                  </Button>
+                </Link>
+                <Link to="/login" onClick={() => setOpen(false)}>
+                  <Button variant="primary" size="sm" className="w-full">
+                    Admin Login
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           )}

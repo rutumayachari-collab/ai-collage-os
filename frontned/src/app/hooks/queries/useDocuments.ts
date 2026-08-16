@@ -46,11 +46,21 @@ export function useUpdateDocument() {
   });
 }
 
-export function useUploadDocument() {
+export function useApproveDocument() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ file, applicantId, type }: { file: File; applicantId: string; type: string }) =>
-      documentService.upload(file, applicantId, type),
+    mutationFn: (id: string) => documentService.approve(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["documents"] });
+    },
+  });
+}
+
+export function useRejectDocument() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, reason }: { id: string; reason: string }) =>
+      documentService.reject(id, reason),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["documents"] });
     },

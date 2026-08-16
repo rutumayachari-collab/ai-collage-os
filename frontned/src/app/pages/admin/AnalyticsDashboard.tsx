@@ -6,8 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   useAdmissionFunnel,
-  useDepartmentStats,
-  useFacultyStats,
   useRevenue,
   useScholarshipDistribution,
   useAdmissionTimeline,
@@ -15,7 +13,7 @@ import {
   useAIAccuracy,
 } from "@/app/hooks/queries/useAdmin";
 import {
-  HiOutlineTrendingUp,
+  HiOutlineArrowTrendingUp,
   HiOutlineBuildingOffice,
   HiOutlineUsers,
   HiOutlineCurrencyRupee,
@@ -42,8 +40,6 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884D8"];
 
 export function AnalyticsDashboard() {
   const { data: funnel, isLoading: funnelLoading } = useAdmissionFunnel();
-  const { data: departments = [], isLoading: deptLoading } = useDepartmentStats();
-  const { data: faculty = [], isLoading: facultyLoading } = useFacultyStats();
   const { data: revenue = [], isLoading: revenueLoading } = useRevenue();
   const { data: scholarships = [], isLoading: scholarshipLoading } = useScholarshipDistribution();
   const { data: timeline = [], isLoading: timelineLoading } = useAdmissionTimeline();
@@ -52,8 +48,6 @@ export function AnalyticsDashboard() {
 
   const isLoading =
     funnelLoading ||
-    deptLoading ||
-    facultyLoading ||
     revenueLoading ||
     scholarshipLoading ||
     timelineLoading ||
@@ -86,8 +80,6 @@ export function AnalyticsDashboard() {
       <Tabs defaultValue="overview" className="space-y-6">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="departments">Departments</TabsTrigger>
-          <TabsTrigger value="faculty">Faculty</TabsTrigger>
           <TabsTrigger value="revenue">Revenue</TabsTrigger>
           <TabsTrigger value="ai">AI Metrics</TabsTrigger>
         </TabsList>
@@ -155,56 +147,6 @@ export function AnalyticsDashboard() {
                   <Line type="monotone" dataKey="admissions" stroke="#82ca9d" name="Admissions" />
                 </LineChart>
               </ResponsiveContainer>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="departments" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Department Statistics</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {departments.map((dept) => (
-                  <div key={dept.id} className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">{dept.name}</p>
-                      <p className="text-sm text-muted-foreground">{dept.applicants} applicants</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-medium">{dept.admitted} admitted</p>
-                      <p className="text-sm text-muted-foreground">{dept.occupancy}% occupancy</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="faculty" className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Faculty Statistics</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {faculty.map((f) => (
-                  <div key={f.id} className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">{f.name}</p>
-                      <p className="text-sm text-muted-foreground">{f.department}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-medium">{f.applicantsReviewed} reviewed</p>
-                      <p className="text-sm text-muted-foreground">
-                        Avg: {f.averageProcessingTime}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </CardContent>
           </Card>
         </TabsContent>

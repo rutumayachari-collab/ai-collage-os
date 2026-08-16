@@ -89,7 +89,9 @@ export function NotificationsCenter() {
                         )}
                       </div>
                       <p className="text-sm text-muted-foreground">{notification.description}</p>
-                      <p className="text-xs text-muted-foreground">{notification.timestamp}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {new Date(notification.createdAt).toLocaleDateString()}
+                      </p>
                     </div>
                   </div>
                 ))}

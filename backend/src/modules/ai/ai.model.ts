@@ -1,4 +1,24 @@
-import { AISummaryInput, AISummaryOutput, AIEligibilityInput, AIEligibilityOutput, AIRiskAnalysisInput, AIRiskAnalysisOutput, AIScholarshipInput, AIScholarshipOutput, AICounselingNotesInput, AICounselingNotesOutput, AIAdmissionEmailInput, AIAdmissionEmailOutput, AIWhatsAppDraftInput, AIWhatsAppDraftOutput, AINextActionInput, AINextActionOutput } from './ai.types';
+import {
+  AISummaryInput,
+  AISummaryOutput,
+  AIEligibilityInput,
+  AIEligibilityOutput,
+  AIRiskAnalysisInput,
+  AIRiskAnalysisOutput,
+  AIScholarshipInput,
+  AIScholarshipOutput,
+  AICounselingNotesInput,
+  AICounselingNotesOutput,
+  AIAdmissionEmailInput,
+  AIAdmissionEmailOutput,
+  AIWhatsAppDraftInput,
+  AIWhatsAppDraftOutput,
+  AINextActionInput,
+  AINextActionOutput,
+} from './ai.types';
+
+export { type AIProvider, type AIProviderConfig } from './ai.providers';
+export { AIProviderFactory, type OpenAIProvider } from './ai.providers.impl';
 
 export class AiModel {
   public static async generateSummary(input: AISummaryInput): Promise<AISummaryOutput['summary']> {

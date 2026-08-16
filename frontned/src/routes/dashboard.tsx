@@ -1,20 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ProtectedRoute } from "@/app/guards/ProtectedRoute";
-import { DashboardShell } from "@/app/components/dashboard/DashboardShell";
-import { StudentDashboard } from "@/app/pages/dashboard/StudentDashboard";
+import { DashboardRouter } from "@/app/pages/dashboard/DashboardRouter";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard — AI-CollegeOS" },
-      { name: "description", content: "AI-CollegeOS dashboard" },
+      { title: "Dashboard — NEXORA AI CAMPUSOS" },
+      { name: "description", content: "NEXORA AI CAMPUSOS dashboard" },
     ],
   }),
   component: () => (
     <ProtectedRoute>
-      <DashboardShell>
-        <StudentDashboard />
-      </DashboardShell>
+      <DashboardRouter />
     </ProtectedRoute>
   ),
 });

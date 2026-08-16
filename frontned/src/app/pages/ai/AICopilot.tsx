@@ -13,59 +13,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-
-const API_BASE = import.meta.env.VITE_API_URL || "";
-
-type AISummaryOutput = {
-  summary: string;
-  confidence: number;
-  generatedAt: string;
-};
-
-type AIEligibilityOutput = {
-  isEligible: boolean;
-  score: number;
-  reasons: string[];
-  generatedAt: string;
-};
-
-type AIRiskAnalysisOutput = {
-  riskScore: number;
-  riskLevel: "LOW" | "MEDIUM" | "HIGH";
-  factors: string[];
-  generatedAt: string;
-};
-
-type AIScholarshipOutput = {
-  recommendedScholarships: Array<{ name: string; amount: number; eligibility: boolean }>;
-  generatedAt: string;
-};
-
-type AICounselingNotesOutput = {
-  structuredNotes: string;
-  keyPoints: string[];
-  nextSteps: string[];
-  generatedAt: string;
-};
-
-type AIAdmissionEmailOutput = {
-  subject: string;
-  body: string;
-  generatedAt: string;
-};
-
-type AIWhatsAppDraftOutput = {
-  draft: string;
-  characterCount: number;
-  generatedAt: string;
-};
-
-type AINextActionOutput = {
-  recommendedAction: string;
-  priority: "HIGH" | "MEDIUM" | "LOW";
-  reasoning: string;
-  generatedAt: string;
-};
+import { aiService } from "@/app/services/ai.service";
+import type {
+  AISummaryOutput,
+  AIEligibilityOutput,
+  AIRiskAnalysisOutput,
+  AIScholarshipOutput,
+  AICounselingNotesOutput,
+  AIAdmissionEmailOutput,
+  AIWhatsAppDraftOutput,
+  AINextActionOutput,
+} from "@/app/services/ai.service";
 
 export function AICopilot() {
   const queryClient = useQueryClient();
@@ -76,21 +34,14 @@ export function AICopilot() {
   const [documentsVerified, setDocumentsVerified] = useState(false);
 
   const summaryMutation = useMutation({
-    mutationFn: async (): Promise<AISummaryOutput> => {
-      const res = await fetch(`${API_BASE}/ai/summary`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          applicantId,
-          applicantName,
-          courseInterest,
-          academicScore,
-          documentsVerified,
-        }),
-      });
-      if (!res.ok) throw new Error("Failed to generate summary");
-      return res.json();
-    },
+    mutationFn: () =>
+      aiService.generateSummary({
+        applicantId,
+        applicantName,
+        courseInterest,
+        academicScore,
+        documentsVerified,
+      }),
     onSuccess: () => {
       toast.success("AI summary generated");
       queryClient.invalidateQueries();
@@ -99,20 +50,13 @@ export function AICopilot() {
   });
 
   const eligibilityMutation = useMutation({
-    mutationFn: async (): Promise<AIEligibilityOutput> => {
-      const res = await fetch(`${API_BASE}/ai/eligibility`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          applicantId,
-          courseId: courseInterest,
-          academicScore,
-          documentsVerified,
-        }),
-      });
-      if (!res.ok) throw new Error("Failed to check eligibility");
-      return res.json();
-    },
+    mutationFn: () =>
+      aiService.checkEligibility({
+        applicantId,
+        courseId: courseInterest,
+        academicScore,
+        documentsVerified,
+      }),
     onSuccess: () => {
       toast.success("Eligibility checked");
       queryClient.invalidateQueries();
@@ -121,20 +65,13 @@ export function AICopilot() {
   });
 
   const riskMutation = useMutation({
-    mutationFn: async (): Promise<AIRiskAnalysisOutput> => {
-      const res = await fetch(`${API_BASE}/ai/risk-analysis`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          applicantId,
-          academicScore,
-          attendancePercentage: 80,
-          previousDefaults: false,
-        }),
-      });
-      if (!res.ok) throw new Error("Failed to analyze risk");
-      return res.json();
-    },
+    mutationFn: () =>
+      aiService.analyzeRisk({
+        applicantId,
+        academicScore,
+        attendancePercentage: 80,
+        previousDefaults: false,
+      }),
     onSuccess: () => {
       toast.success("Risk analysis completed");
       queryClient.invalidateQueries();
@@ -143,20 +80,13 @@ export function AICopilot() {
   });
 
   const scholarshipMutation = useMutation({
-    mutationFn: async (): Promise<AIScholarshipOutput> => {
-      const res = await fetch(`${API_BASE}/ai/scholarship-recommendation`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          applicantId,
-          academicScore,
-          familyIncome: 300000,
-          category: "GENERAL",
-        }),
-      });
-      if (!res.ok) throw new Error("Failed to recommend scholarships");
-      return res.json();
-    },
+    mutationFn: () =>
+      aiService.recommendScholarships({
+        applicantId,
+        academicScore,
+        familyIncome: 300000,
+        category: "GENERAL",
+      }),
     onSuccess: () => {
       toast.success("Scholarship recommendations generated");
       queryClient.invalidateQueries();
@@ -165,19 +95,12 @@ export function AICopilot() {
   });
 
   const counselingMutation = useMutation({
-    mutationFn: async (): Promise<AICounselingNotesOutput> => {
-      const res = await fetch(`${API_BASE}/ai/counseling-notes`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          applicantId,
-          counselingNotes: "Student is interested in Computer Science.",
-          previousInteractions: ["Initial call", "Email follow-up"],
-        }),
-      });
-      if (!res.ok) throw new Error("Failed to generate counseling notes");
-      return res.json();
-    },
+    mutationFn: () =>
+      aiService.generateCounselingNotes({
+        applicantId,
+        counselingNotes: "Student is interested in Computer Science.",
+        previousInteractions: ["Initial call", "Email follow-up"],
+      }),
     onSuccess: () => {
       toast.success("Counseling notes generated");
       queryClient.invalidateQueries();
@@ -186,20 +109,13 @@ export function AICopilot() {
   });
 
   const emailMutation = useMutation({
-    mutationFn: async (): Promise<AIAdmissionEmailOutput> => {
-      const res = await fetch(`${API_BASE}/ai/admission-email`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          applicantId,
-          applicantName,
-          courseName: courseInterest,
-          status: "APPROVED",
-        }),
-      });
-      if (!res.ok) throw new Error("Failed to generate admission email");
-      return res.json();
-    },
+    mutationFn: () =>
+      aiService.generateAdmissionEmail({
+        applicantId,
+        applicantName,
+        courseName: courseInterest,
+        status: "APPROVED",
+      }),
     onSuccess: () => {
       toast.success("Admission email generated");
       queryClient.invalidateQueries();
@@ -208,19 +124,12 @@ export function AICopilot() {
   });
 
   const whatsappMutation = useMutation({
-    mutationFn: async (): Promise<AIWhatsAppDraftOutput> => {
-      const res = await fetch(`${API_BASE}/ai/whatsapp-draft`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          applicantId,
-          applicantName,
-          message: "Your application has been received.",
-        }),
-      });
-      if (!res.ok) throw new Error("Failed to generate WhatsApp draft");
-      return res.json();
-    },
+    mutationFn: () =>
+      aiService.generateWhatsAppDraft({
+        applicantId,
+        applicantName,
+        message: "Your application has been received.",
+      }),
     onSuccess: () => {
       toast.success("WhatsApp draft generated");
       queryClient.invalidateQueries();
@@ -229,19 +138,12 @@ export function AICopilot() {
   });
 
   const nextActionMutation = useMutation({
-    mutationFn: async (): Promise<AINextActionOutput> => {
-      const res = await fetch(`${API_BASE}/ai/next-action`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          applicantId,
-          currentStage: "NEW",
-          pendingActions: ["Contact applicant", "Schedule counseling"],
-        }),
-      });
-      if (!res.ok) throw new Error("Failed to recommend next action");
-      return res.json();
-    },
+    mutationFn: () =>
+      aiService.recommendNextAction({
+        applicantId,
+        currentStage: "NEW",
+        pendingActions: ["Contact applicant", "Schedule counseling"],
+      }),
     onSuccess: () => {
       toast.success("Next action recommended");
       queryClient.invalidateQueries();

@@ -443,6 +443,41 @@ export class AdmissionController {
     sendSuccess(res, { message: 'Admitted count fetched successfully', data: { count } });
   });
 
+  public getAdminStats = asyncHandler(async (_req: Request, res: Response) => {
+    const stats = await this.service.getAdminStats();
+    sendSuccess(res, { message: 'Admin dashboard stats fetched successfully', data: stats });
+  });
+
+  public getAdmissionFunnel = asyncHandler(async (_req: Request, res: Response) => {
+    const funnel = await this.service.getAdmissionFunnel();
+    sendSuccess(res, { message: 'Admission funnel fetched successfully', data: funnel });
+  });
+
+  public getRevenueStatistics = asyncHandler(async (_req: Request, res: Response) => {
+    const revenue = await this.service.getRevenueStatistics();
+    sendSuccess(res, { message: 'Revenue statistics fetched successfully', data: revenue });
+  });
+
+  public getScholarshipDistribution = asyncHandler(async (_req: Request, res: Response) => {
+    const scholarship = await this.service.getScholarshipDistribution();
+    sendSuccess(res, { message: 'Scholarship distribution fetched successfully', data: scholarship });
+  });
+
+  public getAdmissionTimeline = asyncHandler(async (_req: Request, res: Response) => {
+    const timeline = await this.service.getAdmissionTimeline();
+    sendSuccess(res, { message: 'Admission timeline fetched successfully', data: timeline });
+  });
+
+  public getProcessingTime = asyncHandler(async (_req: Request, res: Response) => {
+    const processingTime = await this.service.getProcessingTime();
+    sendSuccess(res, { message: 'Processing time fetched successfully', data: processingTime });
+  });
+
+  public getAIAccuracy = asyncHandler(async (_req: Request, res: Response) => {
+    const aiAccuracy = await this.service.getAIAccuracy();
+    sendSuccess(res, { message: 'AI accuracy metrics fetched successfully', data: aiAccuracy });
+  });
+
   // ─── ARCHIVE / RESTORE ───────────────────────────────────────────────────
 
   /**

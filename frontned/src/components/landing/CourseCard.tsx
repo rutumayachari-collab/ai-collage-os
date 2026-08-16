@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import {
   HiArrowRight,
@@ -9,6 +11,7 @@ import {
   HiOutlineChip,
   HiOutlineHeart,
 } from "react-icons/hi";
+import { Link } from "@tanstack/react-router";
 
 export type CourseTag = "Popular" | "New" | "AI Track" | "Scholarship";
 
@@ -151,13 +154,16 @@ export function CourseCard({
         </div>
 
         <div className="mt-6 flex items-center justify-between border-t border-border pt-4">
-          <button className="inline-flex items-center gap-1.5 text-sm font-medium text-navy transition hover:text-sky">
-            Learn more{" "}
-            <HiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </button>
-          <button className="rounded-full bg-navy px-4 py-1.5 text-xs font-medium text-white transition hover:bg-navy-deep">
-            Apply
-          </button>
+          <Link to="/login" search={{ redirect: `/applicants/new` }}>
+            <button className="inline-flex items-center gap-1.5 text-sm font-medium text-navy transition hover:text-sky">
+              Learn more <HiArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </button>
+          </Link>
+          <Link to="/register">
+            <button className="rounded-full bg-navy px-4 py-1.5 text-xs font-medium text-white transition hover:bg-navy-deep">
+              Apply
+            </button>
+          </Link>
         </div>
       </div>
     </motion.article>

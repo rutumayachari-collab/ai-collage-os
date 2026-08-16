@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import {
   HiArrowRight,
@@ -6,22 +8,26 @@ import {
   HiOutlineLightningBolt,
 } from "react-icons/hi";
 import { Link } from "@tanstack/react-router";
-import heroImg from "@/assets/hero-ai-students.jpg";
+import campusBuilding from "@/assets/college-building.png";
 import { Button } from "./Button";
 import { Container } from "./Container";
 
 export function Hero() {
   return (
-    <section
-      id="home"
-      className="gradient-hero relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28"
-    >
-      {/* Floating shapes */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="animate-float absolute left-[6%] top-24 h-24 w-24 rounded-3xl bg-sky/20 blur-2xl" />
-        <div className="animate-float-alt absolute right-[10%] top-40 h-32 w-32 rounded-full bg-sky-soft/20 blur-3xl" />
-        <div className="animate-float absolute bottom-16 left-[20%] h-40 w-40 rounded-full bg-sky/10 blur-3xl" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-navy-deep" />
+    <section id="home" className="relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28">
+      {/* College background image with dark navy overlay */}
+      <div className="absolute inset-0">
+        <img
+          src={campusBuilding}
+          alt="NEXORA AI CAMPUSOS campus"
+          className="h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-deep/90 via-navy/80 to-navy/90" />
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-[6%] top-24 h-24 w-24 rounded-3xl bg-sky/20 blur-2xl" />
+          <div className="absolute right-[10%] top-40 h-32 w-32 rounded-full bg-sky-soft/20 blur-3xl" />
+          <div className="absolute bottom-16 left-[20%] h-40 w-40 rounded-full bg-sky/10 blur-3xl" />
+        </div>
       </div>
 
       <Container className="relative">
@@ -33,7 +39,7 @@ export function Hero() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-sky/30 bg-sky/10 px-3 py-1 text-xs font-medium text-sky-soft">
               <span className="h-1.5 w-1.5 rounded-full bg-sky animate-pulse" />
-              Introducing AI-CollegeOS · Admission Module
+              Introducing NEXORA AI CAMPUSOS · Admission Module
             </span>
 
             <h1 className="mt-6 font-heading text-4xl font-semibold leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-[68px]">
@@ -51,9 +57,15 @@ export function Hero() {
                   Apply Now
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" leftIcon={<HiOutlineChat className="h-5 w-5" />}>
-                Talk to AI Assistant
-              </Button>
+              <Link to="/ai/copilot">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  leftIcon={<HiOutlineChat className="h-5 w-5" />}
+                >
+                  Talk to AI Assistant
+                </Button>
+              </Link>
             </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/60">
@@ -79,8 +91,8 @@ export function Hero() {
               <div className="absolute -inset-6 rounded-[2rem] bg-sky/20 blur-3xl" />
               <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-2 shadow-elegant backdrop-blur">
                 <img
-                  src={heroImg}
-                  alt="Students collaborating with the AI-CollegeOS assistant"
+                  src={campusBuilding}
+                  alt="NEXORA AI CAMPUSOS campus"
                   width={1280}
                   height={1024}
                   className="h-auto w-full rounded-2xl"

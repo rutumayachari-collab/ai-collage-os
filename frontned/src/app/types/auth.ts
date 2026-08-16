@@ -1,19 +1,25 @@
 export type UserRole =
-  "SUPPORT" | "STUDENT" | "COUNSELOR" | "FACULTY" | "ADMISSION_COMMITTEE" | "ADMIN" | "SUPER_ADMIN";
+  | "SUPER_ADMIN"
+  | "ADMIN"
+  | "HOD"
+  | "FACULTY"
+  | "STUDENT"
+  | "PARENT"
+  | "STAFF";
 
 export type UserStatus = "ACTIVE" | "INACTIVE" | "SUSPENDED" | "PENDING_VERIFICATION";
 
 export interface User {
   id: string;
   email: string;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   role: UserRole;
   status: UserStatus;
   departmentId?: string;
   avatarUrl?: string;
   permissions: string[];
   lastLoginAt?: string;
+  phone?: string;
 }
 
 export interface AuthState {
@@ -31,14 +37,22 @@ export interface AuthContextValue {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (credentials: LoginCredentials) => Promise<void>;
+  register: (credentials: { fullName: string; email: string; password: string; role?: string }) => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
   logout: () => Promise<void>;
-  refreshUser: () => Promise<void>;
   updateUser: (user: User) => void;
 }
 
 export interface LoginCredentials {
   email: string;
   password: string;
+}
+
+export interface RegisterCredentials {
+  fullName: string;
+  email: string;
+  password: string;
+  role?: string;
 }
 
 export interface AuthResponse {

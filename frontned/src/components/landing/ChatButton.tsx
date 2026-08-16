@@ -1,6 +1,9 @@
+"use client";
+
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiOutlineChat, HiX, HiOutlinePaperAirplane, HiOutlineSparkles } from "react-icons/hi";
+import { Link } from "@tanstack/react-router";
 
 export function ChatButton() {
   const [open, setOpen] = useState(false);
@@ -31,14 +34,21 @@ export function ChatButton() {
                 process.
               </div>
               <div className="flex flex-wrap gap-2">
-                {["Explore courses", "Check eligibility", "Scholarships"].map((s) => (
-                  <button
-                    key={s}
-                    className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:border-sky hover:text-sky"
-                  >
-                    {s}
+                <Link to="/login" search={{ redirect: "/student/courses" }}>
+                  <button className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:border-sky hover:text-sky">
+                    Explore courses
                   </button>
-                ))}
+                </Link>
+                <Link to="/login" search={{ redirect: "/eligibility" }}>
+                  <button className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:border-sky hover:text-sky">
+                    Check eligibility
+                  </button>
+                </Link>
+                <Link to="/login" search={{ redirect: "/student/scholarships" }}>
+                  <button className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground hover:border-sky hover:text-sky">
+                    Scholarships
+                  </button>
+                </Link>
               </div>
             </div>
             <div className="flex items-center gap-2 border-t border-border p-3">

@@ -13,43 +13,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-
-const API_BASE = import.meta.env.VITE_API_URL || "";
-
-type NotificationChannel = "IN_APP" | "EMAIL" | "WHATSAPP" | "SMS";
-type NotificationPriority = "LOW" | "MEDIUM" | "HIGH" | "URGENT";
-type NotificationType = "INFO" | "WARNING" | "SUCCESS" | "ERROR";
-type NotificationStatus = "PENDING" | "SENT" | "DELIVERED" | "READ" | "FAILED";
-
-type Notification = {
-  notificationId: string;
-  recipient: {
-    userId: string;
-    userRole: string;
-    email?: string;
-    phone?: string;
-    whatsappNumber?: string;
-  };
-  payload: {
-    channel: NotificationChannel;
-    priority: NotificationPriority;
-    type: NotificationType;
-    subject: string;
-    body: string;
-  };
-  status: NotificationStatus;
-  readAt?: string;
-  createdAt: string;
-};
-
-type NotificationStats = {
-  total: number;
-  unread: number;
-  read: number;
-  failed: number;
-  byChannel: Record<NotificationChannel, number>;
-  byPriority: Record<NotificationPriority, number>;
-};
+import { notificationService } from "@/app/services/notification.service";
+import type { Notification, NotificationStats, NotificationChannel, NotificationPriority, NotificationType } from "@/app/types/notification";
 
 export function NotificationsPage() {
   const queryClient = useQueryClient();
@@ -62,36 +27,21 @@ export function NotificationsPage() {
 
   const { data: stats } = useQuery({
     queryKey: ["notification-stats"],
-    queryFn: async (): Promise<NotificationStats> => {
-      const res = await fetch(`${API_BASE}/notifications/stats/summary`);
-      if (!res.ok) throw new Error("Failed to fetch notification stats");
-      return res.json();
-    },
+    queryFn: () => notificationService.getStats(),
   });
 
   const { data: notifications, isLoading } = useQuery({
     queryKey: ["notifications"],
-    queryFn: async (): Promise<{ items: Notification[]; total: number }> => {
-      const res = await fetch(`${API_BASE}/notifications`);
-      if (!res.ok) throw new Error("Failed to fetch notifications");
-      return res.json();
-    },
+    queryFn: () => notificationService.getAll(),
   });
 
   const sendMutation = useMutation({
-    mutationFn: async () => {
-      const res = await fetch(`${API_BASE}/notifications/send`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          recipient: { userId: userId || "user-1", userRole: "ADMIN", email: "admin@example.com" },
-          payload: { channel, priority, type, subject, body },
-          createdBy: "user-1",
-        }),
-      });
-      if (!res.ok) throw new Error("Failed to send notification");
-      return res.json();
-    },
+    mutationFn: () =>
+      notificationService.send({
+        recipient: { userId: userId || "user-1", userRole: "ADMIN", email: "admin@example.com" },
+        payload: { channel, priority, type, subject, body },
+        createdBy: "user-1",
+      }),
     onSuccess: () => {
       toast.success("Notification sent");
       setSubject("");
@@ -102,13 +52,7 @@ export function NotificationsPage() {
   });
 
   const markAsReadMutation = useMutation({
-    mutationFn: async (notificationId: string) => {
-      const res = await fetch(`${API_BASE}/notifications/${notificationId}/read`, {
-        method: "PATCH",
-      });
-      if (!res.ok) throw new Error("Failed to mark as read");
-      return res.json();
-    },
+    mutationFn: (notificationId: string) => notificationService.markAsRead(notificationId),
     onSuccess: () => {
       toast.success("Marked as read");
       queryClient.invalidateQueries();

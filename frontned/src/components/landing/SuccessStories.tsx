@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { HiOutlineBriefcase, HiArrowRight } from "react-icons/hi";
 import { Container } from "./Container";
@@ -23,7 +25,7 @@ const STORIES = [
     year: "B.Tech CSE · 2022",
     metric: "38 LPA",
     quote:
-      "AI-CollegeOS matched me to research and internships that shaped my career. The placement cell felt like a coach, not a queue.",
+      "NEXORA AI CAMPUSOS matched me to research and internships that shaped my career. The placement cell felt like a coach, not a queue.",
   },
   {
     photo: alum3,

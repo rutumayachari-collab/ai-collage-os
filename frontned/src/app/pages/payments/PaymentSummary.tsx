@@ -3,26 +3,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-
-const API_BASE = import.meta.env.VITE_API_URL || "";
-
-type PaymentSummary = {
-  totalCollected: number;
-  totalPending: number;
-  totalRefunded: number;
-  totalFailed: number;
-  byMethod: Record<string, number>;
-  byStatus: Record<string, number>;
-};
+import { paymentService } from "@/app/services/payment.service";
+import type { PaymentSummary } from "@/app/types/payment";
 
 export function PaymentSummary() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["payment-summary"],
-    queryFn: async (): Promise<PaymentSummary> => {
-      const res = await fetch(`${API_BASE}/payments/summary`);
-      if (!res.ok) throw new Error("Failed to fetch payment summary");
-      return res.json();
-    },
+    queryFn: () => paymentService.getSummary(),
   });
 
   if (isLoading) return <div className="text-muted-foreground">Loading payment summary...</div>;

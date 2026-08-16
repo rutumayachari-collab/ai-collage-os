@@ -16,40 +16,42 @@ import {
 } from "react-icons/hi2";
 import { type LucideIcon } from "lucide-react";
 
-const ACTIVITIES = [
-  {
-    id: "1",
-    title: "New applicant submitted",
-    description: "Rahul Sharma applied for Computer Science",
-    timestamp: "2 min ago",
-    type: "info" as const,
-  },
-  {
-    id: "2",
-    title: "Document verified",
-    description: "Priya Patel's marksheet verified",
-    timestamp: "15 min ago",
-    type: "success" as const,
-  },
-  {
-    id: "3",
-    title: "Eligibility check pending",
-    description: "Arjun Kumar's eligibility review needed",
-    timestamp: "1 hour ago",
-    type: "warning" as const,
-  },
-  {
-    id: "4",
-    title: "Admission approved",
-    description: "Meera Reddy's admission approved",
-    timestamp: "2 hours ago",
-    type: "success" as const,
-  },
-];
-
 export function FacultyDashboard() {
   const navigate = useNavigate();
   const { data: stats, isLoading } = useFacultyStats();
+
+  const activities = stats
+    ? [
+        {
+          id: "1",
+          title: "Today's applications",
+          description: `${stats.todayApplicants || 0} new applicants`,
+          timestamp: "Live",
+          type: "info" as const,
+        },
+        {
+          id: "2",
+          title: "Documents to verify",
+          description: `${stats.pendingVerification || 0} documents pending`,
+          timestamp: "Live",
+          type: "warning" as const,
+        },
+        {
+          id: "3",
+          title: "Eligibility reviews",
+          description: `${stats.pendingEligibility || 0} eligibility checks needed`,
+          timestamp: "Live",
+          type: "warning" as const,
+        },
+        {
+          id: "4",
+          title: "Approvals processed",
+          description: `${stats.admissionsApproved || 0} admissions approved`,
+          timestamp: "Live",
+          type: "success" as const,
+        },
+      ]
+    : [];
 
   if (isLoading) {
     return (
@@ -167,7 +169,7 @@ export function FacultyDashboard() {
         </div>
 
         <div>
-          <ActivityFeed activities={ACTIVITIES} title="Recent Activities" />
+          <ActivityFeed activities={activities} title="Recent Activities" />
         </div>
       </div>
     </div>

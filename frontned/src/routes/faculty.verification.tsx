@@ -6,7 +6,7 @@ import { VerificationQueue } from "@/app/pages/faculty/VerificationQueue";
 export const Route = createFileRoute("/faculty/verification")({
   head: () => ({
     meta: [
-      { title: "Verification Queue — AI-CollegeOS" },
+      { title: "Verification Queue — NEXORA AI CAMPUSOS" },
       { name: "description", content: "Verify documents" },
     ],
   }),

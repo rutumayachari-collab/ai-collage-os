@@ -1,20 +1,29 @@
 "use client";
 
-import { useState } from "react";
-import { Link, useLocation } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
+import { Link, useSearch, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useAuth } from "@/app/hooks/useAuth";
+import { useDefaultDashboard } from "@/app/hooks/useDefaultDashboard";
 import { HiOutlineSparkles, HiOutlineUserCircle } from "react-icons/hi";
 
 export function LoginPage() {
-  const { login, isLoading } = useAuth();
+  const { login, isLoading, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
-  const location = useLocation();
-  const redirect = (location.search as Record<string, string>)?.redirect || "/dashboard";
+  const search = useSearch({ from: "/login" }) as { redirect?: string };
+  const defaultDashboard = useDefaultDashboard();
+  const redirect = search?.redirect || defaultDashboard;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate({ to: redirect });
+    }
+  }, [isAuthenticated, navigate, redirect]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,7 +46,7 @@ export function LoginPage() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <HiOutlineSparkles className="h-6 w-6" />
           </div>
-          <CardTitle className="text-2xl">Welcome to AI-CollegeOS</CardTitle>
+          <CardTitle className="text-2xl">Welcome to NEXORA AI CAMPUSOS</CardTitle>
           <CardDescription>Sign in to access your admission dashboard</CardDescription>
         </CardHeader>
         <CardContent>
@@ -80,7 +89,7 @@ export function LoginPage() {
             <p className="text-center text-sm text-muted-foreground">
               Don't have an account?{" "}
               <Link to="/register" className="text-primary hover:underline">
-                Contact administrator
+                Create an account
               </Link>
             </p>
           </form>

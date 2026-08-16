@@ -24,22 +24,3 @@ export function useAdmissionByApplicant(applicantId: string) {
     enabled: !!applicantId,
   });
 }
-
-export function useAdmissionStages(id: string) {
-  return useQuery({
-    queryKey: ["admissions", id, "stages"],
-    queryFn: () => admissionService.getStages(id),
-    enabled: !!id,
-  });
-}
-
-export function useUpdateAdmissionStage() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: ({ id, stage }: { id: string; stage: string }) =>
-      admissionService.updateStage(id, stage),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["admissions"] });
-    },
-  });
-}

@@ -6,7 +6,7 @@ import { ApplicantList } from "@/app/pages/applicants/ApplicantList";
 export const Route = createFileRoute("/applicants")({
   head: () => ({
     meta: [
-      { title: "Applicants — AI-CollegeOS" },
+      { title: "Applicants — NEXORA AI CAMPUSOS" },
       { name: "description", content: "Manage student applications" },
     ],
   }),

@@ -12,3 +12,6 @@ export * from './ai.types';
 export * from './ai.service';
 export * from './ai.controller';
 export * from './ai.validator';
+export * from './ai.providers';
+export * from './ai.providers.impl';
+export * from './ai.model';

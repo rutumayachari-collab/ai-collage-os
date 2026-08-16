@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AdmissionIntelligenceRouteImport } from './routes/admission-intelligence'
 import { Route as ApplicantsRouteImport } from './routes/applicants'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DocumentsRouteImport } from './routes/documents'
@@ -19,17 +20,50 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as InquiriesRouteImport } from './routes/inquiries'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as OrchestratorRouteImport } from './routes/orchestrator'
+import { Route as OutreachRouteImport } from './routes/outreach'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as AdminAdmissionsRouteImport } from './routes/admin.admissions'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
+import { Route as AdminApplicantsRouteImport } from './routes/admin.applicants'
+import { Route as AdminCallingRouteImport } from './routes/admin.calling'
+import { Route as AdminCounsellorsRouteImport } from './routes/admin.counsellors'
+import { Route as AdminCoursesRouteImport } from './routes/admin.courses'
+import { Route as AdminDashboardRouteImport } from './routes/admin.dashboard'
+import { Route as AdminDepartmentsRouteImport } from './routes/admin.departments'
+import { Route as AdminDocumentsRouteImport } from './routes/admin.documents'
+import { Route as AdminEligibilityRouteImport } from './routes/admin.eligibility'
+import { Route as AdminNotificationsRouteImport } from './routes/admin.notifications'
+import { Route as AdminPaymentsRouteImport } from './routes/admin.payments'
 import { Route as AdminReportsRouteImport } from './routes/admin.reports'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminStudentsRouteImport } from './routes/admin.students'
 import { Route as AdmissionsIdRouteImport } from './routes/admissions.$id'
 import { Route as AiCopilotRouteImport } from './routes/ai.copilot'
 import { Route as AiOcrRouteImport } from './routes/ai.ocr'
+import { Route as ApplicantAdmissionRouteImport } from './routes/applicant.admission'
+import { Route as ApplicantApplicationRouteImport } from './routes/applicant.application'
+import { Route as ApplicantCounsellorRouteImport } from './routes/applicant.counsellor'
+import { Route as ApplicantDashboardRouteImport } from './routes/applicant.dashboard'
+import { Route as ApplicantDocumentsRouteImport } from './routes/applicant.documents'
+import { Route as ApplicantEligibilityRouteImport } from './routes/applicant.eligibility'
+import { Route as ApplicantHelpRouteImport } from './routes/applicant.help'
+import { Route as ApplicantHistoryRouteImport } from './routes/applicant.history'
+import { Route as ApplicantPaymentsRouteImport } from './routes/applicant.payments'
+import { Route as ApplicantProfileRouteImport } from './routes/applicant.profile'
+import { Route as ApplicantScholarshipsRouteImport } from './routes/applicant.scholarships'
 import { Route as ApplicantsIdRouteImport } from './routes/applicants.$id'
 import { Route as ApplicantsNewRouteImport } from './routes/applicants.new'
+import { Route as CounsellorCallHistoryRouteImport } from './routes/counsellor.call-history'
+import { Route as CounsellorCallsRouteImport } from './routes/counsellor.calls'
+import { Route as CounsellorDashboardRouteImport } from './routes/counsellor.dashboard'
+import { Route as CounsellorFollowupsRouteImport } from './routes/counsellor.followups'
+import { Route as CounsellorLeadsRouteImport } from './routes/counsellor.leads'
+import { Route as CounsellorProfileRouteImport } from './routes/counsellor.profile'
+import { Route as CounsellorSettingsRouteImport } from './routes/counsellor.settings'
+import { Route as CounsellorWorkspaceRouteImport } from './routes/counsellor.workspace'
 import { Route as DocumentsUploadRouteImport } from './routes/documents.upload'
 import { Route as FacultyAdmissionsRouteImport } from './routes/faculty.admissions'
 import { Route as FacultyApplicantsRouteImport } from './routes/faculty.applicants'
@@ -40,8 +74,30 @@ import { Route as InquiriesIdRouteImport } from './routes/inquiries.$id'
 import { Route as InquiriesNewRouteImport } from './routes/inquiries.new'
 import { Route as PaymentsHistoryRouteImport } from './routes/payments.history'
 import { Route as PaymentsSummaryRouteImport } from './routes/payments.summary'
+import { Route as StudentAcademicsRouteImport } from './routes/student.academics'
+import { Route as StudentAssignmentsRouteImport } from './routes/student.assignments'
+import { Route as StudentAttendanceRouteImport } from './routes/student.attendance'
+import { Route as StudentCampusRouteImport } from './routes/student.campus'
+import { Route as StudentCoursesRouteImport } from './routes/student.courses'
+import { Route as StudentDashboardRouteImport } from './routes/student.dashboard'
+import { Route as StudentDocumentsRouteImport } from './routes/student.documents'
+import { Route as StudentEventsRouteImport } from './routes/student.events'
+import { Route as StudentExamsRouteImport } from './routes/student.exams'
+import { Route as StudentFeesRouteImport } from './routes/student.fees'
+import { Route as StudentFutureRouteImport } from './routes/student.future'
+import { Route as StudentProfileRouteImport } from './routes/student.profile'
+import { Route as StudentScholarshipsRouteImport } from './routes/student.scholarships'
+import { Route as StudentSettingsRouteImport } from './routes/student.settings'
+import { Route as StudentTimetableRouteImport } from './routes/student.timetable'
+import { Route as AdminAdmissionsNewRouteImport } from './routes/admin.admissions.new'
+import { Route as AdminCoursesNewRouteImport } from './routes/admin.courses.new'
+import { Route as AdminDepartmentsNewRouteImport } from './routes/admin.departments.new'
+import { Route as AdminNotificationsNewRouteImport } from './routes/admin.notifications.new'
+import { Route as AdminPaymentsNewRouteImport } from './routes/admin.payments.new'
+import { Route as AdminStudentsNewRouteImport } from './routes/admin.students.new'
 import { Route as FacultyAiCopilotApplicantIdRouteImport } from './routes/faculty.ai-copilot.$applicantId'
 import { Route as InquiriesIdEditRouteImport } from './routes/inquiries.$id.edit'
+import { Route as StudentApplicationNewRouteImport } from './routes/student.application.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -51,6 +107,11 @@ const IndexRoute = IndexRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionIntelligenceRoute = AdmissionIntelligenceRouteImport.update({
+  id: '/admission-intelligence',
+  path: '/admission-intelligence',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApplicantsRoute = ApplicantsRouteImport.update({
@@ -93,6 +154,16 @@ const NotificationsRoute = NotificationsRouteImport.update({
   path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrchestratorRoute = OrchestratorRouteImport.update({
+  id: '/orchestrator',
+  path: '/orchestrator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OutreachRoute = OutreachRouteImport.update({
+  id: '/outreach',
+  path: '/outreach',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -108,9 +179,64 @@ const SettingsRoute = SettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminAdmissionsRoute = AdminAdmissionsRouteImport.update({
+  id: '/admissions',
+  path: '/admissions',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminApplicantsRoute = AdminApplicantsRouteImport.update({
+  id: '/applicants',
+  path: '/applicants',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCallingRoute = AdminCallingRouteImport.update({
+  id: '/calling',
+  path: '/calling',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCounsellorsRoute = AdminCounsellorsRouteImport.update({
+  id: '/counsellors',
+  path: '/counsellors',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCoursesRoute = AdminCoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDepartmentsRoute = AdminDepartmentsRouteImport.update({
+  id: '/departments',
+  path: '/departments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDocumentsRoute = AdminDocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEligibilityRoute = AdminEligibilityRouteImport.update({
+  id: '/eligibility',
+  path: '/eligibility',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminNotificationsRoute = AdminNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
+  id: '/payments',
+  path: '/payments',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminReportsRoute = AdminReportsRouteImport.update({
@@ -121,6 +247,11 @@ const AdminReportsRoute = AdminReportsRouteImport.update({
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminStudentsRoute = AdminStudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdmissionsIdRoute = AdmissionsIdRouteImport.update({
@@ -138,6 +269,61 @@ const AiOcrRoute = AiOcrRouteImport.update({
   path: '/ai/ocr',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApplicantAdmissionRoute = ApplicantAdmissionRouteImport.update({
+  id: '/applicant/admission',
+  path: '/applicant/admission',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantApplicationRoute = ApplicantApplicationRouteImport.update({
+  id: '/applicant/application',
+  path: '/applicant/application',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantCounsellorRoute = ApplicantCounsellorRouteImport.update({
+  id: '/applicant/counsellor',
+  path: '/applicant/counsellor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantDashboardRoute = ApplicantDashboardRouteImport.update({
+  id: '/applicant/dashboard',
+  path: '/applicant/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantDocumentsRoute = ApplicantDocumentsRouteImport.update({
+  id: '/applicant/documents',
+  path: '/applicant/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantEligibilityRoute = ApplicantEligibilityRouteImport.update({
+  id: '/applicant/eligibility',
+  path: '/applicant/eligibility',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantHelpRoute = ApplicantHelpRouteImport.update({
+  id: '/applicant/help',
+  path: '/applicant/help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantHistoryRoute = ApplicantHistoryRouteImport.update({
+  id: '/applicant/history',
+  path: '/applicant/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantPaymentsRoute = ApplicantPaymentsRouteImport.update({
+  id: '/applicant/payments',
+  path: '/applicant/payments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantProfileRoute = ApplicantProfileRouteImport.update({
+  id: '/applicant/profile',
+  path: '/applicant/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplicantScholarshipsRoute = ApplicantScholarshipsRouteImport.update({
+  id: '/applicant/scholarships',
+  path: '/applicant/scholarships',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApplicantsIdRoute = ApplicantsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -147,6 +333,46 @@ const ApplicantsNewRoute = ApplicantsNewRouteImport.update({
   id: '/new',
   path: '/new',
   getParentRoute: () => ApplicantsRoute,
+} as any)
+const CounsellorCallHistoryRoute = CounsellorCallHistoryRouteImport.update({
+  id: '/counsellor/call-history',
+  path: '/counsellor/call-history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CounsellorCallsRoute = CounsellorCallsRouteImport.update({
+  id: '/counsellor/calls',
+  path: '/counsellor/calls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CounsellorDashboardRoute = CounsellorDashboardRouteImport.update({
+  id: '/counsellor/dashboard',
+  path: '/counsellor/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CounsellorFollowupsRoute = CounsellorFollowupsRouteImport.update({
+  id: '/counsellor/followups',
+  path: '/counsellor/followups',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CounsellorLeadsRoute = CounsellorLeadsRouteImport.update({
+  id: '/counsellor/leads',
+  path: '/counsellor/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CounsellorProfileRoute = CounsellorProfileRouteImport.update({
+  id: '/counsellor/profile',
+  path: '/counsellor/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CounsellorSettingsRoute = CounsellorSettingsRouteImport.update({
+  id: '/counsellor/settings',
+  path: '/counsellor/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CounsellorWorkspaceRoute = CounsellorWorkspaceRouteImport.update({
+  id: '/counsellor/workspace',
+  path: '/counsellor/workspace',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const DocumentsUploadRoute = DocumentsUploadRouteImport.update({
   id: '/upload',
@@ -198,6 +424,111 @@ const PaymentsSummaryRoute = PaymentsSummaryRouteImport.update({
   path: '/payments/summary',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudentAcademicsRoute = StudentAcademicsRouteImport.update({
+  id: '/student/academics',
+  path: '/student/academics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentAssignmentsRoute = StudentAssignmentsRouteImport.update({
+  id: '/student/assignments',
+  path: '/student/assignments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentAttendanceRoute = StudentAttendanceRouteImport.update({
+  id: '/student/attendance',
+  path: '/student/attendance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentCampusRoute = StudentCampusRouteImport.update({
+  id: '/student/campus',
+  path: '/student/campus',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentCoursesRoute = StudentCoursesRouteImport.update({
+  id: '/student/courses',
+  path: '/student/courses',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentDashboardRoute = StudentDashboardRouteImport.update({
+  id: '/student/dashboard',
+  path: '/student/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentDocumentsRoute = StudentDocumentsRouteImport.update({
+  id: '/student/documents',
+  path: '/student/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentEventsRoute = StudentEventsRouteImport.update({
+  id: '/student/events',
+  path: '/student/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentExamsRoute = StudentExamsRouteImport.update({
+  id: '/student/exams',
+  path: '/student/exams',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentFeesRoute = StudentFeesRouteImport.update({
+  id: '/student/fees',
+  path: '/student/fees',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentFutureRoute = StudentFutureRouteImport.update({
+  id: '/student/future',
+  path: '/student/future',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentProfileRoute = StudentProfileRouteImport.update({
+  id: '/student/profile',
+  path: '/student/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentScholarshipsRoute = StudentScholarshipsRouteImport.update({
+  id: '/student/scholarships',
+  path: '/student/scholarships',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentSettingsRoute = StudentSettingsRouteImport.update({
+  id: '/student/settings',
+  path: '/student/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentTimetableRoute = StudentTimetableRouteImport.update({
+  id: '/student/timetable',
+  path: '/student/timetable',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAdmissionsNewRoute = AdminAdmissionsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminAdmissionsRoute,
+} as any)
+const AdminCoursesNewRoute = AdminCoursesNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminCoursesRoute,
+} as any)
+const AdminDepartmentsNewRoute = AdminDepartmentsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminDepartmentsRoute,
+} as any)
+const AdminNotificationsNewRoute = AdminNotificationsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminNotificationsRoute,
+} as any)
+const AdminPaymentsNewRoute = AdminPaymentsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminPaymentsRoute,
+} as any)
+const AdminStudentsNewRoute = AdminStudentsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminStudentsRoute,
+} as any)
 const FacultyAiCopilotApplicantIdRoute =
   FacultyAiCopilotApplicantIdRouteImport.update({
     id: '/ai-copilot/$applicantId',
@@ -209,10 +540,16 @@ const InquiriesIdEditRoute = InquiriesIdEditRouteImport.update({
   path: '/edit',
   getParentRoute: () => InquiriesIdRoute,
 } as any)
+const StudentApplicationNewRoute = StudentApplicationNewRouteImport.update({
+  id: '/student/application/new',
+  path: '/student/application/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/admission-intelligence': typeof AdmissionIntelligenceRoute
   '/applicants': typeof ApplicantsRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/documents': typeof DocumentsRouteWithChildren
@@ -221,17 +558,50 @@ export interface FileRoutesByFullPath {
   '/inquiries': typeof InquiriesRouteWithChildren
   '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
+  '/orchestrator': typeof OrchestratorRoute
+  '/outreach': typeof OutreachRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
+  '/admin/admissions': typeof AdminAdmissionsRouteWithChildren
   '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/applicants': typeof AdminApplicantsRoute
+  '/admin/calling': typeof AdminCallingRoute
+  '/admin/counsellors': typeof AdminCounsellorsRoute
+  '/admin/courses': typeof AdminCoursesRouteWithChildren
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/departments': typeof AdminDepartmentsRouteWithChildren
+  '/admin/documents': typeof AdminDocumentsRoute
+  '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/notifications': typeof AdminNotificationsRouteWithChildren
+  '/admin/payments': typeof AdminPaymentsRouteWithChildren
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/students': typeof AdminStudentsRouteWithChildren
   '/admissions/$id': typeof AdmissionsIdRoute
   '/ai/copilot': typeof AiCopilotRoute
   '/ai/ocr': typeof AiOcrRoute
+  '/applicant/admission': typeof ApplicantAdmissionRoute
+  '/applicant/application': typeof ApplicantApplicationRoute
+  '/applicant/counsellor': typeof ApplicantCounsellorRoute
+  '/applicant/dashboard': typeof ApplicantDashboardRoute
+  '/applicant/documents': typeof ApplicantDocumentsRoute
+  '/applicant/eligibility': typeof ApplicantEligibilityRoute
+  '/applicant/help': typeof ApplicantHelpRoute
+  '/applicant/history': typeof ApplicantHistoryRoute
+  '/applicant/payments': typeof ApplicantPaymentsRoute
+  '/applicant/profile': typeof ApplicantProfileRoute
+  '/applicant/scholarships': typeof ApplicantScholarshipsRoute
   '/applicants/$id': typeof ApplicantsIdRoute
   '/applicants/new': typeof ApplicantsNewRoute
+  '/counsellor/call-history': typeof CounsellorCallHistoryRoute
+  '/counsellor/calls': typeof CounsellorCallsRoute
+  '/counsellor/dashboard': typeof CounsellorDashboardRoute
+  '/counsellor/followups': typeof CounsellorFollowupsRoute
+  '/counsellor/leads': typeof CounsellorLeadsRoute
+  '/counsellor/profile': typeof CounsellorProfileRoute
+  '/counsellor/settings': typeof CounsellorSettingsRoute
+  '/counsellor/workspace': typeof CounsellorWorkspaceRoute
   '/documents/upload': typeof DocumentsUploadRoute
   '/faculty/admissions': typeof FacultyAdmissionsRoute
   '/faculty/applicants': typeof FacultyApplicantsRoute
@@ -242,12 +612,35 @@ export interface FileRoutesByFullPath {
   '/inquiries/new': typeof InquiriesNewRoute
   '/payments/history': typeof PaymentsHistoryRoute
   '/payments/summary': typeof PaymentsSummaryRoute
+  '/student/academics': typeof StudentAcademicsRoute
+  '/student/assignments': typeof StudentAssignmentsRoute
+  '/student/attendance': typeof StudentAttendanceRoute
+  '/student/campus': typeof StudentCampusRoute
+  '/student/courses': typeof StudentCoursesRoute
+  '/student/dashboard': typeof StudentDashboardRoute
+  '/student/documents': typeof StudentDocumentsRoute
+  '/student/events': typeof StudentEventsRoute
+  '/student/exams': typeof StudentExamsRoute
+  '/student/fees': typeof StudentFeesRoute
+  '/student/future': typeof StudentFutureRoute
+  '/student/profile': typeof StudentProfileRoute
+  '/student/scholarships': typeof StudentScholarshipsRoute
+  '/student/settings': typeof StudentSettingsRoute
+  '/student/timetable': typeof StudentTimetableRoute
+  '/admin/admissions/new': typeof AdminAdmissionsNewRoute
+  '/admin/courses/new': typeof AdminCoursesNewRoute
+  '/admin/departments/new': typeof AdminDepartmentsNewRoute
+  '/admin/notifications/new': typeof AdminNotificationsNewRoute
+  '/admin/payments/new': typeof AdminPaymentsNewRoute
+  '/admin/students/new': typeof AdminStudentsNewRoute
   '/faculty/ai-copilot/$applicantId': typeof FacultyAiCopilotApplicantIdRoute
   '/inquiries/$id/edit': typeof InquiriesIdEditRoute
+  '/student/application/new': typeof StudentApplicationNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/admission-intelligence': typeof AdmissionIntelligenceRoute
   '/applicants': typeof ApplicantsRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/documents': typeof DocumentsRouteWithChildren
@@ -256,17 +649,50 @@ export interface FileRoutesByTo {
   '/inquiries': typeof InquiriesRouteWithChildren
   '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
+  '/orchestrator': typeof OrchestratorRoute
+  '/outreach': typeof OutreachRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
+  '/admin/admissions': typeof AdminAdmissionsRouteWithChildren
   '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/applicants': typeof AdminApplicantsRoute
+  '/admin/calling': typeof AdminCallingRoute
+  '/admin/counsellors': typeof AdminCounsellorsRoute
+  '/admin/courses': typeof AdminCoursesRouteWithChildren
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/departments': typeof AdminDepartmentsRouteWithChildren
+  '/admin/documents': typeof AdminDocumentsRoute
+  '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/notifications': typeof AdminNotificationsRouteWithChildren
+  '/admin/payments': typeof AdminPaymentsRouteWithChildren
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/students': typeof AdminStudentsRouteWithChildren
   '/admissions/$id': typeof AdmissionsIdRoute
   '/ai/copilot': typeof AiCopilotRoute
   '/ai/ocr': typeof AiOcrRoute
+  '/applicant/admission': typeof ApplicantAdmissionRoute
+  '/applicant/application': typeof ApplicantApplicationRoute
+  '/applicant/counsellor': typeof ApplicantCounsellorRoute
+  '/applicant/dashboard': typeof ApplicantDashboardRoute
+  '/applicant/documents': typeof ApplicantDocumentsRoute
+  '/applicant/eligibility': typeof ApplicantEligibilityRoute
+  '/applicant/help': typeof ApplicantHelpRoute
+  '/applicant/history': typeof ApplicantHistoryRoute
+  '/applicant/payments': typeof ApplicantPaymentsRoute
+  '/applicant/profile': typeof ApplicantProfileRoute
+  '/applicant/scholarships': typeof ApplicantScholarshipsRoute
   '/applicants/$id': typeof ApplicantsIdRoute
   '/applicants/new': typeof ApplicantsNewRoute
+  '/counsellor/call-history': typeof CounsellorCallHistoryRoute
+  '/counsellor/calls': typeof CounsellorCallsRoute
+  '/counsellor/dashboard': typeof CounsellorDashboardRoute
+  '/counsellor/followups': typeof CounsellorFollowupsRoute
+  '/counsellor/leads': typeof CounsellorLeadsRoute
+  '/counsellor/profile': typeof CounsellorProfileRoute
+  '/counsellor/settings': typeof CounsellorSettingsRoute
+  '/counsellor/workspace': typeof CounsellorWorkspaceRoute
   '/documents/upload': typeof DocumentsUploadRoute
   '/faculty/admissions': typeof FacultyAdmissionsRoute
   '/faculty/applicants': typeof FacultyApplicantsRoute
@@ -277,13 +703,36 @@ export interface FileRoutesByTo {
   '/inquiries/new': typeof InquiriesNewRoute
   '/payments/history': typeof PaymentsHistoryRoute
   '/payments/summary': typeof PaymentsSummaryRoute
+  '/student/academics': typeof StudentAcademicsRoute
+  '/student/assignments': typeof StudentAssignmentsRoute
+  '/student/attendance': typeof StudentAttendanceRoute
+  '/student/campus': typeof StudentCampusRoute
+  '/student/courses': typeof StudentCoursesRoute
+  '/student/dashboard': typeof StudentDashboardRoute
+  '/student/documents': typeof StudentDocumentsRoute
+  '/student/events': typeof StudentEventsRoute
+  '/student/exams': typeof StudentExamsRoute
+  '/student/fees': typeof StudentFeesRoute
+  '/student/future': typeof StudentFutureRoute
+  '/student/profile': typeof StudentProfileRoute
+  '/student/scholarships': typeof StudentScholarshipsRoute
+  '/student/settings': typeof StudentSettingsRoute
+  '/student/timetable': typeof StudentTimetableRoute
+  '/admin/admissions/new': typeof AdminAdmissionsNewRoute
+  '/admin/courses/new': typeof AdminCoursesNewRoute
+  '/admin/departments/new': typeof AdminDepartmentsNewRoute
+  '/admin/notifications/new': typeof AdminNotificationsNewRoute
+  '/admin/payments/new': typeof AdminPaymentsNewRoute
+  '/admin/students/new': typeof AdminStudentsNewRoute
   '/faculty/ai-copilot/$applicantId': typeof FacultyAiCopilotApplicantIdRoute
   '/inquiries/$id/edit': typeof InquiriesIdEditRoute
+  '/student/application/new': typeof StudentApplicationNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
+  '/admission-intelligence': typeof AdmissionIntelligenceRoute
   '/applicants': typeof ApplicantsRouteWithChildren
   '/dashboard': typeof DashboardRoute
   '/documents': typeof DocumentsRouteWithChildren
@@ -292,17 +741,50 @@ export interface FileRoutesById {
   '/inquiries': typeof InquiriesRouteWithChildren
   '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
+  '/orchestrator': typeof OrchestratorRoute
+  '/outreach': typeof OutreachRoute
   '/register': typeof RegisterRoute
   '/reset-password': typeof ResetPasswordRoute
   '/settings': typeof SettingsRoute
+  '/admin/admissions': typeof AdminAdmissionsRouteWithChildren
   '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/applicants': typeof AdminApplicantsRoute
+  '/admin/calling': typeof AdminCallingRoute
+  '/admin/counsellors': typeof AdminCounsellorsRoute
+  '/admin/courses': typeof AdminCoursesRouteWithChildren
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/departments': typeof AdminDepartmentsRouteWithChildren
+  '/admin/documents': typeof AdminDocumentsRoute
+  '/admin/eligibility': typeof AdminEligibilityRoute
+  '/admin/notifications': typeof AdminNotificationsRouteWithChildren
+  '/admin/payments': typeof AdminPaymentsRouteWithChildren
   '/admin/reports': typeof AdminReportsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/students': typeof AdminStudentsRouteWithChildren
   '/admissions/$id': typeof AdmissionsIdRoute
   '/ai/copilot': typeof AiCopilotRoute
   '/ai/ocr': typeof AiOcrRoute
+  '/applicant/admission': typeof ApplicantAdmissionRoute
+  '/applicant/application': typeof ApplicantApplicationRoute
+  '/applicant/counsellor': typeof ApplicantCounsellorRoute
+  '/applicant/dashboard': typeof ApplicantDashboardRoute
+  '/applicant/documents': typeof ApplicantDocumentsRoute
+  '/applicant/eligibility': typeof ApplicantEligibilityRoute
+  '/applicant/help': typeof ApplicantHelpRoute
+  '/applicant/history': typeof ApplicantHistoryRoute
+  '/applicant/payments': typeof ApplicantPaymentsRoute
+  '/applicant/profile': typeof ApplicantProfileRoute
+  '/applicant/scholarships': typeof ApplicantScholarshipsRoute
   '/applicants/$id': typeof ApplicantsIdRoute
   '/applicants/new': typeof ApplicantsNewRoute
+  '/counsellor/call-history': typeof CounsellorCallHistoryRoute
+  '/counsellor/calls': typeof CounsellorCallsRoute
+  '/counsellor/dashboard': typeof CounsellorDashboardRoute
+  '/counsellor/followups': typeof CounsellorFollowupsRoute
+  '/counsellor/leads': typeof CounsellorLeadsRoute
+  '/counsellor/profile': typeof CounsellorProfileRoute
+  '/counsellor/settings': typeof CounsellorSettingsRoute
+  '/counsellor/workspace': typeof CounsellorWorkspaceRoute
   '/documents/upload': typeof DocumentsUploadRoute
   '/faculty/admissions': typeof FacultyAdmissionsRoute
   '/faculty/applicants': typeof FacultyApplicantsRoute
@@ -313,14 +795,37 @@ export interface FileRoutesById {
   '/inquiries/new': typeof InquiriesNewRoute
   '/payments/history': typeof PaymentsHistoryRoute
   '/payments/summary': typeof PaymentsSummaryRoute
+  '/student/academics': typeof StudentAcademicsRoute
+  '/student/assignments': typeof StudentAssignmentsRoute
+  '/student/attendance': typeof StudentAttendanceRoute
+  '/student/campus': typeof StudentCampusRoute
+  '/student/courses': typeof StudentCoursesRoute
+  '/student/dashboard': typeof StudentDashboardRoute
+  '/student/documents': typeof StudentDocumentsRoute
+  '/student/events': typeof StudentEventsRoute
+  '/student/exams': typeof StudentExamsRoute
+  '/student/fees': typeof StudentFeesRoute
+  '/student/future': typeof StudentFutureRoute
+  '/student/profile': typeof StudentProfileRoute
+  '/student/scholarships': typeof StudentScholarshipsRoute
+  '/student/settings': typeof StudentSettingsRoute
+  '/student/timetable': typeof StudentTimetableRoute
+  '/admin/admissions/new': typeof AdminAdmissionsNewRoute
+  '/admin/courses/new': typeof AdminCoursesNewRoute
+  '/admin/departments/new': typeof AdminDepartmentsNewRoute
+  '/admin/notifications/new': typeof AdminNotificationsNewRoute
+  '/admin/payments/new': typeof AdminPaymentsNewRoute
+  '/admin/students/new': typeof AdminStudentsNewRoute
   '/faculty/ai-copilot/$applicantId': typeof FacultyAiCopilotApplicantIdRoute
   '/inquiries/$id/edit': typeof InquiriesIdEditRoute
+  '/student/application/new': typeof StudentApplicationNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/admin'
+    | '/admission-intelligence'
     | '/applicants'
     | '/dashboard'
     | '/documents'
@@ -329,17 +834,50 @@ export interface FileRouteTypes {
     | '/inquiries'
     | '/login'
     | '/notifications'
+    | '/orchestrator'
+    | '/outreach'
     | '/register'
     | '/reset-password'
     | '/settings'
+    | '/admin/admissions'
     | '/admin/analytics'
+    | '/admin/applicants'
+    | '/admin/calling'
+    | '/admin/counsellors'
+    | '/admin/courses'
+    | '/admin/dashboard'
+    | '/admin/departments'
+    | '/admin/documents'
+    | '/admin/eligibility'
+    | '/admin/notifications'
+    | '/admin/payments'
     | '/admin/reports'
     | '/admin/settings'
+    | '/admin/students'
     | '/admissions/$id'
     | '/ai/copilot'
     | '/ai/ocr'
+    | '/applicant/admission'
+    | '/applicant/application'
+    | '/applicant/counsellor'
+    | '/applicant/dashboard'
+    | '/applicant/documents'
+    | '/applicant/eligibility'
+    | '/applicant/help'
+    | '/applicant/history'
+    | '/applicant/payments'
+    | '/applicant/profile'
+    | '/applicant/scholarships'
     | '/applicants/$id'
     | '/applicants/new'
+    | '/counsellor/call-history'
+    | '/counsellor/calls'
+    | '/counsellor/dashboard'
+    | '/counsellor/followups'
+    | '/counsellor/leads'
+    | '/counsellor/profile'
+    | '/counsellor/settings'
+    | '/counsellor/workspace'
     | '/documents/upload'
     | '/faculty/admissions'
     | '/faculty/applicants'
@@ -350,12 +888,35 @@ export interface FileRouteTypes {
     | '/inquiries/new'
     | '/payments/history'
     | '/payments/summary'
+    | '/student/academics'
+    | '/student/assignments'
+    | '/student/attendance'
+    | '/student/campus'
+    | '/student/courses'
+    | '/student/dashboard'
+    | '/student/documents'
+    | '/student/events'
+    | '/student/exams'
+    | '/student/fees'
+    | '/student/future'
+    | '/student/profile'
+    | '/student/scholarships'
+    | '/student/settings'
+    | '/student/timetable'
+    | '/admin/admissions/new'
+    | '/admin/courses/new'
+    | '/admin/departments/new'
+    | '/admin/notifications/new'
+    | '/admin/payments/new'
+    | '/admin/students/new'
     | '/faculty/ai-copilot/$applicantId'
     | '/inquiries/$id/edit'
+    | '/student/application/new'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/admin'
+    | '/admission-intelligence'
     | '/applicants'
     | '/dashboard'
     | '/documents'
@@ -364,17 +925,50 @@ export interface FileRouteTypes {
     | '/inquiries'
     | '/login'
     | '/notifications'
+    | '/orchestrator'
+    | '/outreach'
     | '/register'
     | '/reset-password'
     | '/settings'
+    | '/admin/admissions'
     | '/admin/analytics'
+    | '/admin/applicants'
+    | '/admin/calling'
+    | '/admin/counsellors'
+    | '/admin/courses'
+    | '/admin/dashboard'
+    | '/admin/departments'
+    | '/admin/documents'
+    | '/admin/eligibility'
+    | '/admin/notifications'
+    | '/admin/payments'
     | '/admin/reports'
     | '/admin/settings'
+    | '/admin/students'
     | '/admissions/$id'
     | '/ai/copilot'
     | '/ai/ocr'
+    | '/applicant/admission'
+    | '/applicant/application'
+    | '/applicant/counsellor'
+    | '/applicant/dashboard'
+    | '/applicant/documents'
+    | '/applicant/eligibility'
+    | '/applicant/help'
+    | '/applicant/history'
+    | '/applicant/payments'
+    | '/applicant/profile'
+    | '/applicant/scholarships'
     | '/applicants/$id'
     | '/applicants/new'
+    | '/counsellor/call-history'
+    | '/counsellor/calls'
+    | '/counsellor/dashboard'
+    | '/counsellor/followups'
+    | '/counsellor/leads'
+    | '/counsellor/profile'
+    | '/counsellor/settings'
+    | '/counsellor/workspace'
     | '/documents/upload'
     | '/faculty/admissions'
     | '/faculty/applicants'
@@ -385,12 +979,35 @@ export interface FileRouteTypes {
     | '/inquiries/new'
     | '/payments/history'
     | '/payments/summary'
+    | '/student/academics'
+    | '/student/assignments'
+    | '/student/attendance'
+    | '/student/campus'
+    | '/student/courses'
+    | '/student/dashboard'
+    | '/student/documents'
+    | '/student/events'
+    | '/student/exams'
+    | '/student/fees'
+    | '/student/future'
+    | '/student/profile'
+    | '/student/scholarships'
+    | '/student/settings'
+    | '/student/timetable'
+    | '/admin/admissions/new'
+    | '/admin/courses/new'
+    | '/admin/departments/new'
+    | '/admin/notifications/new'
+    | '/admin/payments/new'
+    | '/admin/students/new'
     | '/faculty/ai-copilot/$applicantId'
     | '/inquiries/$id/edit'
+    | '/student/application/new'
   id:
     | '__root__'
     | '/'
     | '/admin'
+    | '/admission-intelligence'
     | '/applicants'
     | '/dashboard'
     | '/documents'
@@ -399,17 +1016,50 @@ export interface FileRouteTypes {
     | '/inquiries'
     | '/login'
     | '/notifications'
+    | '/orchestrator'
+    | '/outreach'
     | '/register'
     | '/reset-password'
     | '/settings'
+    | '/admin/admissions'
     | '/admin/analytics'
+    | '/admin/applicants'
+    | '/admin/calling'
+    | '/admin/counsellors'
+    | '/admin/courses'
+    | '/admin/dashboard'
+    | '/admin/departments'
+    | '/admin/documents'
+    | '/admin/eligibility'
+    | '/admin/notifications'
+    | '/admin/payments'
     | '/admin/reports'
     | '/admin/settings'
+    | '/admin/students'
     | '/admissions/$id'
     | '/ai/copilot'
     | '/ai/ocr'
+    | '/applicant/admission'
+    | '/applicant/application'
+    | '/applicant/counsellor'
+    | '/applicant/dashboard'
+    | '/applicant/documents'
+    | '/applicant/eligibility'
+    | '/applicant/help'
+    | '/applicant/history'
+    | '/applicant/payments'
+    | '/applicant/profile'
+    | '/applicant/scholarships'
     | '/applicants/$id'
     | '/applicants/new'
+    | '/counsellor/call-history'
+    | '/counsellor/calls'
+    | '/counsellor/dashboard'
+    | '/counsellor/followups'
+    | '/counsellor/leads'
+    | '/counsellor/profile'
+    | '/counsellor/settings'
+    | '/counsellor/workspace'
     | '/documents/upload'
     | '/faculty/admissions'
     | '/faculty/applicants'
@@ -420,13 +1070,36 @@ export interface FileRouteTypes {
     | '/inquiries/new'
     | '/payments/history'
     | '/payments/summary'
+    | '/student/academics'
+    | '/student/assignments'
+    | '/student/attendance'
+    | '/student/campus'
+    | '/student/courses'
+    | '/student/dashboard'
+    | '/student/documents'
+    | '/student/events'
+    | '/student/exams'
+    | '/student/fees'
+    | '/student/future'
+    | '/student/profile'
+    | '/student/scholarships'
+    | '/student/settings'
+    | '/student/timetable'
+    | '/admin/admissions/new'
+    | '/admin/courses/new'
+    | '/admin/departments/new'
+    | '/admin/notifications/new'
+    | '/admin/payments/new'
+    | '/admin/students/new'
     | '/faculty/ai-copilot/$applicantId'
     | '/inquiries/$id/edit'
+    | '/student/application/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
+  AdmissionIntelligenceRoute: typeof AdmissionIntelligenceRoute
   ApplicantsRoute: typeof ApplicantsRouteWithChildren
   DashboardRoute: typeof DashboardRoute
   DocumentsRoute: typeof DocumentsRouteWithChildren
@@ -435,14 +1108,51 @@ export interface RootRouteChildren {
   InquiriesRoute: typeof InquiriesRouteWithChildren
   LoginRoute: typeof LoginRoute
   NotificationsRoute: typeof NotificationsRoute
+  OrchestratorRoute: typeof OrchestratorRoute
+  OutreachRoute: typeof OutreachRoute
   RegisterRoute: typeof RegisterRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SettingsRoute: typeof SettingsRoute
   AdmissionsIdRoute: typeof AdmissionsIdRoute
   AiCopilotRoute: typeof AiCopilotRoute
   AiOcrRoute: typeof AiOcrRoute
+  ApplicantAdmissionRoute: typeof ApplicantAdmissionRoute
+  ApplicantApplicationRoute: typeof ApplicantApplicationRoute
+  ApplicantCounsellorRoute: typeof ApplicantCounsellorRoute
+  ApplicantDashboardRoute: typeof ApplicantDashboardRoute
+  ApplicantDocumentsRoute: typeof ApplicantDocumentsRoute
+  ApplicantEligibilityRoute: typeof ApplicantEligibilityRoute
+  ApplicantHelpRoute: typeof ApplicantHelpRoute
+  ApplicantHistoryRoute: typeof ApplicantHistoryRoute
+  ApplicantPaymentsRoute: typeof ApplicantPaymentsRoute
+  ApplicantProfileRoute: typeof ApplicantProfileRoute
+  ApplicantScholarshipsRoute: typeof ApplicantScholarshipsRoute
+  CounsellorCallHistoryRoute: typeof CounsellorCallHistoryRoute
+  CounsellorCallsRoute: typeof CounsellorCallsRoute
+  CounsellorDashboardRoute: typeof CounsellorDashboardRoute
+  CounsellorFollowupsRoute: typeof CounsellorFollowupsRoute
+  CounsellorLeadsRoute: typeof CounsellorLeadsRoute
+  CounsellorProfileRoute: typeof CounsellorProfileRoute
+  CounsellorSettingsRoute: typeof CounsellorSettingsRoute
+  CounsellorWorkspaceRoute: typeof CounsellorWorkspaceRoute
   PaymentsHistoryRoute: typeof PaymentsHistoryRoute
   PaymentsSummaryRoute: typeof PaymentsSummaryRoute
+  StudentAcademicsRoute: typeof StudentAcademicsRoute
+  StudentAssignmentsRoute: typeof StudentAssignmentsRoute
+  StudentAttendanceRoute: typeof StudentAttendanceRoute
+  StudentCampusRoute: typeof StudentCampusRoute
+  StudentCoursesRoute: typeof StudentCoursesRoute
+  StudentDashboardRoute: typeof StudentDashboardRoute
+  StudentDocumentsRoute: typeof StudentDocumentsRoute
+  StudentEventsRoute: typeof StudentEventsRoute
+  StudentExamsRoute: typeof StudentExamsRoute
+  StudentFeesRoute: typeof StudentFeesRoute
+  StudentFutureRoute: typeof StudentFutureRoute
+  StudentProfileRoute: typeof StudentProfileRoute
+  StudentScholarshipsRoute: typeof StudentScholarshipsRoute
+  StudentSettingsRoute: typeof StudentSettingsRoute
+  StudentTimetableRoute: typeof StudentTimetableRoute
+  StudentApplicationNewRoute: typeof StudentApplicationNewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -459,6 +1169,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admission-intelligence': {
+      id: '/admission-intelligence'
+      path: '/admission-intelligence'
+      fullPath: '/admission-intelligence'
+      preLoaderRoute: typeof AdmissionIntelligenceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/applicants': {
@@ -517,6 +1234,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/orchestrator': {
+      id: '/orchestrator'
+      path: '/orchestrator'
+      fullPath: '/orchestrator'
+      preLoaderRoute: typeof OrchestratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/outreach': {
+      id: '/outreach'
+      path: '/outreach'
+      fullPath: '/outreach'
+      preLoaderRoute: typeof OutreachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/register': {
       id: '/register'
       path: '/register'
@@ -538,11 +1269,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/admissions': {
+      id: '/admin/admissions'
+      path: '/admissions'
+      fullPath: '/admin/admissions'
+      preLoaderRoute: typeof AdminAdmissionsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/analytics': {
       id: '/admin/analytics'
       path: '/analytics'
       fullPath: '/admin/analytics'
       preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/applicants': {
+      id: '/admin/applicants'
+      path: '/applicants'
+      fullPath: '/admin/applicants'
+      preLoaderRoute: typeof AdminApplicantsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/calling': {
+      id: '/admin/calling'
+      path: '/calling'
+      fullPath: '/admin/calling'
+      preLoaderRoute: typeof AdminCallingRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/counsellors': {
+      id: '/admin/counsellors'
+      path: '/counsellors'
+      fullPath: '/admin/counsellors'
+      preLoaderRoute: typeof AdminCounsellorsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/courses': {
+      id: '/admin/courses'
+      path: '/courses'
+      fullPath: '/admin/courses'
+      preLoaderRoute: typeof AdminCoursesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/departments': {
+      id: '/admin/departments'
+      path: '/departments'
+      fullPath: '/admin/departments'
+      preLoaderRoute: typeof AdminDepartmentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/documents': {
+      id: '/admin/documents'
+      path: '/documents'
+      fullPath: '/admin/documents'
+      preLoaderRoute: typeof AdminDocumentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/eligibility': {
+      id: '/admin/eligibility'
+      path: '/eligibility'
+      fullPath: '/admin/eligibility'
+      preLoaderRoute: typeof AdminEligibilityRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/notifications': {
+      id: '/admin/notifications'
+      path: '/notifications'
+      fullPath: '/admin/notifications'
+      preLoaderRoute: typeof AdminNotificationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/payments': {
+      id: '/admin/payments'
+      path: '/payments'
+      fullPath: '/admin/payments'
+      preLoaderRoute: typeof AdminPaymentsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/reports': {
@@ -557,6 +1365,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/admin/settings'
       preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/students': {
+      id: '/admin/students'
+      path: '/students'
+      fullPath: '/admin/students'
+      preLoaderRoute: typeof AdminStudentsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admissions/$id': {
@@ -580,6 +1395,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AiOcrRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/applicant/admission': {
+      id: '/applicant/admission'
+      path: '/applicant/admission'
+      fullPath: '/applicant/admission'
+      preLoaderRoute: typeof ApplicantAdmissionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicant/application': {
+      id: '/applicant/application'
+      path: '/applicant/application'
+      fullPath: '/applicant/application'
+      preLoaderRoute: typeof ApplicantApplicationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicant/counsellor': {
+      id: '/applicant/counsellor'
+      path: '/applicant/counsellor'
+      fullPath: '/applicant/counsellor'
+      preLoaderRoute: typeof ApplicantCounsellorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicant/dashboard': {
+      id: '/applicant/dashboard'
+      path: '/applicant/dashboard'
+      fullPath: '/applicant/dashboard'
+      preLoaderRoute: typeof ApplicantDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicant/documents': {
+      id: '/applicant/documents'
+      path: '/applicant/documents'
+      fullPath: '/applicant/documents'
+      preLoaderRoute: typeof ApplicantDocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicant/eligibility': {
+      id: '/applicant/eligibility'
+      path: '/applicant/eligibility'
+      fullPath: '/applicant/eligibility'
+      preLoaderRoute: typeof ApplicantEligibilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicant/help': {
+      id: '/applicant/help'
+      path: '/applicant/help'
+      fullPath: '/applicant/help'
+      preLoaderRoute: typeof ApplicantHelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicant/history': {
+      id: '/applicant/history'
+      path: '/applicant/history'
+      fullPath: '/applicant/history'
+      preLoaderRoute: typeof ApplicantHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicant/payments': {
+      id: '/applicant/payments'
+      path: '/applicant/payments'
+      fullPath: '/applicant/payments'
+      preLoaderRoute: typeof ApplicantPaymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicant/profile': {
+      id: '/applicant/profile'
+      path: '/applicant/profile'
+      fullPath: '/applicant/profile'
+      preLoaderRoute: typeof ApplicantProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/applicant/scholarships': {
+      id: '/applicant/scholarships'
+      path: '/applicant/scholarships'
+      fullPath: '/applicant/scholarships'
+      preLoaderRoute: typeof ApplicantScholarshipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/applicants/$id': {
       id: '/applicants/$id'
       path: '/$id'
@@ -593,6 +1485,62 @@ declare module '@tanstack/react-router' {
       fullPath: '/applicants/new'
       preLoaderRoute: typeof ApplicantsNewRouteImport
       parentRoute: typeof ApplicantsRoute
+    }
+    '/counsellor/call-history': {
+      id: '/counsellor/call-history'
+      path: '/counsellor/call-history'
+      fullPath: '/counsellor/call-history'
+      preLoaderRoute: typeof CounsellorCallHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/counsellor/calls': {
+      id: '/counsellor/calls'
+      path: '/counsellor/calls'
+      fullPath: '/counsellor/calls'
+      preLoaderRoute: typeof CounsellorCallsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/counsellor/dashboard': {
+      id: '/counsellor/dashboard'
+      path: '/counsellor/dashboard'
+      fullPath: '/counsellor/dashboard'
+      preLoaderRoute: typeof CounsellorDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/counsellor/followups': {
+      id: '/counsellor/followups'
+      path: '/counsellor/followups'
+      fullPath: '/counsellor/followups'
+      preLoaderRoute: typeof CounsellorFollowupsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/counsellor/leads': {
+      id: '/counsellor/leads'
+      path: '/counsellor/leads'
+      fullPath: '/counsellor/leads'
+      preLoaderRoute: typeof CounsellorLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/counsellor/profile': {
+      id: '/counsellor/profile'
+      path: '/counsellor/profile'
+      fullPath: '/counsellor/profile'
+      preLoaderRoute: typeof CounsellorProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/counsellor/settings': {
+      id: '/counsellor/settings'
+      path: '/counsellor/settings'
+      fullPath: '/counsellor/settings'
+      preLoaderRoute: typeof CounsellorSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/counsellor/workspace': {
+      id: '/counsellor/workspace'
+      path: '/counsellor/workspace'
+      fullPath: '/counsellor/workspace'
+      preLoaderRoute: typeof CounsellorWorkspaceRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/documents/upload': {
       id: '/documents/upload'
@@ -664,6 +1612,153 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PaymentsSummaryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/student/academics': {
+      id: '/student/academics'
+      path: '/student/academics'
+      fullPath: '/student/academics'
+      preLoaderRoute: typeof StudentAcademicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/assignments': {
+      id: '/student/assignments'
+      path: '/student/assignments'
+      fullPath: '/student/assignments'
+      preLoaderRoute: typeof StudentAssignmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/attendance': {
+      id: '/student/attendance'
+      path: '/student/attendance'
+      fullPath: '/student/attendance'
+      preLoaderRoute: typeof StudentAttendanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/campus': {
+      id: '/student/campus'
+      path: '/student/campus'
+      fullPath: '/student/campus'
+      preLoaderRoute: typeof StudentCampusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/courses': {
+      id: '/student/courses'
+      path: '/student/courses'
+      fullPath: '/student/courses'
+      preLoaderRoute: typeof StudentCoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/dashboard': {
+      id: '/student/dashboard'
+      path: '/student/dashboard'
+      fullPath: '/student/dashboard'
+      preLoaderRoute: typeof StudentDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/documents': {
+      id: '/student/documents'
+      path: '/student/documents'
+      fullPath: '/student/documents'
+      preLoaderRoute: typeof StudentDocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/events': {
+      id: '/student/events'
+      path: '/student/events'
+      fullPath: '/student/events'
+      preLoaderRoute: typeof StudentEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/exams': {
+      id: '/student/exams'
+      path: '/student/exams'
+      fullPath: '/student/exams'
+      preLoaderRoute: typeof StudentExamsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/fees': {
+      id: '/student/fees'
+      path: '/student/fees'
+      fullPath: '/student/fees'
+      preLoaderRoute: typeof StudentFeesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/future': {
+      id: '/student/future'
+      path: '/student/future'
+      fullPath: '/student/future'
+      preLoaderRoute: typeof StudentFutureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/profile': {
+      id: '/student/profile'
+      path: '/student/profile'
+      fullPath: '/student/profile'
+      preLoaderRoute: typeof StudentProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/scholarships': {
+      id: '/student/scholarships'
+      path: '/student/scholarships'
+      fullPath: '/student/scholarships'
+      preLoaderRoute: typeof StudentScholarshipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/settings': {
+      id: '/student/settings'
+      path: '/student/settings'
+      fullPath: '/student/settings'
+      preLoaderRoute: typeof StudentSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student/timetable': {
+      id: '/student/timetable'
+      path: '/student/timetable'
+      fullPath: '/student/timetable'
+      preLoaderRoute: typeof StudentTimetableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/admissions/new': {
+      id: '/admin/admissions/new'
+      path: '/new'
+      fullPath: '/admin/admissions/new'
+      preLoaderRoute: typeof AdminAdmissionsNewRouteImport
+      parentRoute: typeof AdminAdmissionsRoute
+    }
+    '/admin/courses/new': {
+      id: '/admin/courses/new'
+      path: '/new'
+      fullPath: '/admin/courses/new'
+      preLoaderRoute: typeof AdminCoursesNewRouteImport
+      parentRoute: typeof AdminCoursesRoute
+    }
+    '/admin/departments/new': {
+      id: '/admin/departments/new'
+      path: '/new'
+      fullPath: '/admin/departments/new'
+      preLoaderRoute: typeof AdminDepartmentsNewRouteImport
+      parentRoute: typeof AdminDepartmentsRoute
+    }
+    '/admin/notifications/new': {
+      id: '/admin/notifications/new'
+      path: '/new'
+      fullPath: '/admin/notifications/new'
+      preLoaderRoute: typeof AdminNotificationsNewRouteImport
+      parentRoute: typeof AdminNotificationsRoute
+    }
+    '/admin/payments/new': {
+      id: '/admin/payments/new'
+      path: '/new'
+      fullPath: '/admin/payments/new'
+      preLoaderRoute: typeof AdminPaymentsNewRouteImport
+      parentRoute: typeof AdminPaymentsRoute
+    }
+    '/admin/students/new': {
+      id: '/admin/students/new'
+      path: '/new'
+      fullPath: '/admin/students/new'
+      preLoaderRoute: typeof AdminStudentsNewRouteImport
+      parentRoute: typeof AdminStudentsRoute
+    }
     '/faculty/ai-copilot/$applicantId': {
       id: '/faculty/ai-copilot/$applicantId'
       path: '/ai-copilot/$applicantId'
@@ -678,19 +1773,120 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InquiriesIdEditRouteImport
       parentRoute: typeof InquiriesIdRoute
     }
+    '/student/application/new': {
+      id: '/student/application/new'
+      path: '/student/application/new'
+      fullPath: '/student/application/new'
+      preLoaderRoute: typeof StudentApplicationNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AdminAdmissionsRouteChildren {
+  AdminAdmissionsNewRoute: typeof AdminAdmissionsNewRoute
+}
+
+const AdminAdmissionsRouteChildren: AdminAdmissionsRouteChildren = {
+  AdminAdmissionsNewRoute: AdminAdmissionsNewRoute,
+}
+
+const AdminAdmissionsRouteWithChildren = AdminAdmissionsRoute._addFileChildren(
+  AdminAdmissionsRouteChildren,
+)
+
+interface AdminCoursesRouteChildren {
+  AdminCoursesNewRoute: typeof AdminCoursesNewRoute
+}
+
+const AdminCoursesRouteChildren: AdminCoursesRouteChildren = {
+  AdminCoursesNewRoute: AdminCoursesNewRoute,
+}
+
+const AdminCoursesRouteWithChildren = AdminCoursesRoute._addFileChildren(
+  AdminCoursesRouteChildren,
+)
+
+interface AdminDepartmentsRouteChildren {
+  AdminDepartmentsNewRoute: typeof AdminDepartmentsNewRoute
+}
+
+const AdminDepartmentsRouteChildren: AdminDepartmentsRouteChildren = {
+  AdminDepartmentsNewRoute: AdminDepartmentsNewRoute,
+}
+
+const AdminDepartmentsRouteWithChildren =
+  AdminDepartmentsRoute._addFileChildren(AdminDepartmentsRouteChildren)
+
+interface AdminNotificationsRouteChildren {
+  AdminNotificationsNewRoute: typeof AdminNotificationsNewRoute
+}
+
+const AdminNotificationsRouteChildren: AdminNotificationsRouteChildren = {
+  AdminNotificationsNewRoute: AdminNotificationsNewRoute,
+}
+
+const AdminNotificationsRouteWithChildren =
+  AdminNotificationsRoute._addFileChildren(AdminNotificationsRouteChildren)
+
+interface AdminPaymentsRouteChildren {
+  AdminPaymentsNewRoute: typeof AdminPaymentsNewRoute
+}
+
+const AdminPaymentsRouteChildren: AdminPaymentsRouteChildren = {
+  AdminPaymentsNewRoute: AdminPaymentsNewRoute,
+}
+
+const AdminPaymentsRouteWithChildren = AdminPaymentsRoute._addFileChildren(
+  AdminPaymentsRouteChildren,
+)
+
+interface AdminStudentsRouteChildren {
+  AdminStudentsNewRoute: typeof AdminStudentsNewRoute
+}
+
+const AdminStudentsRouteChildren: AdminStudentsRouteChildren = {
+  AdminStudentsNewRoute: AdminStudentsNewRoute,
+}
+
+const AdminStudentsRouteWithChildren = AdminStudentsRoute._addFileChildren(
+  AdminStudentsRouteChildren,
+)
+
 interface AdminRouteChildren {
+  AdminAdmissionsRoute: typeof AdminAdmissionsRouteWithChildren
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminApplicantsRoute: typeof AdminApplicantsRoute
+  AdminCallingRoute: typeof AdminCallingRoute
+  AdminCounsellorsRoute: typeof AdminCounsellorsRoute
+  AdminCoursesRoute: typeof AdminCoursesRouteWithChildren
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminDepartmentsRoute: typeof AdminDepartmentsRouteWithChildren
+  AdminDocumentsRoute: typeof AdminDocumentsRoute
+  AdminEligibilityRoute: typeof AdminEligibilityRoute
+  AdminNotificationsRoute: typeof AdminNotificationsRouteWithChildren
+  AdminPaymentsRoute: typeof AdminPaymentsRouteWithChildren
   AdminReportsRoute: typeof AdminReportsRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminStudentsRoute: typeof AdminStudentsRouteWithChildren
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminAdmissionsRoute: AdminAdmissionsRouteWithChildren,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminApplicantsRoute: AdminApplicantsRoute,
+  AdminCallingRoute: AdminCallingRoute,
+  AdminCounsellorsRoute: AdminCounsellorsRoute,
+  AdminCoursesRoute: AdminCoursesRouteWithChildren,
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminDepartmentsRoute: AdminDepartmentsRouteWithChildren,
+  AdminDocumentsRoute: AdminDocumentsRoute,
+  AdminEligibilityRoute: AdminEligibilityRoute,
+  AdminNotificationsRoute: AdminNotificationsRouteWithChildren,
+  AdminPaymentsRoute: AdminPaymentsRouteWithChildren,
   AdminReportsRoute: AdminReportsRoute,
   AdminSettingsRoute: AdminSettingsRoute,
+  AdminStudentsRoute: AdminStudentsRouteWithChildren,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
@@ -771,6 +1967,7 @@ const InquiriesRouteWithChildren = InquiriesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
+  AdmissionIntelligenceRoute: AdmissionIntelligenceRoute,
   ApplicantsRoute: ApplicantsRouteWithChildren,
   DashboardRoute: DashboardRoute,
   DocumentsRoute: DocumentsRouteWithChildren,
@@ -779,14 +1976,51 @@ const rootRouteChildren: RootRouteChildren = {
   InquiriesRoute: InquiriesRouteWithChildren,
   LoginRoute: LoginRoute,
   NotificationsRoute: NotificationsRoute,
+  OrchestratorRoute: OrchestratorRoute,
+  OutreachRoute: OutreachRoute,
   RegisterRoute: RegisterRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SettingsRoute: SettingsRoute,
   AdmissionsIdRoute: AdmissionsIdRoute,
   AiCopilotRoute: AiCopilotRoute,
   AiOcrRoute: AiOcrRoute,
+  ApplicantAdmissionRoute: ApplicantAdmissionRoute,
+  ApplicantApplicationRoute: ApplicantApplicationRoute,
+  ApplicantCounsellorRoute: ApplicantCounsellorRoute,
+  ApplicantDashboardRoute: ApplicantDashboardRoute,
+  ApplicantDocumentsRoute: ApplicantDocumentsRoute,
+  ApplicantEligibilityRoute: ApplicantEligibilityRoute,
+  ApplicantHelpRoute: ApplicantHelpRoute,
+  ApplicantHistoryRoute: ApplicantHistoryRoute,
+  ApplicantPaymentsRoute: ApplicantPaymentsRoute,
+  ApplicantProfileRoute: ApplicantProfileRoute,
+  ApplicantScholarshipsRoute: ApplicantScholarshipsRoute,
+  CounsellorCallHistoryRoute: CounsellorCallHistoryRoute,
+  CounsellorCallsRoute: CounsellorCallsRoute,
+  CounsellorDashboardRoute: CounsellorDashboardRoute,
+  CounsellorFollowupsRoute: CounsellorFollowupsRoute,
+  CounsellorLeadsRoute: CounsellorLeadsRoute,
+  CounsellorProfileRoute: CounsellorProfileRoute,
+  CounsellorSettingsRoute: CounsellorSettingsRoute,
+  CounsellorWorkspaceRoute: CounsellorWorkspaceRoute,
   PaymentsHistoryRoute: PaymentsHistoryRoute,
   PaymentsSummaryRoute: PaymentsSummaryRoute,
+  StudentAcademicsRoute: StudentAcademicsRoute,
+  StudentAssignmentsRoute: StudentAssignmentsRoute,
+  StudentAttendanceRoute: StudentAttendanceRoute,
+  StudentCampusRoute: StudentCampusRoute,
+  StudentCoursesRoute: StudentCoursesRoute,
+  StudentDashboardRoute: StudentDashboardRoute,
+  StudentDocumentsRoute: StudentDocumentsRoute,
+  StudentEventsRoute: StudentEventsRoute,
+  StudentExamsRoute: StudentExamsRoute,
+  StudentFeesRoute: StudentFeesRoute,
+  StudentFutureRoute: StudentFutureRoute,
+  StudentProfileRoute: StudentProfileRoute,
+  StudentScholarshipsRoute: StudentScholarshipsRoute,
+  StudentSettingsRoute: StudentSettingsRoute,
+  StudentTimetableRoute: StudentTimetableRoute,
+  StudentApplicationNewRoute: StudentApplicationNewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

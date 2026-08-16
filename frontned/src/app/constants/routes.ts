@@ -23,7 +23,7 @@ export const APP_ROUTES: RouteDefinition[] = [
     path: "/inquiries",
     label: "Inquiries",
     requiresAuth: true,
-    requiredRole: ["SUPPORT", "COUNSELOR", "ADMISSION_COMMITTEE", "ADMIN", "SUPER_ADMIN"],
+    requiredRole: ["FACULTY", "HOD", "ADMIN", "SUPER_ADMIN"],
     requiredPermission: ["inquiries:read"],
     children: [
       {
@@ -44,7 +44,7 @@ export const APP_ROUTES: RouteDefinition[] = [
     path: "/applicants",
     label: "Applicants",
     requiresAuth: true,
-    requiredRole: ["COUNSELOR", "ADMISSION_COMMITTEE", "ADMIN", "SUPER_ADMIN"],
+    requiredRole: ["FACULTY", "HOD", "ADMIN", "SUPER_ADMIN"],
     requiredPermission: ["applications:read"],
     children: [
       {
@@ -65,7 +65,7 @@ export const APP_ROUTES: RouteDefinition[] = [
     path: "/documents",
     label: "Documents",
     requiresAuth: true,
-    requiredRole: ["COUNSELOR", "ADMISSION_COMMITTEE", "ADMIN", "SUPER_ADMIN"],
+    requiredRole: ["FACULTY", "HOD", "ADMIN", "SUPER_ADMIN"],
     requiredPermission: ["documents:read"],
     children: [
       {
@@ -80,7 +80,7 @@ export const APP_ROUTES: RouteDefinition[] = [
     path: "/eligibility",
     label: "Eligibility",
     requiresAuth: true,
-    requiredRole: ["ADMISSION_COMMITTEE", "ADMIN", "SUPER_ADMIN"],
+    requiredRole: ["HOD", "ADMIN", "SUPER_ADMIN"],
     requiredPermission: ["eligibility:read"],
     children: [
       {
@@ -95,7 +95,7 @@ export const APP_ROUTES: RouteDefinition[] = [
     path: "/admissions",
     label: "Admissions",
     requiresAuth: true,
-    requiredRole: ["ADMISSION_COMMITTEE", "ADMIN", "SUPER_ADMIN"],
+    requiredRole: ["HOD", "ADMIN", "SUPER_ADMIN"],
     requiredPermission: ["admissions:read"],
     children: [
       {
@@ -116,7 +116,7 @@ export const APP_ROUTES: RouteDefinition[] = [
     path: "/faculty",
     label: "Faculty",
     requiresAuth: true,
-    requiredRole: ["FACULTY", "ADMISSION_COMMITTEE", "ADMIN", "SUPER_ADMIN"],
+    requiredRole: ["FACULTY", "HOD", "ADMIN", "SUPER_ADMIN"],
     requiredPermission: ["faculty:read"],
     children: [
       {
@@ -183,13 +183,92 @@ export const APP_ROUTES: RouteDefinition[] = [
         label: "Settings",
         requiresAuth: true,
       },
+      {
+        path: "/admin/applicants",
+        label: "Applicants",
+        requiresAuth: true,
+      },
+      {
+        path: "/admin/students",
+        label: "Students",
+        requiresAuth: true,
+      },
+      {
+        path: "/admin/counsellors",
+        label: "Counsellors",
+        requiresAuth: true,
+      },
+      {
+        path: "/admin/courses",
+        label: "Courses",
+        requiresAuth: true,
+      },
+      {
+        path: "/admin/departments",
+        label: "Departments",
+        requiresAuth: true,
+      },
+      {
+        path: "/admin/admissions",
+        label: "Admissions",
+        requiresAuth: true,
+      },
+      {
+        path: "/admin/documents",
+        label: "Documents",
+        requiresAuth: true,
+      },
+      {
+        path: "/admin/eligibility",
+        label: "Eligibility",
+        requiresAuth: true,
+      },
+      {
+        path: "/admin/payments",
+        label: "Payments",
+        requiresAuth: true,
+      },
+      {
+        path: "/admin/notifications",
+        label: "Notifications",
+        requiresAuth: true,
+      },
+      {
+        path: "/admin/calling",
+        label: "Calling",
+        requiresAuth: true,
+      },
     ],
+  },
+  {
+    path: "/outreach",
+    label: "Calling Agent",
+    requiresAuth: true,
+    requiredRole: ["FACULTY", "HOD", "ADMIN", "SUPER_ADMIN"],
+    requiredPermission: ["outreach:read"],
+    icon: "PhoneCall",
+  },
+  {
+    path: "/admission-intelligence",
+    label: "Admission Intelligence",
+    requiresAuth: true,
+    requiredRole: ["FACULTY", "HOD", "ADMIN", "SUPER_ADMIN"],
+    requiredPermission: ["outreach:read"],
+    icon: "BarChart3",
+  },
+  {
+    path: "/orchestrator",
+    label: "Action Orchestrator",
+    requiresAuth: true,
+    requiredRole: ["ADMIN", "SUPER_ADMIN", "FACULTY"],
+    requiredPermission: ["orchestrator:read"],
+    icon: "Settings",
   },
   {
     path: "/ai",
     label: "AI Services",
     requiresAuth: true,
-    requiredRole: ["ADMIN", "SUPER_ADMIN", "COUNSELOR", "FACULTY"],
+    requiredRole: ["ADMIN", "SUPER_ADMIN", "FACULTY"],
     children: [
       {
         path: "/ai/copilot",
@@ -235,7 +314,7 @@ export const APP_ROUTES: RouteDefinition[] = [
     path: "/students",
     label: "Students",
     requiresAuth: true,
-    requiredRole: ["SUPPORT", "FACULTY", "ADMISSION_COMMITTEE", "ADMIN", "SUPER_ADMIN"],
+    requiredRole: ["FACULTY", "HOD", "ADMIN", "SUPER_ADMIN"],
     requiredPermission: ["students:read"],
     children: [
       {
@@ -284,7 +363,7 @@ export const APP_ROUTES: RouteDefinition[] = [
     path: "/exams",
     label: "Exams",
     requiresAuth: true,
-    requiredRole: ["FACULTY", "ADMISSION_COMMITTEE", "ADMIN", "SUPER_ADMIN"],
+    requiredRole: ["FACULTY", "HOD", "ADMIN", "SUPER_ADMIN"],
     requiredPermission: ["exams:read"],
   },
   {

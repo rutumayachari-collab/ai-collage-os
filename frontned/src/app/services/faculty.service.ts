@@ -9,7 +9,7 @@ import type {
 
 export class FacultyService extends BaseService {
   async getStats(): Promise<FacultyStats> {
-    return this.get<FacultyStats>(`${API_ENDPOINTS.ADMISSIONS}/stats`);
+    return this.get<FacultyStats>(`${API_ENDPOINTS.ADMISSIONS}/admin/stats`);
   }
 
   async getReviewQueue(type: string): Promise<ReviewItem[]> {

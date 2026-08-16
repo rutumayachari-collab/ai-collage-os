@@ -6,7 +6,6 @@ export const API_ENDPOINTS = {
     REFRESH: "/auth/refresh",
     FORGOT_PASSWORD: "/auth/forgot-password",
     RESET_PASSWORD: "/auth/reset-password",
-    ME: "/auth/me",
   },
   INQUIRIES: "/inquiries",
   APPLICANTS: "/applicants",
@@ -26,8 +25,21 @@ export const API_ENDPOINTS = {
   LIBRARY: "/library",
   PLACEMENTS: "/placements",
   NOTIFICATIONS: "/notifications",
+  AI: "/ai",
+  OCR: "/ocr",
+  PAYMENTS: "/payments",
   SETTINGS: "/settings",
   UPLOAD: "/upload",
+  OUTREACH: {
+    CAMPAIGNS: "/outreach/campaigns",
+    CALLS_NEXT: "/outreach/calls/next",
+    CALLS: "/outreach/calls",
+    CALLS_HISTORY: "/outreach/calls/history",
+    INTELLIGENCE: "/admission-intelligence",
+  },
+  ORCHESTRATOR: {
+    WORKFLOWS: "/orchestrator/workflows",
+  },
 } as const;
 
 export const HTTP_STATUS = {

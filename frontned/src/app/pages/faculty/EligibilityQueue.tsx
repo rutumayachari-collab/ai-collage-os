@@ -38,8 +38,7 @@ export function EligibilityQueue() {
   const actions = (row: ReviewItem) => [
     {
       label: "Check Eligibility",
-      onClick: () =>
-        navigate({ to: "/eligibility/$applicantId", params: { applicantId: row.applicantId } }),
+      onClick: () => navigate({ to: "/faculty/eligibility" }),
     },
   ];
 

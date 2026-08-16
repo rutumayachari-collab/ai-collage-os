@@ -1,11 +1,15 @@
 import { BaseService } from "./base.service";
 import { API_ENDPOINTS } from "../constants";
-import type { AuthResponse, LoginCredentials } from "../types/auth";
+import type { AuthResponse, LoginCredentials, RegisterCredentials } from "../types/auth";
 import type { ApiResponse } from "../types/api";
 
 export class AuthService extends BaseService {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
     return this.post<AuthResponse>(API_ENDPOINTS.AUTH.LOGIN, credentials);
+  }
+
+  async register(credentials: RegisterCredentials): Promise<AuthResponse> {
+    return this.post<AuthResponse>(API_ENDPOINTS.AUTH.REGISTER, credentials);
   }
 
   async logout(): Promise<void> {
@@ -14,10 +18,6 @@ export class AuthService extends BaseService {
 
   async refreshToken(refreshToken: string): Promise<AuthResponse> {
     return this.post<AuthResponse>(API_ENDPOINTS.AUTH.REFRESH, { refreshToken });
-  }
-
-  async getCurrentUser(): Promise<ApiResponse> {
-    return this.get<ApiResponse>(API_ENDPOINTS.AUTH.ME);
   }
 
   async forgotPassword(email: string): Promise<void> {

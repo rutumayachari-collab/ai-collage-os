@@ -4,7 +4,10 @@ import { DashboardShell } from "@/app/components/dashboard/DashboardShell";
 
 export const Route = createFileRoute("/settings")({
   head: () => ({
-    meta: [{ title: "Settings — AI-CollegeOS" }, { name: "description", content: "Settings page" }],
+    meta: [
+      { title: "Settings — NEXORA AI CAMPUSOS" },
+      { name: "description", content: "Settings page" },
+    ],
   }),
   component: () => (
     <ProtectedRoute>

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { HiOutlinePlusSm } from "react-icons/hi";
@@ -6,8 +8,8 @@ import { SectionTitle } from "./SectionTitle";
 
 const ITEMS = [
   {
-    q: "What is AI-CollegeOS and who is it for?",
-    a: "AI-CollegeOS is a modular platform for higher education institutions. Module 1 automates admissions; upcoming modules cover Student, Faculty, Placement, Library, Hostel, Finance and ERP.",
+    q: "What is NEXORA AI CAMPUSOS and who is it for?",
+    a: "NEXORA AI CAMPUSOS is a modular platform for higher education institutions. Module 1 automates admissions; upcoming modules cover Student, Faculty, Placement, Library, Hostel, Finance and ERP.",
   },
   {
     q: "How does the AI Admission Assistant work?",

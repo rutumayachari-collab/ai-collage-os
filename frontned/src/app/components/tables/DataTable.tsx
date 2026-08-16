@@ -18,7 +18,7 @@ import { StatusBadge } from "@/app/components/common/StatusBadge";
 import { PriorityBadge } from "@/app/components/common/PriorityBadge";
 import { cn } from "@/lib/utils";
 import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
-import type { LucideIcon } from "lucide-react";
+import type { ComponentType } from "react";
 
 export interface Column<T> {
   key: string;
@@ -41,7 +41,7 @@ interface DataTableProps<T> {
     variant?: "default" | "destructive";
   }[];
   emptyState?: {
-    icon?: LucideIcon;
+    icon?: ComponentType<{ className?: string }>;
     title: string;
     description?: string;
     action?: { label: string; onClick: () => void };

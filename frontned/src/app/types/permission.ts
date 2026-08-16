@@ -16,57 +16,50 @@ export type RoleDefinition = {
 };
 
 export const ROLES: Record<UserRole, RoleDefinition> = {
-  SUPPORT: {
-    id: "support",
-    name: "Support",
-    description: "Read-only access to student records for support purposes",
-    permissions: ["students:read", "inquiries:read", "applications:read"],
-  },
   STUDENT: {
     id: "student",
     name: "Student",
-    description: "Access to own profile and academic records",
+    description: "Access to own profile, application, and admission workflow",
     permissions: [
       "profile:read",
       "profile:update",
       "applications:read",
+      "applications:create",
       "documents:read",
+      "documents:create",
+      "eligibility:read",
       "fees:read",
+      "payments:read",
     ],
   },
-  COUNSELOR: {
-    id: "counselor",
-    name: "Counselor",
-    description: "Manage inquiries and initial document verification",
+  FACULTY: {
+    id: "faculty",
+    name: "Faculty / Counsellor",
+    description: "Manage inquiries, applicants, documents, eligibility, and admissions",
     permissions: [
       "inquiries:read",
       "inquiries:create",
       "inquiries:update",
       "applications:read",
       "applications:create",
+      "applications:update",
       "documents:read",
       "documents:update",
       "documents:verify",
-    ],
-  },
-  FACULTY: {
-    id: "faculty",
-    name: "Faculty",
-    description: "View assigned courses, students, and attendance",
-    permissions: [
-      "courses:read",
+      "eligibility:read",
+      "eligibility:update",
+      "admissions:read",
+      "admissions:create",
+      "admissions:update",
+      "admissions:approve",
+      "admissions:reject",
       "students:read",
-      "attendance:read",
-      "attendance:update",
-      "exams:read",
-      "grades:read",
-      "grades:update",
     ],
   },
-  ADMISSION_COMMITTEE: {
-    id: "admission_committee",
-    name: "Admission Committee",
-    description: "Review and approve admissions, manage waiting lists",
+  HOD: {
+    id: "hod",
+    name: "HOD",
+    description: "Department head access for academic and admission operations",
     permissions: [
       "applications:read",
       "applications:update",
@@ -95,16 +88,28 @@ export const ROLES: Record<UserRole, RoleDefinition> = {
     description: "Unrestricted access to all modules and system settings",
     permissions: ["*"],
   },
+  PARENT: {
+    id: "parent",
+    name: "Parent",
+    description: "Access to own children's records",
+    permissions: ["students:read", "fees:read"],
+  },
+  STAFF: {
+    id: "staff",
+    name: "Staff",
+    description: "General staff access",
+    permissions: ["inquiries:read", "applications:read"],
+  },
 };
 
 export const ROLE_HIERARCHY: Record<UserRole, UserRole[]> = {
-  SUPPORT: [],
   STUDENT: [],
-  COUNSELOR: ["SUPPORT"],
-  FACULTY: ["SUPPORT", "STUDENT"],
-  ADMISSION_COMMITTEE: ["COUNSELOR", "FACULTY", "SUPPORT", "STUDENT"],
-  ADMIN: ["ADMISSION_COMMITTEE", "COUNSELOR", "FACULTY", "SUPPORT", "STUDENT"],
-  SUPER_ADMIN: ["ADMIN", "ADMISSION_COMMITTEE", "COUNSELOR", "FACULTY", "SUPPORT", "STUDENT"],
+  PARENT: [],
+  STAFF: [],
+  FACULTY: ["STUDENT", "PARENT", "STAFF"],
+  HOD: ["FACULTY", "STUDENT", "PARENT", "STAFF"],
+  ADMIN: ["HOD", "FACULTY", "STUDENT", "PARENT", "STAFF"],
+  SUPER_ADMIN: ["ADMIN", "HOD", "FACULTY", "STUDENT", "PARENT", "STAFF"],
 };
 
 export function hasPermission(userRole: UserRole, requiredPermission: string): boolean {

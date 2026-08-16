@@ -11,42 +11,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-
-const API_BASE = import.meta.env.VITE_API_URL || "";
-
-type OCRProcessingRequest = {
-  provider: "TESSERACT" | "GOOGLE_VISION" | "AZURE_DOCUMENT_INTELLIGENCE";
-  documentType:
-    | "AADHAAR"
-    | "PAN"
-    | "PASSPORT"
-    | "DRIVING_LICENSE"
-    | "BIRTH_CERTIFICATE"
-    | "MARKSHEET"
-    | "PHOTO"
-    | "OTHER";
-  fileUrl: string;
-  mimeType: string;
-  fileSizeBytes: number;
-  language?: string;
-};
-
-type OCRProcessingResult = {
-  extractedText: string;
-  confidence: number;
-  confidenceLevel: "HIGH" | "MEDIUM" | "LOW";
-  fields: Record<string, string>;
-  processingTimeMs: number;
-  provider: string;
-  processedAt: string;
-};
-
-type OCREngineHealth = {
-  provider: string;
-  isHealthy: boolean;
-  lastChecked: string;
-  errorMessage?: string;
-};
+import { ocrService } from "@/app/services/ocr.service";
+import type { OCRProcessingRequest, OCRProcessingResult, OCREngineHealth } from "@/app/types/ocr";
 
 export function OCRProcessing() {
   const queryClient = useQueryClient();
@@ -58,23 +24,18 @@ export function OCRProcessing() {
 
   const { data: health, isLoading: healthLoading } = useQuery({
     queryKey: ["ocr-health"],
-    queryFn: async (): Promise<OCREngineHealth[]> => {
-      const res = await fetch(`${API_BASE}/ocr/health`);
-      if (!res.ok) throw new Error("Failed to fetch OCR health");
-      return res.json();
-    },
+    queryFn: () => ocrService.getProviderHealth(),
   });
 
   const processMutation = useMutation({
-    mutationFn: async (): Promise<OCRProcessingResult> => {
-      const res = await fetch(`${API_BASE}/ocr/process`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ provider, documentType, fileUrl, mimeType, fileSizeBytes }),
-      });
-      if (!res.ok) throw new Error("Failed to process document");
-      return res.json();
-    },
+    mutationFn: () =>
+      ocrService.processDocument({
+        provider,
+        documentType,
+        fileUrl,
+        mimeType,
+        fileSizeBytes,
+      }),
     onSuccess: () => {
       toast.success("Document processed successfully");
       queryClient.invalidateQueries();

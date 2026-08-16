@@ -6,7 +6,7 @@ import { NotificationsCenter } from "@/app/pages/faculty/NotificationsCenter";
 export const Route = createFileRoute("/faculty/notifications")({
   head: () => ({
     meta: [
-      { title: "Notifications — AI-CollegeOS" },
+      { title: "Notifications — NEXORA AI CAMPUSOS" },
       { name: "description", content: "View notifications" },
     ],
   }),

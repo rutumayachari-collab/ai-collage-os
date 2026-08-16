@@ -4,227 +4,112 @@ import { PageHeader } from "@/app/components/common/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatCard } from "@/app/components/common/StatCard";
 import { StatusBadge } from "@/app/components/common/StatusBadge";
-import { DataTable } from "@/app/components/tables/DataTable";
-import { Timeline } from "@/app/components/common/Timeline";
-import { AIInsightCard } from "@/app/components/common/AIInsightCard";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/app/hooks/useAuth";
 import { useApplicants } from "@/app/hooks/queries/useApplicants";
 import { useDocumentsByApplicant } from "@/app/hooks/queries/useDocuments";
 import { useAdmissionByApplicant } from "@/app/hooks/queries/useAdmissions";
+import { useApplicantTimeline } from "@/app/hooks/queries/useApplicants";
+import { useNavigate } from "@tanstack/react-router";
 import {
   HiOutlineDocumentText,
   HiOutlineCheckCircle,
   HiOutlineAcademicCap,
   HiOutlineCurrencyRupee,
-  HiOutlineBell,
-  HiOutlineClock,
 } from "react-icons/hi2";
-import { type LucideIcon } from "lucide-react";
+import { toast } from "sonner";
 
 export function StudentDashboard() {
   const { user } = useAuth();
-  const { data: applicants = [] } = useApplicants({ studentId: user?.id });
+  const navigate = useNavigate();
+  const { data: applicants = [], isLoading, error } = useApplicants({ search: user?.email || "" });
   const applicant = applicants[0];
   const { data: documents = [] } = useDocumentsByApplicant(applicant?.id || "");
   const { data: admission } = useAdmissionByApplicant(applicant?.id || "");
+  const { data: timeline = [] } = useApplicantTimeline(applicant?.id || "");
+
+  if (error) {
+    toast.error("Unable to load dashboard data.");
+  }
 
   const pendingDocuments = documents.filter(
-    (d) => d.status === "PENDING" || d.status === "REJECTED",
+    (d) => d.status === "PENDING" || d.status === "REJECTED" || d.status === "EXPIRED",
   );
   const verifiedDocuments = documents.filter((d) => d.status === "VERIFIED");
 
-  const notifications = [
-    {
-      id: "1",
-      title: "Document verified",
-      description: "Your marksheet has been verified",
-      time: "2 hours ago",
-    },
-    {
-      id: "2",
-      title: "Application under review",
-      description: "Your application is being reviewed",
-      time: "1 day ago",
-    },
-    {
-      id: "3",
-      title: "Fee payment pending",
-      description: "Application fee payment is pending",
-      time: "3 days ago",
-    },
-  ];
+  const recentEvents = timeline.slice(-3).reverse();
 
   return (
     <div className="space-y-6">
       <PageHeader
         title="Student Dashboard"
-        description={`Welcome back, ${user?.firstName || "Student"}`}
+        description={`Welcome back, ${user?.fullName || "Student"}`}
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard
-          title="Application Status"
-          value={admission?.status || "Not Started"}
-          description={applicant ? `Applied for ${applicant.courseName}` : "No application yet"}
-          icon={HiOutlineAcademicCap as LucideIcon}
-        />
-        <StatCard
-          title="Documents"
-          value={`${verifiedDocuments.length}/${documents.length}`}
-          description={
-            pendingDocuments.length > 0 ? `${pendingDocuments.length} pending` : "All verified"
-          }
-          icon={HiOutlineDocumentText as LucideIcon}
-        />
-        <StatCard
-          title="Fee Status"
-          value={admission?.feeStatus || "Pending"}
-          description="Application fee"
-          icon={HiOutlineCurrencyRupee as LucideIcon}
-        />
-        <StatCard
-          title="Notifications"
-          value={notifications.length.toString()}
-          description="Unread notifications"
-          icon={HiOutlineBell as LucideIcon}
-        />
-      </div>
+      {!applicant ? (
+        <Card>
+          <CardContent className="flex flex-col items-center justify-center py-12">
+            <HiOutlineAcademicCap className="h-12 w-12 text-muted-foreground mb-4" />
+            <p className="text-lg font-medium">No Application Found</p>
+            <p className="text-sm text-muted-foreground mb-4">You haven't submitted an application yet.</p>
+            <Button onClick={() => navigate({ to: "/student/application/new" })}>Start Application</Button>
+          </CardContent>
+        </Card>
+      ) : (
+        <>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <StatCard
+              title="Application Status"
+              value={admission?.status || applicant.status.replace(/_/g, " ")}
+              description={`Application ${applicant.applicationNumber || "N/A"}`}
+              icon={HiOutlineAcademicCap}
+            />
+            <StatCard
+              title="Documents"
+              value={`${verifiedDocuments.length}/${documents.length}`}
+              description={
+                pendingDocuments.length > 0 ? `${pendingDocuments.length} pending` : "All verified"
+              }
+              icon={HiOutlineDocumentText}
+            />
+            <StatCard
+              title="Eligibility"
+              value={applicant.aiEligibilityScore !== undefined ? `${applicant.aiEligibilityScore}/100` : "Pending"}
+              description="AI eligibility score"
+              icon={HiOutlineCheckCircle}
+            />
+            <StatCard
+              title="Payment"
+              value={admission?.status === "CONFIRMED" ? "Confirmed" : "Pending"}
+              description="Admission fee status"
+              icon={HiOutlineCurrencyRupee}
+            />
+          </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Application Progress</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {applicant ? (
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Profile Completion</span>
-                    <span className="text-sm text-muted-foreground">80%</span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-secondary">
-                    <div className="h-2 w-4/5 rounded-full bg-primary" />
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div className="flex items-center gap-2">
-                      <HiOutlineCheckCircle className="h-5 w-5 text-emerald-500" />
-                      <span className="text-sm">Profile completed</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <HiOutlineCheckCircle className="h-5 w-5 text-emerald-500" />
-                      <span className="text-sm">Documents uploaded</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {verifiedDocuments.length === documents.length ? (
-                        <HiOutlineCheckCircle className="h-5 w-5 text-emerald-500" />
-                      ) : (
-                        <HiOutlineClock className="h-5 w-5 text-amber-500" />
-                      )}
-                      <span className="text-sm">Documents verified</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {admission ? (
-                        <HiOutlineCheckCircle className="h-5 w-5 text-emerald-500" />
-                      ) : (
-                        <HiOutlineClock className="h-5 w-5 text-amber-500" />
-                      )}
-                      <span className="text-sm">Admission decision</span>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="text-center py-8">
-                  <p className="text-muted-foreground mb-4">
-                    You haven't submitted an application yet.
-                  </p>
-                  <Button onClick={() => (window.location.href = "/inquiries/new")}>
-                    Start Application
-                  </Button>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-
-          {admission && (
+          {recentEvents.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Admission Status</CardTitle>
+                <CardTitle>Recent Activity</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Current Status</p>
-                    <StatusBadge status={admission.status} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Course</p>
-                    <p className="font-medium">{admission.courseName}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Fee Status</p>
-                    <StatusBadge status={admission.feeStatus} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Eligibility Status</p>
-                    <StatusBadge status={admission.eligibilityStatus} />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-        </div>
-
-        <div className="space-y-6">
-          {pendingDocuments.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Missing Documents</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {pendingDocuments.map((doc) => (
-                    <li key={doc.id} className="flex items-center gap-2 text-sm">
-                      <HiOutlineDocumentText className="h-4 w-4 text-amber-500" />
-                      {doc.name}
+                <ul className="space-y-3">
+                  {recentEvents.map((event) => (
+                    <li key={event.eventId} className="flex items-start gap-3 text-sm">
+                      <HiOutlineCheckCircle className="h-4 w-4 text-muted-foreground mt-0.5" />
+                      <div>
+                        <p className="font-medium">{event.description}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {new Date(event.createdAt).toLocaleString()}
+                        </p>
+                      </div>
                     </li>
                   ))}
                 </ul>
               </CardContent>
             </Card>
           )}
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Notifications</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-4">
-                {notifications.map((notification) => (
-                  <li key={notification.id} className="flex gap-3">
-                    <div className="mt-1">
-                      <HiOutlineBell className="h-4 w-4 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium">{notification.title}</p>
-                      <p className="text-xs text-muted-foreground">{notification.description}</p>
-                      <p className="text-xs text-muted-foreground">{notification.time}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-
-          <AIInsightCard
-            title="AI Recommendation"
-            insight="Based on your profile and course selection, you have a strong chance of admission."
-            confidence={88}
-            recommendation="Complete your document uploads to improve your chances."
-          />
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { ApplicantReviewQueue } from "@/app/pages/faculty/ApplicantReviewQueue";
 export const Route = createFileRoute("/faculty/applicants")({
   head: () => ({
     meta: [
-      { title: "Applicant Review Queue — AI-CollegeOS" },
+      { title: "Applicant Review Queue — NEXORA AI CAMPUSOS" },
       { name: "description", content: "Review applicants" },
     ],
   }),

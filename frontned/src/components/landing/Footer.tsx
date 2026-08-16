@@ -7,6 +7,7 @@ import {
 import { FaTwitter, FaLinkedinIn, FaInstagram, FaYoutube } from "react-icons/fa";
 import { Container } from "./Container";
 import { Button } from "./Button";
+import { AnimatedBrand } from "@/app/components/brand/AnimatedBrand";
 
 const COLUMNS = [
   { title: "Platform", links: ["Admission", "Student", "Faculty", "Placement"] },
@@ -48,12 +49,7 @@ export function Footer() {
 
         <div className="grid gap-10 lg:grid-cols-6">
           <div className="lg:col-span-2">
-            <a href="#home" className="flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-sky text-navy-deep">
-                <HiOutlineSparkles className="h-5 w-5" />
-              </span>
-              <span className="font-heading text-lg font-semibold text-white">AI-CollegeOS</span>
-            </a>
+            <AnimatedBrand size="sm" />
             <p className="mt-4 max-w-sm text-sm">
               The intelligent operating system for modern higher education — starting with
               admissions.
@@ -102,7 +98,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs sm:flex-row sm:items-center">
-          <div>© {new Date().getFullYear()} AI-CollegeOS. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} NEXORA AI CAMPUSOS. All rights reserved.</div>
           <div className="flex flex-wrap gap-6">
             <a href="#" className="hover:text-sky">
               Privacy Policy

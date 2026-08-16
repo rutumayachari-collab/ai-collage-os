@@ -102,4 +102,12 @@ router.get('/statistics/rejected', authenticate, authorize('HOD', 'SUPER_ADMIN',
 router.get('/statistics/waitlisted', authenticate, authorize('HOD', 'SUPER_ADMIN', 'ADMIN'), admissionRateLimiter, admissionController.countWaitlisted);
 router.get('/statistics/admitted', authenticate, authorize('HOD', 'SUPER_ADMIN', 'ADMIN'), admissionRateLimiter, admissionController.countAdmitted);
 
+router.get('/admin/stats', authenticate, authorize('HOD', 'SUPER_ADMIN', 'ADMIN'), admissionRateLimiter, admissionController.getAdminStats);
+router.get('/admin/funnel', authenticate, authorize('HOD', 'SUPER_ADMIN', 'ADMIN'), admissionRateLimiter, admissionController.getAdmissionFunnel);
+router.get('/admin/revenue', authenticate, authorize('HOD', 'SUPER_ADMIN', 'ADMIN'), admissionRateLimiter, admissionController.getRevenueStatistics);
+router.get('/admin/scholarships', authenticate, authorize('HOD', 'SUPER_ADMIN', 'ADMIN'), admissionRateLimiter, admissionController.getScholarshipDistribution);
+router.get('/admin/timeline', authenticate, authorize('HOD', 'SUPER_ADMIN', 'ADMIN'), admissionRateLimiter, admissionController.getAdmissionTimeline);
+router.get('/admin/processing-time', authenticate, authorize('HOD', 'SUPER_ADMIN', 'ADMIN'), admissionRateLimiter, admissionController.getProcessingTime);
+router.get('/admin/ai-accuracy', authenticate, authorize('HOD', 'SUPER_ADMIN', 'ADMIN'), admissionRateLimiter, admissionController.getAIAccuracy);
+
 export const admissionRoutes: Router = router;

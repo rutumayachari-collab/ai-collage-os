@@ -6,7 +6,7 @@ import { FacultyDashboard } from "@/app/pages/faculty/FacultyDashboard";
 export const Route = createFileRoute("/faculty")({
   head: () => ({
     meta: [
-      { title: "Faculty Dashboard — AI-CollegeOS" },
+      { title: "Faculty Dashboard — NEXORA AI CAMPUSOS" },
       { name: "description", content: "Faculty dashboard" },
     ],
   }),

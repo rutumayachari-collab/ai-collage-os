@@ -16,40 +16,42 @@ import {
 } from "react-icons/hi2";
 import { type LucideIcon } from "lucide-react";
 
-const ACTIVITIES = [
-  {
-    id: "1",
-    title: "New applicant submitted",
-    description: "Rahul Sharma applied for Computer Science",
-    timestamp: "2 min ago",
-    type: "info" as const,
-  },
-  {
-    id: "2",
-    title: "Document verified",
-    description: "Priya Patel's marksheet verified",
-    timestamp: "15 min ago",
-    type: "success" as const,
-  },
-  {
-    id: "3",
-    title: "Admission approved",
-    description: "Meera Reddy's admission approved",
-    timestamp: "1 hour ago",
-    type: "success" as const,
-  },
-  {
-    id: "4",
-    title: "Payment pending",
-    description: "Arjun Kumar fee payment overdue",
-    timestamp: "2 hours ago",
-    type: "warning" as const,
-  },
-];
-
 export function AdminDashboard() {
   const navigate = useNavigate();
   const { data: stats, isLoading } = useAdminStats();
+
+  const activities = stats
+    ? [
+        {
+          id: "1",
+          title: "Total applicants",
+          description: `${stats.totalApplicants} applications received`,
+          timestamp: "Live",
+          type: "info" as const,
+        },
+        {
+          id: "2",
+          title: "Document verification",
+          description: `${stats.pendingVerifications} documents pending review`,
+          timestamp: "Live",
+          type: "warning" as const,
+        },
+        {
+          id: "3",
+          title: "Admissions processed",
+          description: `${stats.admissionsApproved} admissions approved`,
+          timestamp: "Live",
+          type: "success" as const,
+        },
+        {
+          id: "4",
+          title: "Eligibility queue",
+          description: `${stats.pendingEligibility} pending eligibility checks`,
+          timestamp: "Live",
+          type: "warning" as const,
+        },
+      ]
+    : [];
 
   if (isLoading) {
     return (
@@ -85,7 +87,7 @@ export function AdminDashboard() {
       value: stats?.admissionsApproved || 0,
       description: "Total approvals",
       icon: HiOutlineCheckCircle as LucideIcon,
-      onClick: () => navigate({ to: "/admissions" }),
+      onClick: () => navigate({ to: "/faculty/admissions" }),
     },
     {
       title: "Revenue",
@@ -146,7 +148,7 @@ export function AdminDashboard() {
         </div>
 
         <div>
-          <ActivityFeed activities={ACTIVITIES} title="Recent Activities" />
+          <ActivityFeed activities={activities} title="Recent Activities" />
         </div>
       </div>
     </div>

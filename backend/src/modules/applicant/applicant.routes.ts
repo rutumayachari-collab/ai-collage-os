@@ -59,7 +59,7 @@ const applicantRateLimiter = (req: Request, res: Response, next: NextFunction): 
 // Self-service application submission and status lookup. No authentication required.
 // Future integration: public portal, WhatsApp bot, education fair kiosks.
 
-router.post('/', applicantRateLimiter, validateRequest({ body: createApplicantSchema }), applicantController.create);
+router.post('/', authenticate, applicantRateLimiter, validateRequest({ body: createApplicantSchema }), applicantController.create);
 
 router.get('/application-status', applicantRateLimiter, validateRequest({ query: applicantQuerySchema }), applicantController.list);
 

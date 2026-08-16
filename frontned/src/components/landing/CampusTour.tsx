@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { HiPlay, HiOutlineCube, HiOutlineMap } from "react-icons/hi";
 import { Container } from "./Container";

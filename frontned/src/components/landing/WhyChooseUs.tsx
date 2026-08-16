@@ -53,7 +53,7 @@ export function WhyChooseUs() {
     <section id="about" className="py-24 sm:py-28">
       <Container>
         <SectionTitle
-          eyebrow="Why AI-CollegeOS"
+          eyebrow="Why NEXORA AI CAMPUSOS"
           title="Everything your admission office needs — in one platform"
           subtitle="Built for scale from day one. Admission today, then Student, Faculty, Placement, Library, Hostel and Finance modules — all sharing one intelligent core."
         />

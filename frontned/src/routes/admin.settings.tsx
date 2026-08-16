@@ -1,20 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ProtectedRoute } from "@/app/guards/ProtectedRoute";
-import { DashboardShell } from "@/app/components/dashboard/DashboardShell";
-import { SettingsModule } from "@/app/pages/admin/SettingsModule";
+import { RoleAppShell } from "@/app/components/layout/RoleAppShell";
+import { AdminSettings } from "@/app/pages/role/AdminSettings";
 
 export const Route = createFileRoute("/admin/settings")({
   head: () => ({
     meta: [
-      { title: "Settings — AI-CollegeOS" },
+      { title: "Settings — NEXORA AI CAMPUSOS" },
       { name: "description", content: "System settings" },
     ],
   }),
   component: () => (
     <ProtectedRoute>
-      <DashboardShell>
-        <SettingsModule />
-      </DashboardShell>
+      <RoleAppShell>
+        <AdminSettings />
+      </RoleAppShell>
     </ProtectedRoute>
   ),
 });

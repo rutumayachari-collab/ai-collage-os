@@ -16,11 +16,11 @@ export interface RoleContextValue {
   canAccessRole: (targetRole: UserRole) => boolean;
   isAdmin: boolean;
   isSuperAdmin: boolean;
-  isAdmissionCommittee: boolean;
-  isCounselor: boolean;
+  isHod: boolean;
   isFaculty: boolean;
   isStudent: boolean;
-  isSupport: boolean;
+  isParent: boolean;
+  isStaff: boolean;
 }
 
 export const RoleContext = createContext<RoleContextValue | null>(null);
@@ -46,20 +46,10 @@ export function createRoleContextValue(
     canAccessRole: (targetRole: UserRole) => canAccessRole(role as UserRole, targetRole),
     isAdmin: role === "ADMIN" || role === "SUPER_ADMIN",
     isSuperAdmin: role === "SUPER_ADMIN",
-    isAdmissionCommittee:
-      role === "ADMISSION_COMMITTEE" || role === "ADMIN" || role === "SUPER_ADMIN",
-    isCounselor:
-      role === "COUNSELOR" ||
-      role === "ADMISSION_COMMITTEE" ||
-      role === "ADMIN" ||
-      role === "SUPER_ADMIN",
-    isFaculty: role === "FACULTY" || role === "ADMIN" || role === "SUPER_ADMIN",
+    isHod: role === "HOD",
+    isFaculty: role === "FACULTY" || role === "HOD" || role === "ADMIN" || role === "SUPER_ADMIN",
     isStudent: role === "STUDENT",
-    isSupport:
-      role === "SUPPORT" ||
-      role === "COUNSELOR" ||
-      role === "ADMISSION_COMMITTEE" ||
-      role === "ADMIN" ||
-      role === "SUPER_ADMIN",
+    isParent: role === "PARENT",
+    isStaff: role === "STAFF",
   };
 }

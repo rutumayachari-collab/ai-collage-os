@@ -17,6 +17,21 @@ export function useApplicant(id: string) {
   });
 }
 
+export function useApplicantByApplicationNumber(applicationNumber: string) {
+  return useQuery({
+    queryKey: ["applicants", "applicationNumber", applicationNumber],
+    queryFn: () => applicantService.getByApplicationNumber(applicationNumber),
+    enabled: !!applicationNumber,
+  });
+}
+
+export function useMeProfile() {
+  return useQuery({
+    queryKey: ["applicants", "me"],
+    queryFn: () => applicantService.getMeProfile(),
+  });
+}
+
 export function useCreateApplicant() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -35,5 +50,53 @@ export function useUpdateApplicant() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["applicants"] });
     },
+  });
+}
+
+export function useApplicantWorkflow(id: string) {
+  return useQuery({
+    queryKey: ["applicants", id, "workflow"],
+    queryFn: () => applicantService.getWorkflow(id),
+    enabled: !!id,
+  });
+}
+
+export function useApplicantDocuments(id: string) {
+  return useQuery({
+    queryKey: ["applicants", id, "documents"],
+    queryFn: () => applicantService.getDocuments(id),
+    enabled: !!id,
+  });
+}
+
+export function useApplicantInterview(id: string) {
+  return useQuery({
+    queryKey: ["applicants", id, "interview"],
+    queryFn: () => applicantService.getInterview(id),
+    enabled: !!id,
+  });
+}
+
+export function useApplicantOfferLetter(id: string) {
+  return useQuery({
+    queryKey: ["applicants", id, "offer-letter"],
+    queryFn: () => applicantService.getOfferLetter(id),
+    enabled: !!id,
+  });
+}
+
+export function useApplicantFeeSummary(id: string) {
+  return useQuery({
+    queryKey: ["applicants", id, "fee-summary"],
+    queryFn: () => applicantService.getFeeSummary(id),
+    enabled: !!id,
+  });
+}
+
+export function useApplicantTimeline(id: string) {
+  return useQuery({
+    queryKey: ["applicants", id, "timeline"],
+    queryFn: () => applicantService.getTimeline(id),
+    enabled: !!id,
   });
 }

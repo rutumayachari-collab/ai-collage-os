@@ -15,5 +15,8 @@ import { aiModule } from '../modules/ai';
 import { ocrModule } from '../modules/ocr';
 import { notificationModule } from '../modules/notification';
 import { paymentModule } from '../modules/payment';
+import { callingAgentModule } from '../modules/calling-agent';
+import { orchestratorModule } from '../modules/orchestrator';
+import { admissionIntelligenceModule } from '../modules/admission-intelligence';
 
-export const featureModules: readonly FeatureModule[] = [healthModule, authModule, studentModule, departmentModule, courseModule, facultyModule, subjectModule, inquiryModule, applicantModule, documentVerificationModule, eligibilityModule, admissionModule, aiModule, ocrModule, notificationModule, paymentModule];
+export const featureModules: readonly FeatureModule[] = [healthModule, authModule, studentModule, departmentModule, courseModule, facultyModule, subjectModule, inquiryModule, applicantModule, documentVerificationModule, eligibilityModule, admissionModule, aiModule, ocrModule, notificationModule, paymentModule, callingAgentModule, orchestratorModule, admissionIntelligenceModule];

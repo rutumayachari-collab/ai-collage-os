@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { Container } from "./Container";
 import { SectionTitle } from "./SectionTitle";
