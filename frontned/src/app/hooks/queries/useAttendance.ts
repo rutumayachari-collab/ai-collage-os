@@ -55,7 +55,14 @@ export function useUpdateAttendance() {
 export function useBulkMarkAttendance() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: Record<string, unknown>) => attendanceService.bulkMark(data),
+    mutationFn: (data: {
+      studentIds: string[];
+      subjectId: string;
+      date: string;
+      periodNumber?: number;
+      status: string;
+      remarks?: string;
+    }) => attendanceService.bulkMark(data),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["attendance"] }),
   });
 }

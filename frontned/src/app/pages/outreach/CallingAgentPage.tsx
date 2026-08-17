@@ -207,7 +207,8 @@ export function CallingAgentPage() {
       setActiveTab("studio");
       toast.success(`Loaded top priority lead: ${nextStudent.studentName}`);
     } catch (err: unknown) {
-      toast.error(err?.message || "Failed to fetch next student");
+      const error = err as Record<string, unknown>;
+      toast.error((error?.message as string) || "Failed to fetch next student");
     }
   };
 

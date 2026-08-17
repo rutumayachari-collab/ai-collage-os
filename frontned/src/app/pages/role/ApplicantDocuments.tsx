@@ -83,31 +83,40 @@ export function ApplicantDocuments() {
         </Card>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {documents.map((doc) => (
-            <Card key={doc.id}>
+          {(documents as Record<string, unknown>[]).map((doc) => (
+            <Card key={doc.id as string}>
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium">{doc.name}</CardTitle>
-                  <Badge variant={getStatusVariant(doc.status)}>{doc.status}</Badge>
+                  <CardTitle className="text-sm font-medium">{doc.name as string}</CardTitle>
+                  <Badge variant={getStatusVariant(doc.status as string)}>
+                    {doc.status as string}
+                  </Badge>
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">Type: {doc.type}</p>
+                <p className="text-sm text-muted-foreground">Type: {doc.type as string}</p>
                 <p className="text-sm text-muted-foreground">
-                  Uploaded: {doc.uploadedAt ? new Date(doc.uploadedAt).toLocaleDateString() : "N/A"}
+                  Uploaded:{" "}
+                  {(doc as Record<string, unknown>)?.uploadedAt
+                    ? new Date(
+                        (doc as Record<string, unknown>).uploadedAt as string,
+                      ).toLocaleDateString()
+                    : "N/A"}
                 </p>
-                {doc.rejectionReason && (
+                {Boolean((doc as Record<string, unknown>)?.rejectionReason) && (
                   <p className="text-sm text-destructive mt-2">
                     <HiOutlineXCircle className="inline mr-1" />
-                    {doc.rejectionReason}
+                    {(doc as Record<string, unknown>).rejectionReason as string}
                   </p>
                 )}
                 <div className="mt-3 flex gap-2">
-                  {doc.fileUrl && (
+                  {Boolean((doc as Record<string, unknown>)?.fileUrl) && (
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => window.open(doc.fileUrl, "_blank")}
+                      onClick={() =>
+                        window.open((doc as Record<string, unknown>).fileUrl as string, "_blank")
+                      }
                     >
                       View
                     </Button>

@@ -93,8 +93,12 @@ export function ApplicantAdmission() {
             <CardTitle className="text-sm font-medium">Payment Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <Badge variant={getStatusVariant(feeSummary?.paymentStatus)}>
-              {feeSummary?.paymentStatus || "Pending"}
+            <Badge
+              variant={getStatusVariant(
+                (feeSummary as Record<string, unknown>)?.paymentStatus as string,
+              )}
+            >
+              {String((feeSummary as Record<string, unknown>)?.paymentStatus || "Pending")}
             </Badge>
           </CardContent>
         </Card>
@@ -104,7 +108,12 @@ export function ApplicantAdmission() {
           </CardHeader>
           <CardContent>
             <Badge variant={interview ? "default" : "secondary"}>
-              {interview ? interview.recommendation || "Scheduled" : "Not Scheduled"}
+              {(interview as Record<string, unknown>)
+                ? String(
+                    ((interview as Record<string, unknown>).recommendation as string) ||
+                      "Scheduled",
+                  )
+                : "Not Scheduled"}
             </Badge>
           </CardContent>
         </Card>
@@ -115,14 +124,14 @@ export function ApplicantAdmission() {
           <CardContent>
             <Badge
               variant={
-                offerLetter?.status === "ACCEPTED"
+                (offerLetter as Record<string, unknown>)?.status === "ACCEPTED"
                   ? "default"
                   : offerLetter
                     ? "secondary"
                     : "outline"
               }
             >
-              {offerLetter?.status || "Not Generated"}
+              {String((offerLetter as Record<string, unknown>)?.status || "Not Generated")}
             </Badge>
           </CardContent>
         </Card>
@@ -138,19 +147,19 @@ export function ApplicantAdmission() {
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Total Fee</p>
                 <p className="text-2xl font-bold">
-                  ₹{feeSummary.totalFee?.toLocaleString() || "0"}
+                  ₹{(feeSummary as Record<string, unknown>)?.totalFee?.toLocaleString() || "0"}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Paid Amount</p>
                 <p className="text-2xl font-bold text-emerald-600">
-                  ₹{feeSummary.paidAmount?.toLocaleString() || "0"}
+                  ₹{(feeSummary as Record<string, unknown>)?.paidAmount?.toLocaleString() || "0"}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Pending Amount</p>
                 <p className="text-2xl font-bold text-amber-600">
-                  ₹{feeSummary.pendingAmount?.toLocaleString() || "0"}
+                  ₹{(feeSummary as Record<string, unknown>)?.pendingAmount?.toLocaleString() || "0"}
                 </p>
               </div>
             </div>
@@ -160,7 +169,7 @@ export function ApplicantAdmission() {
         </CardContent>
       </Card>
 
-      {interview && (
+      {(interview as Record<string, unknown>) && (
         <Card>
           <CardHeader>
             <CardTitle>Interview Details</CardTitle>
@@ -170,41 +179,59 @@ export function ApplicantAdmission() {
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Scheduled At</p>
                 <p className="text-base">
-                  {interview.scheduledAt ? new Date(interview.scheduledAt).toLocaleString() : "N/A"}
+                  {(interview as Record<string, unknown>)?.scheduledAt
+                    ? new Date(
+                        (interview as Record<string, unknown>).scheduledAt as string,
+                      ).toLocaleString()
+                    : "N/A"}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Recommendation</p>
                 <Badge
-                  variant={interview.recommendation === "RECOMMENDED" ? "default" : "secondary"}
+                  variant={
+                    (interview as Record<string, unknown>).recommendation === "RECOMMENDED"
+                      ? "default"
+                      : "secondary"
+                  }
                 >
-                  {interview.recommendation || "PENDING"}
+                  {String(
+                    ((interview as Record<string, unknown>).recommendation as string) || "PENDING",
+                  )}
                 </Badge>
               </div>
-              {interview.score !== undefined && (
+              {((interview as Record<string, unknown>)?.score as number | undefined) !==
+                undefined && (
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">Score</p>
-                  <p className="text-base">{interview.score}/100</p>
+                  <p className="text-base">
+                    {(interview as Record<string, unknown>).score as number}/100
+                  </p>
                 </div>
               )}
-              {interview.panelMembers && interview.panelMembers.length > 0 && (
-                <div>
-                  <p className="text-sm font-medium text-muted-foreground">Panel Members</p>
-                  <p className="text-base">{interview.panelMembers.join(", ")}</p>
-                </div>
-              )}
+              {Array.isArray((interview as Record<string, unknown>)?.panelMembers) &&
+                ((interview as Record<string, unknown>).panelMembers as string[]).length > 0 && (
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">Panel Members</p>
+                    <p className="text-base">
+                      {((interview as Record<string, unknown>).panelMembers as string[]).join(", ")}
+                    </p>
+                  </div>
+                )}
             </div>
-            {interview.remarks && (
+            {Boolean((interview as Record<string, unknown>)?.remarks) && (
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Remarks</p>
-                <p className="text-base">{interview.remarks}</p>
+                <p className="text-base">
+                  {(interview as Record<string, unknown>).remarks as string}
+                </p>
               </div>
             )}
           </CardContent>
         </Card>
       )}
 
-      {offerLetter && (
+      {Boolean(offerLetter) && (
         <Card>
           <CardHeader>
             <CardTitle>Offer Letter</CardTitle>
@@ -213,21 +240,31 @@ export function ApplicantAdmission() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Status</p>
-                <Badge variant={getStatusVariant(offerLetter.status)}>{offerLetter.status}</Badge>
+                <Badge
+                  variant={getStatusVariant(
+                    (offerLetter as Record<string, unknown>).status as string,
+                  )}
+                >
+                  {(offerLetter as Record<string, unknown>).status as string}
+                </Badge>
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Generated At</p>
                 <p className="text-base">
-                  {offerLetter.generatedAt
-                    ? new Date(offerLetter.generatedAt).toLocaleDateString()
+                  {(offerLetter as Record<string, unknown>)?.generatedAt
+                    ? new Date(
+                        (offerLetter as Record<string, unknown>).generatedAt as string,
+                      ).toLocaleDateString()
                     : "N/A"}
                 </p>
               </div>
-              {offerLetter.validUntil && (
+              {Boolean((offerLetter as Record<string, unknown>)?.validUntil) && (
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">Valid Until</p>
                   <p className="text-base">
-                    {new Date(offerLetter.validUntil).toLocaleDateString()}
+                    {new Date(
+                      (offerLetter as Record<string, unknown>).validUntil as string,
+                    ).toLocaleDateString()}
                   </p>
                 </div>
               )}
@@ -243,16 +280,17 @@ export function ApplicantAdmission() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
-              {timeline
+              {(timeline as Record<string, unknown>[])
                 .slice(-5)
                 .reverse()
                 .map((event) => (
-                  <li key={event.eventId} className="flex items-start gap-3 text-sm">
+                  <li key={event.eventId as string} className="flex items-start gap-3 text-sm">
                     <HiOutlineClock className="h-4 w-4 text-muted-foreground mt-0.5" />
                     <div>
-                      <p className="font-medium">{event.description}</p>
+                      <p className="font-medium">{event.description as string}</p>
                       <p className="text-xs text-muted-foreground">
-                        {new Date(event.createdAt).toLocaleString()} — {event.performedBy}
+                        {new Date(event.createdAt as string).toLocaleString()} —{" "}
+                        {event.performedBy as string}
                       </p>
                     </div>
                   </li>

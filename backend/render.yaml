@@ -1,0 +1,9 @@
+{
+  "buildCommand": "npm run build",
+  "startCommand": "node dist/server.js",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "crons": [],
+  "healthCheckPath": "/api/v1/health"
+}

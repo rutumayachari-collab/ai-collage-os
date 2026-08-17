@@ -19,6 +19,7 @@ import { useCreateApplicant } from "@/app/hooks/queries/useApplicants";
 import { useAuth } from "@/app/hooks/useAuth";
 import { toast } from "sonner";
 import { HiOutlineDocumentText } from "react-icons/hi2";
+import type { CreateApplicantDto } from "@/app/types/applicant";
 
 function generateApplicationNumber(): string {
   const now = new Date();
@@ -108,10 +109,21 @@ export function StudentApplicationForm() {
       phone: formData.phone,
       applicationDate: formData.applicationDate,
       dateOfBirth: formData.dateOfBirth || undefined,
-      gender: formData.gender || undefined,
+      gender:
+        (formData.gender as "MALE" | "FEMALE" | "OTHER" | "PREFER_NOT_TO_SAY" | undefined) ||
+        undefined,
       nationality: formData.nationality || undefined,
       address: formData.address || undefined,
-      qualification: formData.qualification || undefined,
+      qualification:
+        (formData.qualification as
+          | "HIGH_SCHOOL"
+          | "INTERMEDIATE"
+          | "DIPLOMA"
+          | "BACHELORS"
+          | "MASTERS"
+          | "PHD"
+          | "OTHER"
+          | undefined) || undefined,
       boardOrUniversity: formData.boardOrUniversity || undefined,
       passingYear: formData.passingYear ? Number(formData.passingYear) : undefined,
       percentage: formData.percentage ? Number(formData.percentage) : undefined,
@@ -133,11 +145,48 @@ export function StudentApplicationForm() {
       utmMedium: formData.utmMedium || undefined,
       utmCampaign: formData.utmCampaign || undefined,
       campaignId: formData.campaignId || undefined,
-      leadSource: formData.leadSource || undefined,
-      applicationChannel: formData.applicationChannel || undefined,
-      status: formData.status,
-      priority: formData.priority,
-      admissionRound: formData.admissionRound || undefined,
+      leadSource:
+        (formData.leadSource as
+          | "ONLINE"
+          | "OFFLINE"
+          | "COUNSELOR"
+          | "WEBSITE"
+          | "PHONE"
+          | "WHATSAPP"
+          | "EDUCATION_FAIR"
+          | undefined) || undefined,
+      applicationChannel:
+        (formData.applicationChannel as
+          | "ONLINE"
+          | "OFFLINE"
+          | "COUNSELOR"
+          | "WEBSITE"
+          | "PHONE"
+          | "WHATSAPP"
+          | "EDUCATION_FAIR"
+          | undefined) || undefined,
+      status:
+        (formData.status as
+          | "NEW"
+          | "DOCUMENTS_VERIFIED"
+          | "ELIGIBLE"
+          | "INTERVIEW_SCHEDULED"
+          | "INTERVIEWED"
+          | "SELECTED"
+          | "OFFERED"
+          | "ADMITTED"
+          | "REJECTED"
+          | undefined) || undefined,
+      priority: (formData.priority as "LOW" | "MEDIUM" | "HIGH" | undefined) || undefined,
+      admissionRound:
+        (formData.admissionRound as
+          | "CAP_ROUND_1"
+          | "CAP_ROUND_2"
+          | "CAP_ROUND_3"
+          | "SPOT"
+          | "MANAGEMENT"
+          | "INSTITUTIONAL"
+          | undefined) || undefined,
       admissionChecklist: {
         personalDetailsCompleted: false,
         academicDetailsCompleted: false,
@@ -165,7 +214,7 @@ export function StudentApplicationForm() {
     };
 
     try {
-      const result = await createMutation.mutateAsync(payload as Record<string, unknown>);
+      const result = await createMutation.mutateAsync(payload as CreateApplicantDto);
       toast.success("Application submitted successfully!");
       navigate({ to: "/applicant/application" });
     } catch (error: unknown) {

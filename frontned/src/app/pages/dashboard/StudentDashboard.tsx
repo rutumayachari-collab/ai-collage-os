@@ -101,13 +101,13 @@ export function StudentDashboard() {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-3">
-                  {recentEvents.map((event) => (
-                    <li key={event.eventId} className="flex items-start gap-3 text-sm">
+                  {(recentEvents as Record<string, unknown>[]).map((event) => (
+                    <li key={event.eventId as string} className="flex items-start gap-3 text-sm">
                       <HiOutlineCheckCircle className="h-4 w-4 text-muted-foreground mt-0.5" />
                       <div>
-                        <p className="font-medium">{event.description}</p>
+                        <p className="font-medium">{event.description as string}</p>
                         <p className="text-xs text-muted-foreground">
-                          {new Date(event.createdAt).toLocaleString()}
+                          {new Date(event.createdAt as string).toLocaleString()}
                         </p>
                       </div>
                     </li>

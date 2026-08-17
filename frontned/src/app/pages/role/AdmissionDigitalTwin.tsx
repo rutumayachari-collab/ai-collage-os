@@ -152,59 +152,74 @@ export function AdmissionDigitalTwin() {
                       Projected Admissions
                     </p>
                     <p className="text-2xl font-bold">
-                      {simulation.projectedAdmissions ||
-                        Math.round(params.applicantVolume * (params.expectedConversionRate / 100))}
+                      {String(
+                        (simulation as Record<string, unknown>)?.projectedAdmissions ??
+                          Math.round(
+                            params.applicantVolume * (params.expectedConversionRate / 100),
+                          ),
+                      )}
                     </p>
                   </div>
                   <div className="rounded-md border p-4">
                     <p className="text-sm font-medium text-muted-foreground">Seat Occupancy</p>
                     <p className="text-2xl font-bold">
-                      {simulation.seatOccupancy ||
-                        `${Math.round((params.proposedIntake / params.applicantVolume) * 100)}%`}
+                      {String(
+                        (simulation as Record<string, unknown>)?.seatOccupancy ??
+                          `${Math.round((params.proposedIntake / params.applicantVolume) * 100)}%`,
+                      )}
                     </p>
                   </div>
                   <div className="rounded-md border p-4">
                     <p className="text-sm font-medium text-muted-foreground">Counselor Workload</p>
                     <p className="text-2xl font-bold">
-                      {simulation.counselorWorkload ||
-                        `${Math.round(params.applicantVolume / params.counselorCapacity)} per counselor`}
+                      {String(
+                        (simulation as Record<string, unknown>)?.counselorWorkload ??
+                          `${Math.round(params.applicantVolume / params.counselorCapacity)} per counselor`,
+                      )}
                     </p>
                   </div>
                   <div className="rounded-md border p-4">
                     <p className="text-sm font-medium text-muted-foreground">Expected Revenue</p>
                     <p className="text-2xl font-bold">
-                      {simulation.expectedRevenue
-                        ? `₹${simulation.expectedRevenue.toLocaleString()}`
+                      {(simulation as Record<string, unknown>)?.expectedRevenue
+                        ? `₹${String((simulation as Record<string, unknown>)?.expectedRevenue as number).toLocaleString()}`
                         : "Insufficient data"}
                     </p>
                   </div>
                 </div>
 
-                {simulation.recommendations && simulation.recommendations.length > 0 && (
-                  <div className="rounded-md border p-4">
-                    <p className="font-medium mb-2">Recommendations</p>
-                    <ul className="space-y-2">
-                      {simulation.recommendations.map((rec: string, index: number) => (
-                        <li key={index} className="text-sm text-muted-foreground">
-                          • {rec}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                {Array.isArray((simulation as Record<string, unknown>)?.recommendations) &&
+                  ((simulation as Record<string, unknown>).recommendations as string[]).length >
+                    0 && (
+                    <div className="rounded-md border p-4">
+                      <p className="font-medium mb-2">Recommendations</p>
+                      <ul className="space-y-2">
+                        {((simulation as Record<string, unknown>)?.recommendations as string[]).map(
+                          (rec: string, index: number) => (
+                            <li key={index} className="text-sm text-muted-foreground">
+                              • {rec}
+                            </li>
+                          ),
+                        )}
+                      </ul>
+                    </div>
+                  )}
 
-                {simulation.bottlenecks && simulation.bottlenecks.length > 0 && (
-                  <div className="rounded-md border p-4">
-                    <p className="font-medium mb-2">Bottlenecks</p>
-                    <ul className="space-y-2">
-                      {simulation.bottlenecks.map((bottleneck: string, index: number) => (
-                        <li key={index} className="text-sm text-muted-foreground">
-                          • {bottleneck}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                {Array.isArray((simulation as Record<string, unknown>)?.bottlenecks) &&
+                  ((simulation as Record<string, unknown>).bottlenecks as string[]).length > 0 && (
+                    <div className="rounded-md border p-4">
+                      <p className="font-medium mb-2">Bottlenecks</p>
+                      <ul className="space-y-2">
+                        {((simulation as Record<string, unknown>)?.bottlenecks as string[]).map(
+                          (bottleneck: string, index: number) => (
+                            <li key={index} className="text-sm text-muted-foreground">
+                              • {bottleneck}
+                            </li>
+                          ),
+                        )}
+                      </ul>
+                    </div>
+                  )}
               </div>
             )}
           </CardContent>

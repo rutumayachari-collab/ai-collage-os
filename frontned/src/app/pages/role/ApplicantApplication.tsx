@@ -127,8 +127,14 @@ export function ApplicantApplication() {
             <CardTitle className="text-sm font-medium">Payment Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <Badge variant={feeSummary?.paymentStatus === "PAID" ? "default" : "secondary"}>
-              {feeSummary?.paymentStatus || "Pending"}
+            <Badge
+              variant={
+                (feeSummary as Record<string, unknown>)?.paymentStatus === "PAID"
+                  ? "default"
+                  : "secondary"
+              }
+            >
+              {String((feeSummary as Record<string, unknown>)?.paymentStatus || "Pending")}
             </Badge>
           </CardContent>
         </Card>
@@ -225,16 +231,17 @@ export function ApplicantApplication() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
-              {timeline
+              {(timeline as Record<string, unknown>[])
                 .slice(-5)
                 .reverse()
                 .map((event) => (
-                  <li key={event.eventId} className="flex items-start gap-3 text-sm">
+                  <li key={event.eventId as string} className="flex items-start gap-3 text-sm">
                     <HiOutlineBell className="h-4 w-4 text-muted-foreground mt-0.5" />
                     <div>
-                      <p className="font-medium">{event.description}</p>
+                      <p className="font-medium">{event.description as string}</p>
                       <p className="text-xs text-muted-foreground">
-                        {new Date(event.createdAt).toLocaleString()} — {event.performedBy}
+                        {new Date(event.createdAt as string).toLocaleString()} —{" "}
+                        {event.performedBy as string}
                       </p>
                     </div>
                   </li>

@@ -17,7 +17,7 @@ export function GlobalSearch() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<{ type: string; data: Record<string, unknown> }[]>([]);
+  const [results, setResults] = useState<{ type: string; data: unknown }[]>([]);
   const [isSearching, setIsSearching] = useState(false);
 
   const {
@@ -51,9 +51,9 @@ export function GlobalSearch() {
         a.applicantName?.toLowerCase().includes(searchLower),
       );
 
-      const combined = [
-        ...matchedApplicants.map((a) => ({ type: "Applicant", data: a })),
-        ...matchedAdmissions.map((a) => ({ type: "Admission", data: a })),
+      const combined: { type: string; data: unknown }[] = [
+        ...matchedApplicants.map((a) => ({ type: "Applicant", data: a as unknown })),
+        ...matchedAdmissions.map((a) => ({ type: "Admission", data: a as unknown })),
       ];
 
       setResults(combined);
@@ -118,9 +118,15 @@ export function GlobalSearch() {
                   className="flex items-center justify-between rounded-md border p-3 cursor-pointer hover:bg-muted/50"
                   onClick={() => {
                     if (result.type === "Applicant") {
-                      navigate({ to: "/applicants/$id", params: { id: result.data.id } });
+                      navigate({
+                        to: "/applicants/$id",
+                        params: { id: (result.data as Record<string, unknown>).id as string },
+                      });
                     } else {
-                      navigate({ to: "/admissions/$id", params: { id: result.data.id } });
+                      navigate({
+                        to: "/admissions/$id",
+                        params: { id: (result.data as Record<string, unknown>).id as string },
+                      });
                     }
                   }}
                 >
@@ -129,14 +135,20 @@ export function GlobalSearch() {
                     <div>
                       <p className="font-medium">
                         {result.type === "Applicant"
-                          ? result.data.fullName ||
-                            `${result.data.firstName} ${result.data.lastName}`
-                          : result.data.applicantName}
+                          ? String(
+                              ((result.data as Record<string, unknown>).fullName as string) ||
+                                `${(result.data as Record<string, unknown>).firstName as string} ${(result.data as Record<string, unknown>).lastName as string}`,
+                            )
+                          : String(
+                              (result.data as Record<string, unknown>).applicantName as string,
+                            )}
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {result.type === "Applicant"
-                          ? result.data.email
-                          : `${result.data.courseName} - ${result.data.status}`}
+                          ? String((result.data as Record<string, unknown>).email as string)
+                          : String(
+                              `${(result.data as Record<string, unknown>).courseName as string} - ${(result.data as Record<string, unknown>).status as string}`,
+                            )}
                       </p>
                     </div>
                   </div>

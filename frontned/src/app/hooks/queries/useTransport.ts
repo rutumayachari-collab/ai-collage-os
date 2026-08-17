@@ -28,7 +28,7 @@ export function useTransportRoutes(transportId: string) {
     queryKey: ["transport-routes", transportId],
     queryFn: async () => {
       const transport = await transportService.getTransport(transportId);
-      return transport?.routes || [];
+      return (transport as Record<string, unknown>)?.routes || [];
     },
     enabled: !!transportId,
   });
@@ -66,7 +66,7 @@ export function useVehicles(transportId: string) {
     queryKey: ["transport-vehicles", transportId],
     queryFn: async () => {
       const transport = await transportService.getTransport(transportId);
-      return transport?.vehicles || [];
+      return (transport as Record<string, unknown>)?.vehicles || [];
     },
     enabled: !!transportId,
   });
@@ -87,7 +87,7 @@ export function useStops(transportId: string) {
     queryKey: ["transport-stops", transportId],
     queryFn: async () => {
       const transport = await transportService.getTransport(transportId);
-      return transport?.stops || [];
+      return (transport as Record<string, unknown>)?.stops || [];
     },
     enabled: !!transportId,
   });
@@ -113,10 +113,14 @@ export function useTransportAssignments(
         const transports = await transportService.getTransports();
         const assignments: StudentAssignment[] = [];
         for (const transport of transports) {
-          const studentAssignments =
-            transport?.studentAssignments?.filter(
-              (a: StudentAssignment) => a.studentId === params.studentId,
-            ) || [];
+          const t = transport as Record<string, unknown>;
+          const studentAssignments = (
+            Array.isArray(t?.studentAssignments)
+              ? t.studentAssignments.filter(
+                  (a) => (a as Record<string, unknown>).studentId === params.studentId,
+                )
+              : []
+          ) as StudentAssignment[];
           assignments.push(...studentAssignments);
         }
         return assignments;
@@ -124,7 +128,12 @@ export function useTransportAssignments(
       const transports = await transportService.getTransports();
       const assignments: StudentAssignment[] = [];
       for (const transport of transports) {
-        assignments.push(...(transport?.studentAssignments || []));
+        const t = transport as Record<string, unknown>;
+        assignments.push(
+          ...(Array.isArray(t?.studentAssignments)
+            ? (t.studentAssignments as StudentAssignment[])
+            : []),
+        );
       }
       return assignments;
     },

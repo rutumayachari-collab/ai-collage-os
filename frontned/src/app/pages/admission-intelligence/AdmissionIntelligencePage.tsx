@@ -138,16 +138,23 @@ export function AdmissionIntelligencePage() {
         admissionIntelligenceService.getActionRecommendations(campaignId || ""),
         admissionIntelligenceService.getAdmissionFunnel(),
       ]);
-      if (overviewRes.status === "fulfilled") setOverview(overviewRes.value);
-      if (leadsRes.status === "fulfilled") setTopLeads(leadsRes.value);
-      if (followupsRes.status === "fulfilled") setFollowUps(followupsRes.value);
-      if (insightsRes.status === "fulfilled") setCampaignInsights(insightsRes.value);
-      if (demandRes.status === "fulfilled") setCourseDemand(demandRes.value);
-      if (questionsRes.status === "fulfilled") setCommonQuestions(questionsRes.value);
-      if (objectionsRes.status === "fulfilled") setCommonObjections(objectionsRes.value);
-      if (summaryRes.status === "fulfilled") setAiSummary(summaryRes.value);
-      if (recsRes.status === "fulfilled") setRecommendations(recsRes.value);
-      if (funnelRes.status === "fulfilled") setFunnel(funnelRes.value);
+      if (overviewRes.status === "fulfilled")
+        setOverview(overviewRes.value as AdmissionIntelligenceOverview | null);
+      if (leadsRes.status === "fulfilled")
+        setTopLeads(leadsRes.value as AdmissionIntelligenceLead[]);
+      if (followupsRes.status === "fulfilled") setFollowUps(followupsRes.value as FollowUpItem[]);
+      if (insightsRes.status === "fulfilled")
+        setCampaignInsights(insightsRes.value as CampaignInsights | null);
+      if (demandRes.status === "fulfilled") setCourseDemand(demandRes.value as CourseDemandStat[]);
+      if (questionsRes.status === "fulfilled")
+        setCommonQuestions(questionsRes.value as CommonQuestion[]);
+      if (objectionsRes.status === "fulfilled")
+        setCommonObjections(objectionsRes.value as CommonObjection[]);
+      if (summaryRes.status === "fulfilled")
+        setAiSummary(summaryRes.value as AICampaignSummary | null);
+      if (recsRes.status === "fulfilled")
+        setRecommendations(recsRes.value as ActionRecommendation[]);
+      if (funnelRes.status === "fulfilled") setFunnel(funnelRes.value as AdmissionFunnelStage[]);
     } catch (err) {
       console.error("Error fetching admission intelligence", err);
       toast.error("Failed to load admission intelligence data");
@@ -167,7 +174,7 @@ export function AdmissionIntelligencePage() {
     if (!searchQuery.trim()) return;
     try {
       const results = await admissionIntelligenceService.globalSearch(searchQuery.trim());
-      setSearchResults(results);
+      setSearchResults(results as GlobalSearchResult[]);
       setActiveTab("search");
     } catch (err: unknown) {
       const error = err instanceof Error ? err : new Error(String(err));
@@ -179,7 +186,7 @@ export function AdmissionIntelligencePage() {
     setSelectedStudentId(studentId);
     try {
       const data = await admissionIntelligenceService.getStudentIntelligence(studentId);
-      setStudentIntelligence(data);
+      setStudentIntelligence(data as StudentIntelligence | null);
       setActiveTab("student");
     } catch (err: unknown) {
       const error = err instanceof Error ? err : new Error(String(err));

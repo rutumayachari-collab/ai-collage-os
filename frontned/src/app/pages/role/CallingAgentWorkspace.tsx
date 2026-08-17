@@ -166,7 +166,7 @@ export function CallingAgentWorkspace() {
         recommendedAction,
         actionReasoning: "Call ended by counsellor",
         durationSeconds,
-        transcript,
+        transcript: transcript.map((t) => ({ ...t }) as Record<string, unknown>),
         preferredLanguage: selectedStudent.preferredLanguage || "English",
       });
     },

@@ -238,7 +238,7 @@ export function CallStudio({
         campaignId,
         studentUtterance: utteranceText,
         currentLanguage: selectedLanguage,
-        transcriptHistory: transcript,
+        transcriptHistory: transcript.map((t) => ({ ...t }) as Record<string, unknown>),
       });
 
       if (response.languageChanged && response.language) {
@@ -306,7 +306,7 @@ export function CallStudio({
         actionReasoning,
         callbackTime: callbackDateTime ? new Date(callbackDateTime) : undefined,
         durationSeconds,
-        transcript,
+        transcript: transcript.map((t) => ({ ...t }) as Record<string, unknown>),
         preferredLanguage: selectedLanguage,
       });
 

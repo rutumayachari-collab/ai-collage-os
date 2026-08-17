@@ -21,7 +21,11 @@ export function AdminTransport() {
   const { data: transports = [], isLoading, error } = useTransports();
   const createTransport = useCreateTransport();
 
-  const routes: TransportRoute[] = transports.flatMap((t) => t.routes || []);
+  const routes: TransportRoute[] = transports.flatMap((t) => {
+    const transport = t as Record<string, unknown>;
+    const routeList = transport?.routes as TransportRoute[] | undefined;
+    return routeList || [];
+  });
 
   const filteredRoutes = search
     ? routes.filter(

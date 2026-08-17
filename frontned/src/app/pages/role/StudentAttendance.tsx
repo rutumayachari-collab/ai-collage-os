@@ -38,15 +38,9 @@ export function StudentAttendance() {
     );
   }
 
-  const presentCount = attendance.filter(
-    (a) => (a as Record<string, unknown>).status === "PRESENT",
-  ).length;
-  const absentCount = attendance.filter(
-    (a) => (a as Record<string, unknown>).status === "ABSENT",
-  ).length;
-  const lateCount = attendance.filter(
-    (a) => (a as Record<string, unknown>).status === "LATE",
-  ).length;
+  const presentCount = attendance.filter((a) => a.status === "PRESENT").length;
+  const absentCount = attendance.filter((a) => a.status === "ABSENT").length;
+  const lateCount = attendance.filter((a) => a.status === "LATE").length;
   const total = attendance.length;
   const percentage = total > 0 ? Math.round(((presentCount + lateCount) / total) * 100) : 0;
 
