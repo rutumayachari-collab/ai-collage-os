@@ -16,7 +16,9 @@ function NewNotification() {
           <CardTitle>Notification Form</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground">Notification creation form will be implemented here.</p>
+          <p className="text-muted-foreground">
+            Notification creation form will be implemented here.
+          </p>
         </CardContent>
       </Card>
     </div>

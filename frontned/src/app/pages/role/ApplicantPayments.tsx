@@ -9,11 +9,7 @@ import { useAuth } from "@/app/hooks/useAuth";
 import { useApplicants } from "@/app/hooks/queries/useApplicants";
 import { useQuery } from "@tanstack/react-query";
 import { paymentService } from "@/app/services/payment.service";
-import {
-  HiOutlineCurrencyRupee,
-  HiOutlineCheckCircle,
-  HiOutlineClock,
-} from "react-icons/hi2";
+import { HiOutlineCurrencyRupee, HiOutlineCheckCircle, HiOutlineClock } from "react-icons/hi2";
 import { toast } from "sonner";
 
 export function ApplicantPayments() {
@@ -34,10 +30,14 @@ export function ApplicantPayments() {
 
   const getStatusVariant = (status: string) => {
     switch (status) {
-      case "COMPLETED": return "default";
-      case "PENDING": return "secondary";
-      case "FAILED": return "destructive";
-      default: return "outline";
+      case "COMPLETED":
+        return "default";
+      case "PENDING":
+        return "secondary";
+      case "FAILED":
+        return "destructive";
+      default:
+        return "outline";
     }
   };
 
@@ -66,7 +66,8 @@ export function ApplicantPayments() {
                 <div>
                   <p className="font-medium">{payment.courseName}</p>
                   <p className="text-sm text-muted-foreground">
-                    Paid on: {payment.paidAt ? new Date(payment.paidAt).toLocaleDateString() : "Pending"}
+                    Paid on:{" "}
+                    {payment.paidAt ? new Date(payment.paidAt).toLocaleDateString() : "Pending"}
                   </p>
                   <p className="text-xs text-muted-foreground">
                     Method: {payment.method} via {payment.provider}
@@ -79,12 +80,14 @@ export function ApplicantPayments() {
               </CardContent>
             </Card>
           ))}
-          {(!data?.items?.length) && (
+          {!data?.items?.length && (
             <Card>
               <CardContent className="flex flex-col items-center justify-center py-12">
                 <HiOutlineCurrencyRupee className="h-12 w-12 text-muted-foreground mb-4" />
                 <p className="text-lg font-medium">No Payments Found</p>
-                <p className="text-sm text-muted-foreground">Your payment history will appear here once payments are made.</p>
+                <p className="text-sm text-muted-foreground">
+                  Your payment history will appear here once payments are made.
+                </p>
               </CardContent>
             </Card>
           )}

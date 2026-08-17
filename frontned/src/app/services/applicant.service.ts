@@ -18,7 +18,9 @@ export class ApplicantService extends BaseService {
   }
 
   async getByApplicationNumber(applicationNumber: string): Promise<Applicant> {
-    return this.get<Applicant>(`${API_ENDPOINTS.APPLICANTS}/public-info/${encodeURIComponent(applicationNumber)}`);
+    return this.get<Applicant>(
+      `${API_ENDPOINTS.APPLICANTS}/public-info/${encodeURIComponent(applicationNumber)}`,
+    );
   }
 
   async create(data: CreateApplicantDto): Promise<Applicant> {
@@ -41,28 +43,33 @@ export class ApplicantService extends BaseService {
     return this.get<Applicant>(`${API_ENDPOINTS.APPLICANTS}/${id}/checklist`);
   }
 
-  async getDocuments(id: string): Promise<any[]> {
-    return this.get<any[]>(`${API_ENDPOINTS.APPLICANTS}/${id}/documents`);
+  async getDocuments(id: string): Promise<unknown[]> {
+    return this.get<unknown[]>(`${API_ENDPOINTS.APPLICANTS}/${id}/documents`);
   }
 
-  async getInterview(id: string): Promise<any> {
-    return this.get<any>(`${API_ENDPOINTS.APPLICANTS}/${id}/interview`);
+  async getInterview(id: string): Promise<unknown> {
+    return this.get<unknown>(`${API_ENDPOINTS.APPLICANTS}/${id}/interview`);
   }
 
-  async getOfferLetter(id: string): Promise<any> {
-    return this.get<any>(`${API_ENDPOINTS.APPLICANTS}/${id}/offer-letter`);
+  async getOfferLetter(id: string): Promise<unknown> {
+    return this.get<unknown>(`${API_ENDPOINTS.APPLICANTS}/${id}/offer-letter`);
   }
 
-  async getFeeSummary(id: string): Promise<any> {
-    return this.get<any>(`${API_ENDPOINTS.APPLICANTS}/${id}/fee-summary`);
+  async getFeeSummary(id: string): Promise<unknown> {
+    return this.get<unknown>(`${API_ENDPOINTS.APPLICANTS}/${id}/fee-summary`);
   }
 
-  async getTimeline(id: string): Promise<any[]> {
-    return this.get<any[]>(`${API_ENDPOINTS.APPLICANTS}/${id}/timeline`);
+  async getTimeline(id: string): Promise<unknown[]> {
+    return this.get<unknown[]>(`${API_ENDPOINTS.APPLICANTS}/${id}/timeline`);
   }
 
-  async search(params?: Record<string, string | number | boolean | undefined>): Promise<Applicant[]> {
-    return this.get<Applicant[]>(`${API_ENDPOINTS.APPLICANTS}/search`, params ? { params } : undefined);
+  async search(
+    params?: Record<string, string | number | boolean | undefined>,
+  ): Promise<Applicant[]> {
+    return this.get<Applicant[]>(
+      `${API_ENDPOINTS.APPLICANTS}/search`,
+      params ? { params } : undefined,
+    );
   }
 }
 

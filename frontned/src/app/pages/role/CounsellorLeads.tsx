@@ -99,22 +99,28 @@ export function CounsellorLeads() {
     {
       key: "assignedCounsellor",
       header: "Assigned Counsellor",
-      cell: (row: InquiryRow) => (
-        <span className="text-xs">{row.assignedCounsellor}</span>
-      ),
+      cell: (row: InquiryRow) => <span className="text-xs">{row.assignedCounsellor}</span>,
     },
     {
       key: "actions",
       header: "Actions",
       cell: (row: InquiryRow) => (
         <div className="flex items-center gap-1">
-          <Button size="sm" variant="ghost" onClick={() => navigate({ to: `/inquiries/${row.id}` })}>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => navigate({ to: `/inquiries/${row.id}` })}
+          >
             <HiOutlineDocumentText className="h-4 w-4" />
           </Button>
           <Button size="sm" variant="ghost" onClick={() => navigate({ to: "/outreach" })}>
             <HiOutlinePhone className="h-4 w-4" />
           </Button>
-          <Button size="sm" variant="ghost" onClick={() => navigate({ to: "/counsellor/followups" })}>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => navigate({ to: "/counsellor/followups" })}
+          >
             <HiOutlineCalendar className="h-4 w-4" />
           </Button>
         </div>
@@ -183,14 +189,31 @@ export function CounsellorLeads() {
 
       <Card className="border-amber-500/30 bg-amber-500/5">
         <CardHeader>
-          <CardTitle className="text-sm font-medium text-amber-600">Backend Integration Notes</CardTitle>
+          <CardTitle className="text-sm font-medium text-amber-600">
+            Backend Integration Notes
+          </CardTitle>
         </CardHeader>
         <CardContent className="text-xs text-muted-foreground space-y-1">
-          <p>• <strong>Lead Score</strong>: Backend does not provide lead scores. The Inquiry type has no leadScore field.</p>
-          <p>• <strong>Last Contact</strong>: Displayed from the updatedAt timestamp. A dedicated lastContactAt field is not available.</p>
-          <p>• <strong>Next Follow-up</strong>: The inquiry follow-up scheduling endpoint is not yet available.</p>
-          <p>• <strong>Assigned Counsellor</strong>: Displayed from the assignedTo field on Inquiry.</p>
-          <p>• <strong>Status Mapping</strong>: Backend uses NEW | CONTACTED | QUALIFIED | CONVERTED | CLOSED. The requested statuses (Interested, Application Started, Application Submitted, Not Interested, Lost) require a backend enum update.</p>
+          <p>
+            • <strong>Lead Score</strong>: Backend does not provide lead scores. The Inquiry type
+            has no leadScore field.
+          </p>
+          <p>
+            • <strong>Last Contact</strong>: Displayed from the updatedAt timestamp. A dedicated
+            lastContactAt field is not available.
+          </p>
+          <p>
+            • <strong>Next Follow-up</strong>: The inquiry follow-up scheduling endpoint is not yet
+            available.
+          </p>
+          <p>
+            • <strong>Assigned Counsellor</strong>: Displayed from the assignedTo field on Inquiry.
+          </p>
+          <p>
+            • <strong>Status Mapping</strong>: Backend uses NEW | CONTACTED | QUALIFIED | CONVERTED
+            | CLOSED. The requested statuses (Interested, Application Started, Application
+            Submitted, Not Interested, Lost) require a backend enum update.
+          </p>
         </CardContent>
       </Card>
     </div>

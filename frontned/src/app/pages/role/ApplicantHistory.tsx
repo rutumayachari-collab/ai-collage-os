@@ -26,7 +26,7 @@ export function ApplicantHistory() {
         {
           date: applicant.createdAt,
           title: "Application Created",
-          description: `Application submitted for ${applicant.courseName}`,
+          description: `Application ${applicant.applicationNumber} submitted`,
           status: "completed",
         },
         {
@@ -40,14 +40,19 @@ export function ApplicantHistory() {
 
   return (
     <div className="space-y-6">
-      <PageHeader title="Application History" description="View your application history and timeline" />
+      <PageHeader
+        title="Application History"
+        description="View your application history and timeline"
+      />
 
       {!applicant ? (
         <Card>
           <CardContent className="flex flex-col items-center justify-center py-12">
             <HiOutlineCalendar className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-lg font-medium">No History Available</p>
-            <p className="text-sm text-muted-foreground">Your application history will appear here after you submit an application.</p>
+            <p className="text-sm text-muted-foreground">
+              Your application history will appear here after you submit an application.
+            </p>
           </CardContent>
         </Card>
       ) : (

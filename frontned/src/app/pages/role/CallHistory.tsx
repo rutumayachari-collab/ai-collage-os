@@ -49,7 +49,10 @@ export function CallHistory() {
     id: record.id,
     candidateName: record.studentName,
     phone: record.phone,
-    date: typeof record.createdAt === "string" ? record.createdAt : new Date(record.createdAt).toISOString(),
+    date:
+      typeof record.createdAt === "string"
+        ? record.createdAt
+        : new Date(record.createdAt).toISOString(),
     duration: `${Math.floor(record.durationSeconds / 60)} min ${record.durationSeconds % 60} sec`,
     callType: record.isSimulated ? "AI Call" : "Human Call",
     outcome: record.outcome,
@@ -87,23 +90,21 @@ export function CallHistory() {
       key: "callType",
       header: "Type",
       cell: (row: CallRow) => (
-        <Badge variant={row.callType === "AI Call" ? "secondary" : "outline"}>
-          {row.callType}
-        </Badge>
+        <Badge variant={row.callType === "AI Call" ? "secondary" : "outline"}>{row.callType}</Badge>
       ),
     },
     {
       key: "outcome",
       header: "Outcome",
-      cell: (row: CallRow) => (
-        <Badge>{row.outcome.replace(/_/g, " ")}</Badge>
-      ),
+      cell: (row: CallRow) => <Badge>{row.outcome.replace(/_/g, " ")}</Badge>,
     },
     {
       key: "summary",
       header: "Summary",
       cell: (row: CallRow) => (
-        <span className="text-xs text-muted-foreground truncate max-w-[200px] block">{row.summary}</span>
+        <span className="text-xs text-muted-foreground truncate max-w-[200px] block">
+          {row.summary}
+        </span>
       ),
     },
     {

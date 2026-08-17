@@ -14,6 +14,8 @@ router.get('/objections', admissionIntelligenceController.getCommonObjections);
 router.get('/ai-summary', admissionIntelligenceController.getAICampaignSummary);
 router.get('/recommendations', admissionIntelligenceController.getActionRecommendations);
 router.get('/funnel', admissionIntelligenceController.getAdmissionFunnel);
+router.get('/bottlenecks', admissionIntelligenceController.getBottleneckAnalysis);
+router.post('/what-if', admissionIntelligenceController.getWhatIfSimulation);
 router.post('/search', admissionIntelligenceController.globalSearch);
 
 export const admissionIntelligenceRoutes: Router = router;

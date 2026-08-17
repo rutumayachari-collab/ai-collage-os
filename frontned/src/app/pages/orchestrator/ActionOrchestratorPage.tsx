@@ -94,7 +94,8 @@ export function ActionOrchestratorPage() {
     onError: () => toast.error("Failed to create workflow"),
   });
 
-  const selectedWorkflow = workflows.find((wf) => wf.id === selectedWorkflowId) || workflows[0] || null;
+  const selectedWorkflow =
+    workflows.find((wf) => wf.id === selectedWorkflowId) || workflows[0] || null;
 
   if (isLoading) {
     return (
@@ -128,15 +129,26 @@ export function ActionOrchestratorPage() {
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label>Student ID</Label>
-              <Input value={newStudentId} onChange={(e) => setNewStudentId(e.target.value)} placeholder="STU001" />
+              <Input
+                value={newStudentId}
+                onChange={(e) => setNewStudentId(e.target.value)}
+                placeholder="STU001"
+              />
             </div>
             <div className="space-y-2">
               <Label>Student Name</Label>
-              <Input value={newStudentName} onChange={(e) => setNewStudentName(e.target.value)} placeholder="Rahul Sharma" />
+              <Input
+                value={newStudentName}
+                onChange={(e) => setNewStudentName(e.target.value)}
+                placeholder="Rahul Sharma"
+              />
             </div>
             <div className="space-y-2">
               <Label>Action Type</Label>
-              <Select value={newActionType} onValueChange={(value) => setNewActionType(value as ActionType)}>
+              <Select
+                value={newActionType}
+                onValueChange={(value) => setNewActionType(value as ActionType)}
+              >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
@@ -152,11 +164,19 @@ export function ActionOrchestratorPage() {
             </div>
             <div className="space-y-2">
               <Label>Action Title</Label>
-              <Input value={newActionTitle} onChange={(e) => setNewActionTitle(e.target.value)} placeholder="Upload documents" />
+              <Input
+                value={newActionTitle}
+                onChange={(e) => setNewActionTitle(e.target.value)}
+                placeholder="Upload documents"
+              />
             </div>
             <div className="space-y-2 md:col-span-2">
               <Label>Description</Label>
-              <Input value={newActionDescription} onChange={(e) => setNewActionDescription(e.target.value)} placeholder="Upload marksheet and ID proof" />
+              <Input
+                value={newActionDescription}
+                onChange={(e) => setNewActionDescription(e.target.value)}
+                placeholder="Upload marksheet and ID proof"
+              />
             </div>
           </div>
           <div className="flex justify-end gap-2 mt-4">
@@ -187,7 +207,9 @@ export function ActionOrchestratorPage() {
                       <h2 className="font-display text-lg font-semibold">
                         {selectedWorkflow.studentName}
                       </h2>
-                      <p className="text-sm text-muted-foreground">ID: {selectedWorkflow.studentId}</p>
+                      <p className="text-sm text-muted-foreground">
+                        ID: {selectedWorkflow.studentId}
+                      </p>
                     </div>
                     <Badge variant="outline">
                       Step {selectedWorkflow.currentStep + 1} of {selectedWorkflow.actions.length}
@@ -253,7 +275,12 @@ export function ActionOrchestratorPage() {
                                   {isActive && action.status !== "COMPLETED" && (
                                     <Button
                                       size="sm"
-                                      onClick={() => executeMutation.mutate({ workflowId: selectedWorkflow.id, actionId: action.id })}
+                                      onClick={() =>
+                                        executeMutation.mutate({
+                                          workflowId: selectedWorkflow.id,
+                                          actionId: action.id,
+                                        })
+                                      }
                                       disabled={executeMutation.isPending}
                                     >
                                       {executeMutation.isPending ? (
@@ -277,7 +304,9 @@ export function ActionOrchestratorPage() {
                 </Card>
               ) : (
                 <Card className="panel p-6">
-                  <p className="text-sm text-muted-foreground">No workflows found. Create one to get started.</p>
+                  <p className="text-sm text-muted-foreground">
+                    No workflows found. Create one to get started.
+                  </p>
                 </Card>
               )}
             </div>
@@ -301,8 +330,8 @@ export function ActionOrchestratorPage() {
                     >
                       <p className="text-sm font-medium">{wf.studentName}</p>
                       <p className="text-xs text-muted-foreground mt-1">
-                        {wf.actions.filter((a) => a.status === "COMPLETED").length}/{wf.actions.length}{" "}
-                        steps
+                        {wf.actions.filter((a) => a.status === "COMPLETED").length}/
+                        {wf.actions.length} steps
                       </p>
                       <Progress
                         value={
@@ -347,11 +376,15 @@ export function ActionOrchestratorPage() {
             <h3 className="font-display font-semibold mb-4">Workflow History</h3>
             <div className="space-y-3">
               {workflows.map((wf) => (
-                <div key={wf.id} className="flex items-center justify-between rounded-lg border p-3">
+                <div
+                  key={wf.id}
+                  className="flex items-center justify-between rounded-lg border p-3"
+                >
                   <div>
                     <p className="text-sm font-medium">{wf.studentName}</p>
                     <p className="text-xs text-muted-foreground">
-                      {wf.actions.filter((a) => a.status === "COMPLETED").length}/{wf.actions.length} completed
+                      {wf.actions.filter((a) => a.status === "COMPLETED").length}/
+                      {wf.actions.length} completed
                     </p>
                   </div>
                   <Badge variant={wf.status === "COMPLETED" ? "default" : "secondary"}>

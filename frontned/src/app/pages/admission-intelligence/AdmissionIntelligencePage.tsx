@@ -125,18 +125,18 @@ export function AdmissionIntelligencePage() {
         recsRes,
         funnelRes,
       ] = await Promise.allSettled([
-        admissionIntelligenceService.getOverview(campaignId),
-        admissionIntelligenceService.getTopLeads(campaignId, 15),
-        admissionIntelligenceService.getFollowUpQueue(campaignId),
+        admissionIntelligenceService.getOverview(campaignId || ""),
+        admissionIntelligenceService.getTopLeads(campaignId || "", 15),
+        admissionIntelligenceService.getFollowUpQueue(campaignId || ""),
         campaignId
           ? admissionIntelligenceService.getCampaignInsights(campaignId)
           : Promise.resolve(null),
-        admissionIntelligenceService.getCourseDemand(campaignId),
-        admissionIntelligenceService.getCommonQuestions(campaignId),
-        admissionIntelligenceService.getCommonObjections(campaignId),
-        admissionIntelligenceService.getAICampaignSummary(campaignId),
-        admissionIntelligenceService.getActionRecommendations(campaignId),
-        admissionIntelligenceService.getAdmissionFunnel(campaignId),
+        admissionIntelligenceService.getCourseDemand(campaignId || ""),
+        admissionIntelligenceService.getCommonQuestions(campaignId || ""),
+        admissionIntelligenceService.getCommonObjections(campaignId || ""),
+        admissionIntelligenceService.getAICampaignSummary(campaignId || ""),
+        admissionIntelligenceService.getActionRecommendations(campaignId || ""),
+        admissionIntelligenceService.getAdmissionFunnel(),
       ]);
       if (overviewRes.status === "fulfilled") setOverview(overviewRes.value);
       if (leadsRes.status === "fulfilled") setTopLeads(leadsRes.value);

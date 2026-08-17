@@ -1,11 +1,4 @@
-export type UserRole =
-  | "SUPER_ADMIN"
-  | "ADMIN"
-  | "HOD"
-  | "FACULTY"
-  | "STUDENT"
-  | "PARENT"
-  | "STAFF";
+export type UserRole = "SUPER_ADMIN" | "ADMIN" | "HOD" | "FACULTY" | "STUDENT" | "PARENT" | "STAFF";
 
 export type UserStatus = "ACTIVE" | "INACTIVE" | "SUSPENDED" | "PENDING_VERIFICATION";
 
@@ -37,7 +30,12 @@ export interface AuthContextValue {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (credentials: LoginCredentials) => Promise<void>;
-  register: (credentials: { fullName: string; email: string; password: string; role?: string }) => Promise<void>;
+  register: (credentials: {
+    fullName: string;
+    email: string;
+    password: string;
+    role?: string;
+  }) => Promise<void>;
   forgotPassword: (email: string) => Promise<void>;
   logout: () => Promise<void>;
   updateUser: (user: User) => void;

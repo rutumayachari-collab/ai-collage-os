@@ -5,11 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "@tanstack/react-router";
-import {
-  HiOutlineUserGroup,
-  HiOutlinePhone,
-  HiOutlineChatBubbleLeftRight,
-} from "react-icons/hi2";
+import { HiOutlineUserGroup, HiOutlinePhone, HiOutlineChatBubbleLeftRight } from "react-icons/hi2";
 
 export function ApplicantCounsellor() {
   const navigate = useNavigate();
@@ -29,7 +25,9 @@ export function ApplicantCounsellor() {
             </div>
             <div>
               <p className="text-lg font-medium">Your Counsellor</p>
-              <p className="text-sm text-muted-foreground">Assigned to assist you throughout the admission process</p>
+              <p className="text-sm text-muted-foreground">
+                Assigned to assist you throughout the admission process
+              </p>
             </div>
           </div>
 

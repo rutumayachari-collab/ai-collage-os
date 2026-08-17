@@ -14,7 +14,13 @@ import { Badge } from "@/components/ui/badge";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { notificationService } from "@/app/services/notification.service";
-import type { Notification, NotificationStats, NotificationChannel, NotificationPriority, NotificationType } from "@/app/types/notification";
+import type {
+  Notification,
+  NotificationStats,
+  NotificationChannel,
+  NotificationPriority,
+  NotificationType,
+} from "@/app/types/notification";
 
 export function NotificationsPage() {
   const queryClient = useQueryClient();

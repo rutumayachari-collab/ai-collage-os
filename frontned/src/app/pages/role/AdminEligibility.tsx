@@ -54,8 +54,9 @@ export function AdminEligibility() {
       key: "criteria",
       header: "Criteria Met",
       cell: (row: Eligibility) => {
-        const total = Object.keys(row.criteria).length;
-        const met = Object.values(row.criteria).filter(Boolean).length;
+        const criteria = row.criteria || {};
+        const total = Object.keys(criteria).length;
+        const met = Object.values(criteria).filter(Boolean).length;
         return `${met}/${total}`;
       },
     },

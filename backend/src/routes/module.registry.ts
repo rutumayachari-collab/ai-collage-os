@@ -18,5 +18,12 @@ import { paymentModule } from '../modules/payment';
 import { callingAgentModule } from '../modules/calling-agent';
 import { orchestratorModule } from '../modules/orchestrator';
 import { admissionIntelligenceModule } from '../modules/admission-intelligence';
+import { examModule } from '../modules/exam';
+import { attendanceModule } from '../modules/attendance';
+import { libraryModule } from '../modules/library';
+import { hostelModule } from '../modules/hostel';
+import { transportModule } from '../modules/transport';
+import { placementModule } from '../modules/placement';
+import { feeModule } from '../modules/fees';
 
-export const featureModules: readonly FeatureModule[] = [healthModule, authModule, studentModule, departmentModule, courseModule, facultyModule, subjectModule, inquiryModule, applicantModule, documentVerificationModule, eligibilityModule, admissionModule, aiModule, ocrModule, notificationModule, paymentModule, callingAgentModule, orchestratorModule, admissionIntelligenceModule];
+export const featureModules: readonly FeatureModule[] = [healthModule, authModule, studentModule, departmentModule, courseModule, facultyModule, subjectModule, inquiryModule, applicantModule, documentVerificationModule, eligibilityModule, admissionModule, aiModule, ocrModule, notificationModule, paymentModule, callingAgentModule, orchestratorModule, admissionIntelligenceModule, examModule, attendanceModule, libraryModule, hostelModule, placementModule, transportModule, feeModule];

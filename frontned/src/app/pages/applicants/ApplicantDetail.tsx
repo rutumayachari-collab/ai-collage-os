@@ -127,7 +127,9 @@ export function ApplicantDetail() {
                   <div>
                     <p className="text-sm text-muted-foreground">Date of Birth</p>
                     <p className="font-medium">
-                      {applicant.dateOfBirth ? new Date(applicant.dateOfBirth).toLocaleDateString() : "N/A"}
+                      {applicant.dateOfBirth
+                        ? new Date(applicant.dateOfBirth).toLocaleDateString()
+                        : "N/A"}
                     </p>
                   </div>
                   <div>
@@ -154,7 +156,11 @@ export function ApplicantDetail() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Documents</p>
-                    <StatusBadge status={applicant.admissionChecklist?.documentsVerified ? "VERIFIED" : "PENDING"} />
+                    <StatusBadge
+                      status={
+                        applicant.admissionChecklist?.documentsVerified ? "VERIFIED" : "PENDING"
+                      }
+                    />
                   </div>
                   {applicant.aiEligibilityScore !== undefined && (
                     <div>

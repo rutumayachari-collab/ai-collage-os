@@ -627,6 +627,96 @@ export class AdmissionIntelligenceService {
     return stages;
   }
 
+  // ─── What-If Simulation ────────────────────────────────────────────────────
+
+  public async getWhatIfSimulation(input: {
+    currentIntake: number;
+    proposedIntake: number;
+    applicantVolume: number;
+    expectedConversionRate: number;
+    scholarshipBudget: number;
+    processingCapacity: number;
+    verificationDays: number;
+    counselorCapacity: number;
+  }): Promise<{ projectedAdmissions: number; seatOccupancy: number; waitingList: number; counselorWorkload: number; processingDays: number; expectedRevenue: number; recommendations: string[] }> {
+    const projectedAdmissions = Math.round(input.applicantVolume * (input.expectedConversionRate / 100));
+    const seatOccupancy = input.proposedIntake > 0 ? Number(((projectedAdmissions / input.proposedIntake) * 100).toFixed(1)) : 0;
+    const waitingList = Math.max(0, projectedAdmissions - input.proposedIntake);
+    const counselorWorkload = input.counselorCapacity > 0 ? Number((input.applicantVolume / input.counselorCapacity).toFixed(1)) : 0;
+    const processingDays = input.processingCapacity > 0 ? Math.ceil(input.applicantVolume / input.processingCapacity) : 0;
+    const expectedRevenue = projectedAdmissions * 50000;
+
+    const recommendations: string[] = [];
+    if (waitingList > 0) recommendations.push(`Increase intake by ${waitingList} seats or add ${Math.ceil(waitingList / 30)} additional counselors.`);
+    if (counselorWorkload > 50) recommendations.push('Counselor workload is high. Consider hiring additional counselors.');
+    if (processingDays > input.verificationDays) recommendations.push('Processing capacity is insufficient for the applicant volume.');
+    if (seatOccupancy > 100) recommendations.push('Projected admissions exceed proposed intake. Increase seat allocation.');
+
+    return {
+      projectedAdmissions,
+      seatOccupancy,
+      waitingList,
+      counselorWorkload,
+      processingDays,
+      expectedRevenue,
+      recommendations,
+    };
+  }
+
+  // ─── Bottleneck Analysis ───────────────────────────────────────────────────
+
+  public async getBottleneckAnalysis(): Promise<{ bottlenecks: Array<{ area: string; severity: string; detail: string }> }> {
+    const records = await CallRecordModel.find({ deletedAt: { $exists: false } }).exec();
+    const queueItems = await CallQueueItemModel.find({ deletedAt: { $exists: false } }).exec();
+
+    const bottlenecks: Array<{ area: string; severity: string; detail: string }> = [];
+    const avgAttempts = queueItems.length > 0 ? queueItems.reduce((sum, q) => sum + (q.attempts || 0), 0) / queueItems.length : 0;
+    if (avgAttempts > 3) {
+      bottlenecks.push({
+        area: 'Call Connect Rate',
+        severity: 'HIGH',
+        detail: `Average attempts per lead is ${avgAttempts.toFixed(1)}. Improve lead quality or call timing.`,
+      });
+    }
+
+    const pendingCallbacks = records.filter((r) => r.outcome === 'CALLBACK_REQUESTED').length;
+    if (pendingCallbacks > 0) {
+      bottlenecks.push({
+        area: 'Callback Backlog',
+        severity: 'MEDIUM',
+        detail: `${pendingCallbacks} callback(s) pending. Assign dedicated callback staff.`,
+      });
+    }
+
+    const counselorEscalations = records.filter((r) => r.outcome === 'COUNSELOR_ESCALATED').length;
+    if (counselorEscalations > 0) {
+      bottlenecks.push({
+        area: 'Counselor Escalation',
+        severity: 'MEDIUM',
+        detail: `${counselorEscalations} student(s) requested counselling. Increase counselor availability.`,
+      });
+    }
+
+    const uncontacted = queueItems.filter((q) => q.attempts === 0).length;
+    if (uncontacted > 0) {
+      bottlenecks.push({
+        area: 'Uncontacted Leads',
+        severity: 'HIGH',
+        detail: `${uncontacted} lead(s) have not been contacted yet. Increase calling capacity.`,
+      });
+    }
+
+    if (bottlenecks.length === 0) {
+      bottlenecks.push({
+        area: 'None',
+        severity: 'LOW',
+        detail: 'No significant bottlenecks detected at this time.',
+      });
+    }
+
+    return { bottlenecks };
+  }
+
   // ─── Global Search ─────────────────────────────────────────────────────────
 
   public async globalSearch(query: string, filters?: AdmissionIntelligenceFilters): Promise<GlobalSearchResult[]> {

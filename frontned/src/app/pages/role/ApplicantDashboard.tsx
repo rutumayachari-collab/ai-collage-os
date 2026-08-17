@@ -62,14 +62,10 @@ export function ApplicantDashboard() {
   );
   const verifiedDocuments = documents.filter((d) => d.status === "VERIFIED");
 
-  const currentStageIndex = applicant
-    ? STAGES.findIndex((s) => s.key === applicant.status)
-    : -1;
+  const currentStageIndex = applicant ? STAGES.findIndex((s) => s.key === applicant.status) : -1;
 
   const checklist = applicant?.admissionChecklist;
-  const completedSteps = checklist
-    ? Object.values(checklist).filter(Boolean).length
-    : 0;
+  const completedSteps = checklist ? Object.values(checklist).filter(Boolean).length : 0;
   const totalSteps = Object.keys(checklist || {}).length;
   const progressPercent = totalSteps > 0 ? Math.round((completedSteps / totalSteps) * 100) : 0;
 
@@ -137,8 +133,12 @@ export function ApplicantDashboard() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <HiOutlineUserGroup className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-lg font-medium">No Application Found</p>
-            <p className="text-sm text-muted-foreground mb-4">You haven't submitted an application yet.</p>
-            <Button onClick={() => navigate({ to: "/student/application/new" })}>Start Application</Button>
+            <p className="text-sm text-muted-foreground mb-4">
+              You haven't submitted an application yet.
+            </p>
+            <Button onClick={() => navigate({ to: "/student/application/new" })}>
+              Start Application
+            </Button>
           </CardContent>
         </Card>
       ) : (
@@ -157,7 +157,9 @@ export function ApplicantDashboard() {
                 <CardTitle className="text-sm font-medium">Status</CardTitle>
               </CardHeader>
               <CardContent>
-                <Badge variant={getStatusVariant(applicant.status)}>{applicant.status.replace(/_/g, " ")}</Badge>
+                <Badge variant={getStatusVariant(applicant.status)}>
+                  {applicant.status.replace(/_/g, " ")}
+                </Badge>
               </CardContent>
             </Card>
             <Card>
@@ -165,7 +167,9 @@ export function ApplicantDashboard() {
                 <CardTitle className="text-sm font-medium">Documents</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-2xl font-bold">{verifiedDocuments.length}/{documents.length}</p>
+                <p className="text-2xl font-bold">
+                  {verifiedDocuments.length}/{documents.length}
+                </p>
               </CardContent>
             </Card>
             <Card>
@@ -211,7 +215,11 @@ export function ApplicantDashboard() {
                           <HiOutlineClock className="h-5 w-5 text-amber-500" />
                         )}
                         <span className="text-sm">{stage.label}</span>
-                        {isCurrent && <Badge variant="outline" className="ml-auto">Current</Badge>}
+                        {isCurrent && (
+                          <Badge variant="outline" className="ml-auto">
+                            Current
+                          </Badge>
+                        )}
                       </div>
                     );
                   })}
@@ -231,7 +239,9 @@ export function ApplicantDashboard() {
                     <li key={doc.id} className="flex items-center gap-2 text-sm">
                       <HiOutlineDocumentText className="h-4 w-4 text-amber-500" />
                       {doc.name}
-                      <Badge variant="outline" className="ml-auto">{doc.status}</Badge>
+                      <Badge variant="outline" className="ml-auto">
+                        {doc.status}
+                      </Badge>
                     </li>
                   ))}
                 </ul>

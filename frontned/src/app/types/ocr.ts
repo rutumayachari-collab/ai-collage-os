@@ -1,5 +1,13 @@
 export type OCRProvider = "TESSERACT" | "GOOGLE_VISION" | "AZURE_DOCUMENT_INTELLIGENCE";
-export type OCRDocumentType = "AADHAAR" | "PAN" | "PASSPORT" | "DRIVING_LICENSE" | "BIRTH_CERTIFICATE" | "MARKSHEET" | "PHOTO" | "OTHER";
+export type OCRDocumentType =
+  | "AADHAAR"
+  | "PAN"
+  | "PASSPORT"
+  | "DRIVING_LICENSE"
+  | "BIRTH_CERTIFICATE"
+  | "MARKSHEET"
+  | "PHOTO"
+  | "OTHER";
 export type OCRStatus = "PENDING" | "PROCESSING" | "COMPLETED" | "FAILED";
 export type OCRConfidenceLevel = "HIGH" | "MEDIUM" | "LOW";
 

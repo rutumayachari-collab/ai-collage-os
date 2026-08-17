@@ -48,11 +48,7 @@ export function RoleDashboard({ allowedTypes }: RoleDashboardProps) {
   }
 }
 
-export function RoleProtectedRoute({
-  allowedTypes,
-}: {
-  allowedTypes?: UserType[];
-}) {
+export function RoleProtectedRoute({ allowedTypes }: { allowedTypes?: UserType[] }) {
   return (
     <ProtectedRoute>
       <RoleDashboard allowedTypes={allowedTypes} />

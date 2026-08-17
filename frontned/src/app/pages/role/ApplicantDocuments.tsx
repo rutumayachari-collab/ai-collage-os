@@ -18,12 +18,17 @@ import { toast } from "sonner";
 
 function getStatusVariant(status: string) {
   switch (status) {
-    case "VERIFIED": return "default";
-    case "UPLOADED": return "secondary";
-    case "PENDING": return "secondary";
+    case "VERIFIED":
+      return "default";
+    case "UPLOADED":
+      return "secondary";
+    case "PENDING":
+      return "secondary";
     case "REJECTED":
-    case "EXPIRED": return "destructive";
-    default: return "outline";
+    case "EXPIRED":
+      return "destructive";
+    default:
+      return "outline";
   }
 }
 
@@ -32,7 +37,11 @@ export function ApplicantDocuments() {
   const navigate = useNavigate();
   const { data: applicants = [], isLoading, error } = useApplicants({ search: user?.email || "" });
   const applicant = applicants[0];
-  const { data: documents = [], isLoading: docsLoading, error: docsError } = useApplicantDocuments(applicant?.id || "");
+  const {
+    data: documents = [],
+    isLoading: docsLoading,
+    error: docsError,
+  } = useApplicantDocuments(applicant?.id || "");
 
   if (error) {
     toast.error("Unable to load application data.");
@@ -64,8 +73,12 @@ export function ApplicantDocuments() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <HiOutlineDocumentText className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-lg font-medium">No Application Found</p>
-            <p className="text-sm text-muted-foreground mb-4">Submit an application to upload documents.</p>
-            <Button onClick={() => navigate({ to: "/student/application/new" })}>Start Application</Button>
+            <p className="text-sm text-muted-foreground mb-4">
+              Submit an application to upload documents.
+            </p>
+            <Button onClick={() => navigate({ to: "/student/application/new" })}>
+              Start Application
+            </Button>
           </CardContent>
         </Card>
       ) : (
@@ -113,7 +126,9 @@ export function ApplicantDocuments() {
               <CardContent className="flex flex-col items-center justify-center py-12">
                 <HiOutlineDocumentText className="h-12 w-12 text-muted-foreground mb-4" />
                 <p className="text-lg font-medium">No Documents Uploaded</p>
-                <p className="text-sm text-muted-foreground mb-4">Upload your documents to proceed with your application.</p>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Upload your documents to proceed with your application.
+                </p>
                 <Button onClick={() => navigate({ to: "/documents/upload" })}>
                   <HiOutlineArrowUpTray className="mr-2 h-4 w-4" />
                   Upload Documents

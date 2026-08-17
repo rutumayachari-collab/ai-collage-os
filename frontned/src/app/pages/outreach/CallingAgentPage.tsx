@@ -206,7 +206,7 @@ export function CallingAgentPage() {
       setCurrentCallStudent(nextStudent);
       setActiveTab("studio");
       toast.success(`Loaded top priority lead: ${nextStudent.studentName}`);
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error(err?.message || "Failed to fetch next student");
     }
   };

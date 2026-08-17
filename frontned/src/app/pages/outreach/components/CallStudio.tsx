@@ -200,13 +200,13 @@ export function CallStudio({
             setTimeout(() => {
               setCallState("LISTENING");
             }, 3000);
-          } catch (err: any) {
-            setCallState("FAILED");
-            toast.error(err?.message || "Failed to start AI call session");
+          } catch (err: unknown) {
+            const error = err as Record<string, unknown>;
+            toast.error((error?.message as string) || "Failed to start AI call session");
           }
         }, 1200);
       }, 800);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setCallState("FAILED");
       toast.error("Could not connect call");
     }
@@ -276,7 +276,7 @@ export function CallStudio({
           setCallState("LISTENING");
         }
       }, 3500);
-    } catch (err: any) {
+    } catch (err: unknown) {
       setCallState("LISTENING");
       toast.error("AI response error");
     } finally {
@@ -313,8 +313,9 @@ export function CallStudio({
       toast.success("Call record & conversation intelligence saved successfully!");
       setIsSaveOutcomeModalOpen(false);
       onCallEnded();
-    } catch (err: any) {
-      toast.error(err?.message || "Failed to save call outcome");
+    } catch (err: unknown) {
+      const error = err as Record<string, unknown>;
+      toast.error((error?.message as string) || "Failed to save call outcome");
     }
   };
 

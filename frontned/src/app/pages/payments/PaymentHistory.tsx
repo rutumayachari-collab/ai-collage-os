@@ -49,7 +49,7 @@ export function PaymentHistory() {
                   <div className="flex items-center gap-2">
                     <Badge
                       variant={
-                         payment.status === "PAID"
+                        payment.status === "PAID"
                           ? "default"
                           : payment.status === "PENDING"
                             ? "secondary"

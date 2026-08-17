@@ -7,7 +7,11 @@ import { DataTable } from "@/app/components/tables/DataTable";
 import { StatusBadge } from "@/app/components/common/StatusBadge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useDocuments, useDocumentsByApplicant, useApproveDocument } from "@/app/hooks/queries/useDocuments";
+import {
+  useDocuments,
+  useDocumentsByApplicant,
+  useApproveDocument,
+} from "@/app/hooks/queries/useDocuments";
 import { useAuth } from "@/app/hooks/useAuth";
 import { HiOutlineMagnifyingGlass, HiOutlineCloudArrowUp, HiOutlineEye } from "react-icons/hi2";
 import type { Document } from "@/app/types/document";

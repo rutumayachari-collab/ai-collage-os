@@ -73,7 +73,7 @@ export function CounsellorFollowups() {
         notes: "Initial inquiry discussion",
       },
     ],
-    []
+    [],
   );
 
   const filtered = followups.filter((f) => {
@@ -138,7 +138,9 @@ export function CounsellorFollowups() {
       key: "notes",
       header: "Notes",
       cell: (row: FollowUpRow) => (
-        <span className="text-xs text-muted-foreground truncate max-w-[200px] block">{row.notes}</span>
+        <span className="text-xs text-muted-foreground truncate max-w-[200px] block">
+          {row.notes}
+        </span>
       ),
     },
     {
@@ -153,7 +155,9 @@ export function CounsellorFollowups() {
             </Button>
           )}
           {row.status === "COMPLETED" && (
-            <Badge variant="default" className="text-xs">Done</Badge>
+            <Badge variant="default" className="text-xs">
+              Done
+            </Badge>
           )}
         </div>
       ),
@@ -228,20 +232,22 @@ export function CounsellorFollowups() {
 
       <Card className="border-amber-500/30 bg-amber-500/5">
         <CardHeader>
-          <CardTitle className="text-sm font-medium text-amber-600">Backend Integration Note</CardTitle>
+          <CardTitle className="text-sm font-medium text-amber-600">
+            Backend Integration Note
+          </CardTitle>
         </CardHeader>
         <CardContent className="text-xs text-muted-foreground space-y-1">
           <p>
-            • <strong>Follow-up API</strong>: The dedicated inquiry follow-up scheduling endpoint is not yet available.
-            The current UI displays static follow-up data for demonstration.
+            • <strong>Follow-up API</strong>: The dedicated inquiry follow-up scheduling endpoint is
+            not yet available. The current UI displays static follow-up data for demonstration.
           </p>
           <p>
-            • <strong>Create/Update/Delete Follow-ups</strong>: Requires a new backend service and endpoint
-            (e.g., POST /inquiries/:id/followups, GET /inquiries/followups).
+            • <strong>Create/Update/Delete Follow-ups</strong>: Requires a new backend service and
+            endpoint (e.g., POST /inquiries/:id/followups, GET /inquiries/followups).
           </p>
           <p>
-            • <strong>Reminders</strong>: Push notification or email reminder triggers for upcoming follow-ups
-            require backend scheduling support.
+            • <strong>Reminders</strong>: Push notification or email reminder triggers for upcoming
+            follow-ups require backend scheduling support.
           </p>
         </CardContent>
       </Card>

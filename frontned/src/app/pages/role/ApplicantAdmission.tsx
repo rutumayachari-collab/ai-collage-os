@@ -64,7 +64,9 @@ export function ApplicantAdmission() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <HiOutlineAcademicCap className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-lg font-medium">No Application Found</p>
-            <p className="text-sm text-muted-foreground">Submit an application to track admission status.</p>
+            <p className="text-sm text-muted-foreground">
+              Submit an application to track admission status.
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -73,10 +75,7 @@ export function ApplicantAdmission() {
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Admission Status"
-        description="Track your admission progress"
-      />
+      <PageHeader title="Admission Status" description="Track your admission progress" />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
@@ -84,7 +83,9 @@ export function ApplicantAdmission() {
             <CardTitle className="text-sm font-medium">Application Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <Badge variant={getStatusVariant(applicant.status)}>{applicant.status.replace(/_/g, " ")}</Badge>
+            <Badge variant={getStatusVariant(applicant.status)}>
+              {applicant.status.replace(/_/g, " ")}
+            </Badge>
           </CardContent>
         </Card>
         <Card>
@@ -103,7 +104,7 @@ export function ApplicantAdmission() {
           </CardHeader>
           <CardContent>
             <Badge variant={interview ? "default" : "secondary"}>
-              {interview ? (interview.recommendation || "Scheduled") : "Not Scheduled"}
+              {interview ? interview.recommendation || "Scheduled" : "Not Scheduled"}
             </Badge>
           </CardContent>
         </Card>
@@ -112,7 +113,15 @@ export function ApplicantAdmission() {
             <CardTitle className="text-sm font-medium">Offer Letter</CardTitle>
           </CardHeader>
           <CardContent>
-            <Badge variant={offerLetter?.status === "ACCEPTED" ? "default" : offerLetter ? "secondary" : "outline"}>
+            <Badge
+              variant={
+                offerLetter?.status === "ACCEPTED"
+                  ? "default"
+                  : offerLetter
+                    ? "secondary"
+                    : "outline"
+              }
+            >
               {offerLetter?.status || "Not Generated"}
             </Badge>
           </CardContent>
@@ -128,15 +137,21 @@ export function ApplicantAdmission() {
             <div className="grid gap-4 sm:grid-cols-3">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Total Fee</p>
-                <p className="text-2xl font-bold">₹{feeSummary.totalFee?.toLocaleString() || "0"}</p>
+                <p className="text-2xl font-bold">
+                  ₹{feeSummary.totalFee?.toLocaleString() || "0"}
+                </p>
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Paid Amount</p>
-                <p className="text-2xl font-bold text-emerald-600">₹{feeSummary.paidAmount?.toLocaleString() || "0"}</p>
+                <p className="text-2xl font-bold text-emerald-600">
+                  ₹{feeSummary.paidAmount?.toLocaleString() || "0"}
+                </p>
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Pending Amount</p>
-                <p className="text-2xl font-bold text-amber-600">₹{feeSummary.pendingAmount?.toLocaleString() || "0"}</p>
+                <p className="text-2xl font-bold text-amber-600">
+                  ₹{feeSummary.pendingAmount?.toLocaleString() || "0"}
+                </p>
               </div>
             </div>
           ) : (
@@ -154,11 +169,15 @@ export function ApplicantAdmission() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Scheduled At</p>
-                <p className="text-base">{interview.scheduledAt ? new Date(interview.scheduledAt).toLocaleString() : "N/A"}</p>
+                <p className="text-base">
+                  {interview.scheduledAt ? new Date(interview.scheduledAt).toLocaleString() : "N/A"}
+                </p>
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Recommendation</p>
-                <Badge variant={interview.recommendation === "RECOMMENDED" ? "default" : "secondary"}>
+                <Badge
+                  variant={interview.recommendation === "RECOMMENDED" ? "default" : "secondary"}
+                >
                   {interview.recommendation || "PENDING"}
                 </Badge>
               </div>
@@ -198,12 +217,18 @@ export function ApplicantAdmission() {
               </div>
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Generated At</p>
-                <p className="text-base">{offerLetter.generatedAt ? new Date(offerLetter.generatedAt).toLocaleDateString() : "N/A"}</p>
+                <p className="text-base">
+                  {offerLetter.generatedAt
+                    ? new Date(offerLetter.generatedAt).toLocaleDateString()
+                    : "N/A"}
+                </p>
               </div>
               {offerLetter.validUntil && (
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">Valid Until</p>
-                  <p className="text-base">{new Date(offerLetter.validUntil).toLocaleDateString()}</p>
+                  <p className="text-base">
+                    {new Date(offerLetter.validUntil).toLocaleDateString()}
+                  </p>
                 </div>
               )}
             </div>
@@ -218,17 +243,20 @@ export function ApplicantAdmission() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
-              {timeline.slice(-5).reverse().map((event) => (
-                <li key={event.eventId} className="flex items-start gap-3 text-sm">
-                  <HiOutlineClock className="h-4 w-4 text-muted-foreground mt-0.5" />
-                  <div>
-                    <p className="font-medium">{event.description}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {new Date(event.createdAt).toLocaleString()} — {event.performedBy}
-                    </p>
-                  </div>
-                </li>
-              ))}
+              {timeline
+                .slice(-5)
+                .reverse()
+                .map((event) => (
+                  <li key={event.eventId} className="flex items-start gap-3 text-sm">
+                    <HiOutlineClock className="h-4 w-4 text-muted-foreground mt-0.5" />
+                    <div>
+                      <p className="font-medium">{event.description}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {new Date(event.createdAt).toLocaleString()} — {event.performedBy}
+                      </p>
+                    </div>
+                  </li>
+                ))}
             </ul>
           </CardContent>
         </Card>

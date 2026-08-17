@@ -1,7 +1,13 @@
 "use client";
 
 import { createContext, useState, useCallback, useEffect, useContext } from "react";
-import type { AuthContextValue, User, LoginCredentials, RegisterCredentials, AuthResponse } from "../types/auth";
+import type {
+  AuthContextValue,
+  User,
+  LoginCredentials,
+  RegisterCredentials,
+  AuthResponse,
+} from "../types/auth";
 import { authService } from "../services/auth.service";
 import { apiClient } from "../services/api/apiClient";
 import { useRoleContext } from "../hooks/useRole";

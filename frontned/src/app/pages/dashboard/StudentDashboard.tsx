@@ -51,8 +51,12 @@ export function StudentDashboard() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <HiOutlineAcademicCap className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-lg font-medium">No Application Found</p>
-            <p className="text-sm text-muted-foreground mb-4">You haven't submitted an application yet.</p>
-            <Button onClick={() => navigate({ to: "/student/application/new" })}>Start Application</Button>
+            <p className="text-sm text-muted-foreground mb-4">
+              You haven't submitted an application yet.
+            </p>
+            <Button onClick={() => navigate({ to: "/student/application/new" })}>
+              Start Application
+            </Button>
           </CardContent>
         </Card>
       ) : (
@@ -74,7 +78,11 @@ export function StudentDashboard() {
             />
             <StatCard
               title="Eligibility"
-              value={applicant.aiEligibilityScore !== undefined ? `${applicant.aiEligibilityScore}/100` : "Pending"}
+              value={
+                applicant.aiEligibilityScore !== undefined
+                  ? `${applicant.aiEligibilityScore}/100`
+                  : "Pending"
+              }
               description="AI eligibility score"
               icon={HiOutlineCheckCircle}
             />

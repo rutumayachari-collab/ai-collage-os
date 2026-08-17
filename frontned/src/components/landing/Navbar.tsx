@@ -111,7 +111,11 @@ function LoginDropdown({
             ))}
             <div className="mt-1 border-t border-white/5 p-3 text-xs text-white/50">
               New here?{" "}
-              <Link to="/register" onClick={() => setOpen(false)} className="text-sky hover:underline">
+              <Link
+                to="/register"
+                onClick={() => setOpen(false)}
+                className="text-sky hover:underline"
+              >
                 Create an account
               </Link>
             </div>

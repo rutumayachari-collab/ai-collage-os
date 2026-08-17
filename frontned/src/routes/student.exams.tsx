@@ -7,7 +7,7 @@ export const Route = createFileRoute("/student/exams")({
   head: () => ({
     meta: [
       { title: "Exams — NEXORA AI CAMPUSOS" },
-      { name: "description", content: "View exam schedules and results" },
+      { name: "description", content: "View your exam schedule and results" },
     ],
   }),
   component: () => (

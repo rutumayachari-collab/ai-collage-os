@@ -26,7 +26,12 @@ export function StudentSettings() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { data: student, isLoading, error, refetch } = useQuery({
+  const {
+    data: student,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["students", "me"],
     queryFn: () => studentService.getMyProfile(),
   });
@@ -148,7 +153,11 @@ export function StudentSettings() {
                   onCheckedChange={setSmsNotifications}
                 />
               </div>
-              <Button variant="outline" className="w-full justify-start" onClick={handleProfileUpdate}>
+              <Button
+                variant="outline"
+                className="w-full justify-start"
+                onClick={handleProfileUpdate}
+              >
                 <HiOutlineCheckCircle className="mr-2 h-4 w-4" />
                 Save Notification Preferences
               </Button>
@@ -168,11 +177,7 @@ export function StudentSettings() {
                     <p className="text-sm text-muted-foreground">Toggle dark mode theme</p>
                   </div>
                 </div>
-                <Switch
-                  id="dark-mode"
-                  checked={darkMode}
-                  onCheckedChange={setDarkMode}
-                />
+                <Switch id="dark-mode" checked={darkMode} onCheckedChange={setDarkMode} />
               </div>
             </CardContent>
           </Card>
@@ -187,7 +192,9 @@ export function StudentSettings() {
                   <HiOutlineEye className="h-5 w-5 text-muted-foreground" />
                   <div>
                     <Label htmlFor="profile-visibility">Profile Visibility</Label>
-                    <p className="text-sm text-muted-foreground">Allow other students to see your profile</p>
+                    <p className="text-sm text-muted-foreground">
+                      Allow other students to see your profile
+                    </p>
                   </div>
                 </div>
                 <Switch id="profile-visibility" defaultChecked />

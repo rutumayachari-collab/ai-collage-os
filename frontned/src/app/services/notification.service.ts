@@ -15,8 +15,13 @@ export class NotificationService extends BaseService {
     return this.get<NotificationStats>(`${API_ENDPOINTS.NOTIFICATIONS}/stats/summary`, params);
   }
 
-  async getAll(params?: Record<string, string | number | boolean | undefined>): Promise<{ items: Notification[]; total: number }> {
-    return this.get<{ items: Notification[]; total: number }>(API_ENDPOINTS.NOTIFICATIONS, params ? { params } : undefined);
+  async getAll(
+    params?: Record<string, string | number | boolean | undefined>,
+  ): Promise<{ items: Notification[]; total: number }> {
+    return this.get<{ items: Notification[]; total: number }>(
+      API_ENDPOINTS.NOTIFICATIONS,
+      params ? { params } : undefined,
+    );
   }
 
   async send(data: {
@@ -44,11 +49,16 @@ export class NotificationService extends BaseService {
   }
 
   async markAsDelivered(notificationId: string): Promise<Notification> {
-    return this.patch<Notification>(`${API_ENDPOINTS.NOTIFICATIONS}/${notificationId}/delivered`, {});
+    return this.patch<Notification>(
+      `${API_ENDPOINTS.NOTIFICATIONS}/${notificationId}/delivered`,
+      {},
+    );
   }
 
   async markAsFailed(notificationId: string, reason: string): Promise<Notification> {
-    return this.patch<Notification>(`${API_ENDPOINTS.NOTIFICATIONS}/${notificationId}/failed`, { reason });
+    return this.patch<Notification>(`${API_ENDPOINTS.NOTIFICATIONS}/${notificationId}/failed`, {
+      reason,
+    });
   }
 }
 

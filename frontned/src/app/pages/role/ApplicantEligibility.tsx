@@ -7,11 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/app/hooks/useAuth";
 import { useApplicants } from "@/app/hooks/queries/useApplicants";
-import {
-  HiOutlineCheckCircle,
-  HiOutlineXCircle,
-  HiOutlineAcademicCap,
-} from "react-icons/hi2";
+import { HiOutlineCheckCircle, HiOutlineXCircle, HiOutlineAcademicCap } from "react-icons/hi2";
 import { toast } from "sonner";
 
 export function ApplicantEligibility() {
@@ -40,7 +36,9 @@ export function ApplicantEligibility() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <HiOutlineAcademicCap className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-lg font-medium">No Application Found</p>
-            <p className="text-sm text-muted-foreground">Submit an application to check eligibility.</p>
+            <p className="text-sm text-muted-foreground">
+              Submit an application to check eligibility.
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -114,7 +112,9 @@ export function ApplicantEligibility() {
                 )}
                 <div>
                   <p className="font-medium">
-                    {isEligible ? "You are eligible for admission" : "You are not eligible for admission"}
+                    {isEligible
+                      ? "You are eligible for admission"
+                      : "You are not eligible for admission"}
                   </p>
                   <p className="text-sm text-muted-foreground">
                     {isEligible
@@ -129,7 +129,8 @@ export function ApplicantEligibility() {
                 <div>
                   <p className="font-medium">Eligibility check not yet performed</p>
                   <p className="text-sm text-muted-foreground">
-                    The admission committee will review your application and update your eligibility status.
+                    The admission committee will review your application and update your eligibility
+                    status.
                   </p>
                 </div>
               </div>

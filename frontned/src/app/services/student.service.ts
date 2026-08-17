@@ -4,7 +4,12 @@ import type { Student, StudentQueryParams } from "../types/student";
 
 export class StudentService extends BaseService {
   async getMany(params?: StudentQueryParams): Promise<Student[]> {
-    return this.get<Student[]>(`${API_ENDPOINTS.STUDENTS}`, params ? { params: params as Record<string, string | number | boolean | undefined> } : undefined);
+    return this.get<Student[]>(
+      `${API_ENDPOINTS.STUDENTS}`,
+      params
+        ? { params: params as Record<string, string | number | boolean | undefined> }
+        : undefined,
+    );
   }
 
   async getById(id: string): Promise<Student> {
@@ -20,11 +25,21 @@ export class StudentService extends BaseService {
   }
 
   async search(params?: StudentQueryParams): Promise<Student[]> {
-    return this.get<Student[]>(`${API_ENDPOINTS.STUDENTS}/search`, params ? { params: params as Record<string, string | number | boolean | undefined> } : undefined);
+    return this.get<Student[]>(
+      `${API_ENDPOINTS.STUDENTS}/search`,
+      params
+        ? { params: params as Record<string, string | number | boolean | undefined> }
+        : undefined,
+    );
   }
 
   async filter(params?: StudentQueryParams): Promise<Student[]> {
-    return this.get<Student[]>(`${API_ENDPOINTS.STUDENTS}/filter`, params ? { params: params as Record<string, string | number | boolean | undefined> } : undefined);
+    return this.get<Student[]>(
+      `${API_ENDPOINTS.STUDENTS}/filter`,
+      params
+        ? { params: params as Record<string, string | number | boolean | undefined> }
+        : undefined,
+    );
   }
 
   async getByDepartment(departmentId: string): Promise<Student[]> {

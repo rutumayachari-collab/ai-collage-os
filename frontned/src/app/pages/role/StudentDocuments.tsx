@@ -20,17 +20,33 @@ export function StudentDocuments() {
 
   const documents = [
     { id: "1", name: "Student ID Card", type: "ID_PROOF", status: "VERIFIED", date: "2025-08-01" },
-    { id: "2", name: "Transfer Certificate", type: "TRANSFER", status: "VERIFIED", date: "2025-08-01" },
-    { id: "3", name: "Marksheet - Semester 2", type: "MARKSHEET", status: "PENDING", date: "2025-09-15" },
+    {
+      id: "2",
+      name: "Transfer Certificate",
+      type: "TRANSFER",
+      status: "VERIFIED",
+      date: "2025-08-01",
+    },
+    {
+      id: "3",
+      name: "Marksheet - Semester 2",
+      type: "MARKSHEET",
+      status: "PENDING",
+      date: "2025-09-15",
+    },
     { id: "4", name: "Hostel Application", type: "OTHER", status: "PENDING", date: "2025-09-20" },
   ];
 
   const getStatusVariant = (status: string) => {
     switch (status) {
-      case "VERIFIED": return "default";
-      case "PENDING": return "secondary";
-      case "REJECTED": return "destructive";
-      default: return "outline";
+      case "VERIFIED":
+        return "default";
+      case "PENDING":
+        return "secondary";
+      case "REJECTED":
+        return "destructive";
+      default:
+        return "outline";
     }
   };
 
@@ -62,10 +78,10 @@ export function StudentDocuments() {
                 Uploaded: {new Date(doc.date).toLocaleDateString()}
               </p>
               <div className="mt-3 flex gap-2">
-                <Button variant="outline" size="sm">View</Button>
-                {doc.status === "PENDING" && (
-                  <Button size="sm">Resubmit</Button>
-                )}
+                <Button variant="outline" size="sm">
+                  View
+                </Button>
+                {doc.status === "PENDING" && <Button size="sm">Resubmit</Button>}
               </div>
             </CardContent>
           </Card>

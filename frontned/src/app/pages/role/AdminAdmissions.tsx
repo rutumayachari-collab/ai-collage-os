@@ -34,12 +34,12 @@ export function AdminAdmissions() {
     {
       key: "eligibilityStatus",
       header: "Eligibility",
-      cell: (row: Admission) => <StatusBadge status={row.eligibilityStatus} />,
+      cell: (row: Admission) => <StatusBadge status={row.eligibilityStatus || "PENDING"} />,
     },
     {
       key: "feeStatus",
       header: "Fee Status",
-      cell: (row: Admission) => <StatusBadge status={row.feeStatus} />,
+      cell: (row: Admission) => <StatusBadge status={row.feeStatus || "PENDING"} />,
     },
     {
       key: "status",
@@ -55,39 +55,32 @@ export function AdminAdmissions() {
       key: "actions",
       header: "Actions",
       cell: (row: Admission) => (
-        <div className="flex gap-1">
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={() => navigate({ to: `/admissions/${row.id}` })}
-          >
-            View
-          </Button>
-          <Button
-            size="sm"
-            variant="default"
-            onClick={() => navigate({ to: `/admissions/${row.id}`, search: { action: "approve" } })}
-          >
-            Approve
-          </Button>
-          <Button
-            size="sm"
-            variant="destructive"
-            onClick={() => navigate({ to: `/admissions/${row.id}`, search: { action: "reject" } })}
-          >
-            Reject
-          </Button>
-        </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate({ to: "/admissions/$id", params: { id: row.id } })}
+        >
+          View
+        </Button>
       ),
     },
   ];
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+      </div>
+    );
+  }
+
   if (error) {
     return (
-      <div className="space-y-6">
-        <PageHeader title="Admissions" description="Admissions pipeline" />
-        <ErrorState title="Failed to load admissions" description={error.message} />
-      </div>
+      <ErrorState
+        title="Unable to load admissions"
+        description="Please try again later."
+        onRetry={() => {}}
+      />
     );
   }
 
@@ -95,78 +88,39 @@ export function AdminAdmissions() {
     <div className="space-y-6">
       <PageHeader
         title="Admissions"
-        description="Admissions pipeline"
+        description="Manage admission applications"
         actions={
-          canCreate ? (
+          canCreate && (
             <Button onClick={() => navigate({ to: "/admin/admissions/new" })}>
               <HiOutlinePlus className="mr-2 h-4 w-4" />
               New Admission
             </Button>
-          ) : undefined
+          )
         }
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total Admissions</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">{admissions.length}</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Pending</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">
-              {admissions.filter((a) => a.status === "PENDING").length}
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Approved</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">
-              {admissions.filter((a) => a.status === "APPROVED").length}
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Rejected</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">
-              {admissions.filter((a) => a.status === "REJECTED").length}
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+      <DataTable<Admission>
+        data={admissions}
+        columns={columns}
+        keyExtractor={(row) => row.id}
+        searchable
+        searchPlaceholder="Search admissions..."
+        onSearchChange={setSearch}
+      />
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Admissions Pipeline</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <DataTable
-            data={admissions}
-            columns={columns}
-            keyExtractor={(row) => row.id}
-            isLoading={isLoading}
-            searchable
-            searchPlaceholder="Search admissions..."
-            onSearchChange={setSearch}
-            emptyState={{
-              title: "No admissions found",
-              description: "Admissions will appear here as they are processed.",
-            }}
-          />
-        </CardContent>
-      </Card>
+      <div className="flex gap-2">
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="rounded-md border px-3 py-1.5 text-sm"
+        >
+          <option value="ALL">All Status</option>
+          <option value="PENDING">Pending</option>
+          <option value="APPROVED">Approved</option>
+          <option value="REJECTED">Rejected</option>
+          <option value="CONFIRMED">Confirmed</option>
+        </select>
+      </div>
     </div>
   );
 }

@@ -68,11 +68,7 @@ export function CounsellorSettings() {
                 <p className="text-sm text-muted-foreground">Toggle dark mode theme</p>
               </div>
             </div>
-            <Switch
-              id="dark-mode"
-              checked={darkMode}
-              onCheckedChange={setDarkMode}
-            />
+            <Switch id="dark-mode" checked={darkMode} onCheckedChange={setDarkMode} />
           </div>
         </CardContent>
       </Card>

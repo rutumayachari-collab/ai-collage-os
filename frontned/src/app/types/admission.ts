@@ -1,10 +1,5 @@
 export type AdmissionStatus =
-  | "PENDING"
-  | "APPROVED"
-  | "REJECTED"
-  | "WAITLISTED"
-  | "CONFIRMED"
-  | "CANCELLED";
+  "PENDING" | "APPROVED" | "REJECTED" | "WAITLISTED" | "CONFIRMED" | "CANCELLED";
 
 export interface Admission {
   id: string;

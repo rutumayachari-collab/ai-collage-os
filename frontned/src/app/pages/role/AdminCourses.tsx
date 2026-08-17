@@ -166,7 +166,7 @@ export function AdminCourses() {
               action: canCreate
                 ? {
                     label: "Add Course",
-                     onClick: () => navigate({ to: "/admin/courses/new" }),
+                    onClick: () => navigate({ to: "/admin/courses/new" }),
                   }
                 : undefined,
             }}

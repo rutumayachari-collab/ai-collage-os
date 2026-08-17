@@ -35,7 +35,12 @@ export function StudentAcademics() {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  const { data: student, isLoading, error, refetch } = useQuery({
+  const {
+    data: student,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["students", "me"],
     queryFn: () => studentService.getMyProfile(),
   });
@@ -60,7 +65,8 @@ export function StudentAcademics() {
           <p className="text-xs text-muted-foreground mt-1">
             The following endpoints need implementation to display full academic records:
             <code className="ml-1 rounded bg-muted px-1 py-0.5 text-xs">
-              GET /students/me/subjects, GET /students/me/faculty, GET /students/me/marks, GET /students/me/credits
+              GET /students/me/subjects, GET /students/me/faculty, GET /students/me/marks, GET
+              /students/me/credits
             </code>
           </p>
         </div>
@@ -179,7 +185,9 @@ export function StudentAcademics() {
                 <div className="flex items-center justify-between rounded-md border p-3">
                   <div>
                     <p className="font-medium text-sm">Current Semester</p>
-                    <p className="text-xs text-muted-foreground">Semester {student?.semester || "N/A"}</p>
+                    <p className="text-xs text-muted-foreground">
+                      Semester {student?.semester || "N/A"}
+                    </p>
                   </div>
                   <Badge variant={student?.semester ? "default" : "secondary"}>
                     {student?.semester ? "Active" : "N/A"}
@@ -195,7 +203,9 @@ export function StudentAcademics() {
                 <div className="flex items-center justify-between rounded-md border p-3">
                   <div>
                     <p className="font-medium text-sm">Department</p>
-                    <p className="text-xs text-muted-foreground">{student?.department?.code || "N/A"}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {student?.department?.code || "N/A"}
+                    </p>
                   </div>
                   <p className="text-sm font-medium">{student?.department?.name || "N/A"}</p>
                 </div>

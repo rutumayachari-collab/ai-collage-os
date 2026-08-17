@@ -159,7 +159,7 @@ export function AdminStudents() {
               action: canCreate
                 ? {
                     label: "Add Student",
-                     onClick: () => navigate({ to: "/admin/students/new" }),
+                    onClick: () => navigate({ to: "/admin/students/new" }),
                   }
                 : undefined,
             }}

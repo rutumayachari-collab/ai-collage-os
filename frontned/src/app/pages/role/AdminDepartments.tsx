@@ -129,7 +129,7 @@ export function AdminDepartments() {
               action: canCreate
                 ? {
                     label: "Add Department",
-                     onClick: () => navigate({ to: "/admin/departments/new" }),
+                    onClick: () => navigate({ to: "/admin/departments/new" }),
                   }
                 : undefined,
             }}

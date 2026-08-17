@@ -30,7 +30,9 @@ export function ApplicantProfile() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <HiOutlineUser className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-lg font-medium">No Profile Found</p>
-            <p className="text-sm text-muted-foreground">Submit an application to create your profile.</p>
+            <p className="text-sm text-muted-foreground">
+              Submit an application to create your profile.
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -51,7 +53,9 @@ export function ApplicantProfile() {
               <HiOutlineUser className="h-4 w-4 text-muted-foreground" />
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Full Name</p>
-                <p className="text-base">{applicant.firstName} {applicant.lastName}</p>
+                <p className="text-base">
+                  {applicant.firstName} {applicant.lastName}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -72,7 +76,11 @@ export function ApplicantProfile() {
               <HiOutlineCalendar className="h-4 w-4 text-muted-foreground" />
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Date of Birth</p>
-                 <p className="text-base">{applicant.dateOfBirth ? new Date(applicant.dateOfBirth).toLocaleDateString() : "N/A"}</p>
+                <p className="text-base">
+                  {applicant.dateOfBirth
+                    ? new Date(applicant.dateOfBirth).toLocaleDateString()
+                    : "N/A"}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -86,7 +94,7 @@ export function ApplicantProfile() {
               <HiOutlineMapPin className="h-4 w-4 text-muted-foreground" />
               <div>
                 <p className="text-sm font-medium text-muted-foreground">Address</p>
-                 <p className="text-base">{applicant.address || "N/A"}</p>
+                <p className="text-base">{applicant.address || "N/A"}</p>
               </div>
             </div>
           </div>
@@ -105,7 +113,7 @@ export function ApplicantProfile() {
             </div>
             <div>
               <p className="text-sm font-medium text-muted-foreground">Course</p>
-               <p className="text-base">{applicant.preferredCourseId || "N/A"}</p>
+              <p className="text-base">{applicant.preferredCourseId || "N/A"}</p>
             </div>
             <div>
               <p className="text-sm font-medium text-muted-foreground">Application Status</p>
@@ -113,7 +121,9 @@ export function ApplicantProfile() {
             </div>
             <div>
               <p className="text-sm font-medium text-muted-foreground">Documents Verified</p>
-              <Badge variant={applicant.admissionChecklist?.documentsVerified ? "default" : "secondary"}>
+              <Badge
+                variant={applicant.admissionChecklist?.documentsVerified ? "default" : "secondary"}
+              >
                 {applicant.admissionChecklist?.documentsVerified ? "Verified" : "Pending"}
               </Badge>
             </div>

@@ -95,10 +95,7 @@ export function AdminCounsellors() {
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Counsellors"
-        description="Manage counsellors"
-      />
+      <PageHeader title="Counsellors" description="Manage counsellors" />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
@@ -147,7 +144,8 @@ export function AdminCounsellors() {
             isLoading={statsLoading}
             emptyState={{
               title: "No counsellors found",
-              description: "Counsellor data will appear here when available from the faculty module.",
+              description:
+                "Counsellor data will appear here when available from the faculty module.",
             }}
           />
         </CardContent>

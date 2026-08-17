@@ -75,8 +75,12 @@ export function ApplicantApplication() {
           <CardContent className="flex flex-col items-center justify-center py-12">
             <HiOutlineDocumentText className="h-12 w-12 text-muted-foreground mb-4" />
             <p className="text-lg font-medium">No Application Found</p>
-            <p className="text-sm text-muted-foreground mb-4">You haven't submitted an application yet.</p>
-            <Button onClick={() => navigate({ to: "/student/application/new" })}>Start Application</Button>
+            <p className="text-sm text-muted-foreground mb-4">
+              You haven't submitted an application yet.
+            </p>
+            <Button onClick={() => navigate({ to: "/student/application/new" })}>
+              Start Application
+            </Button>
           </CardContent>
         </Card>
       </div>
@@ -103,7 +107,9 @@ export function ApplicantApplication() {
             <CardTitle className="text-sm font-medium">Status</CardTitle>
           </CardHeader>
           <CardContent>
-            <Badge variant={getStatusVariant(applicant.status)}>{applicant.status.replace(/_/g, " ")}</Badge>
+            <Badge variant={getStatusVariant(applicant.status)}>
+              {applicant.status.replace(/_/g, " ")}
+            </Badge>
           </CardContent>
         </Card>
         <Card>
@@ -136,7 +142,9 @@ export function ApplicantApplication() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <p className="text-sm font-medium text-muted-foreground">Full Name</p>
-              <p className="text-base">{applicant.fullName || `${applicant.firstName} ${applicant.lastName}`}</p>
+              <p className="text-base">
+                {applicant.fullName || `${applicant.firstName} ${applicant.lastName}`}
+              </p>
             </div>
             <div>
               <p className="text-sm font-medium text-muted-foreground">Email</p>
@@ -148,7 +156,11 @@ export function ApplicantApplication() {
             </div>
             <div>
               <p className="text-sm font-medium text-muted-foreground">Date of Birth</p>
-              <p className="text-base">{applicant.dateOfBirth ? new Date(applicant.dateOfBirth).toLocaleDateString() : "N/A"}</p>
+              <p className="text-base">
+                {applicant.dateOfBirth
+                  ? new Date(applicant.dateOfBirth).toLocaleDateString()
+                  : "N/A"}
+              </p>
             </div>
             <div>
               <p className="text-sm font-medium text-muted-foreground">Gender</p>
@@ -194,7 +206,11 @@ export function ApplicantApplication() {
                     <HiOutlineClock className="h-5 w-5 text-amber-500" />
                   )}
                   <span className="text-sm">{stage.label}</span>
-                  {isCurrent && <Badge variant="outline" className="ml-auto">Current</Badge>}
+                  {isCurrent && (
+                    <Badge variant="outline" className="ml-auto">
+                      Current
+                    </Badge>
+                  )}
                 </div>
               );
             })}
@@ -209,17 +225,20 @@ export function ApplicantApplication() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
-              {timeline.slice(-5).reverse().map((event) => (
-                <li key={event.eventId} className="flex items-start gap-3 text-sm">
-                  <HiOutlineBell className="h-4 w-4 text-muted-foreground mt-0.5" />
-                  <div>
-                    <p className="font-medium">{event.description}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {new Date(event.createdAt).toLocaleString()} — {event.performedBy}
-                    </p>
-                  </div>
-                </li>
-              ))}
+              {timeline
+                .slice(-5)
+                .reverse()
+                .map((event) => (
+                  <li key={event.eventId} className="flex items-start gap-3 text-sm">
+                    <HiOutlineBell className="h-4 w-4 text-muted-foreground mt-0.5" />
+                    <div>
+                      <p className="font-medium">{event.description}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {new Date(event.createdAt).toLocaleString()} — {event.performedBy}
+                      </p>
+                    </div>
+                  </li>
+                ))}
             </ul>
           </CardContent>
         </Card>

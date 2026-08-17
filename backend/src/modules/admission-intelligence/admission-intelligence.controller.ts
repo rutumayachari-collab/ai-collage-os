@@ -137,6 +137,32 @@ export class AdmissionIntelligenceController {
       data: results,
     });
   });
+
+  public getWhatIfSimulation = asyncHandler(async (_req: Request, res: Response) => {
+    const input = _req.body as {
+      currentIntake: number;
+      proposedIntake: number;
+      applicantVolume: number;
+      expectedConversionRate: number;
+      scholarshipBudget: number;
+      processingCapacity: number;
+      verificationDays: number;
+      counselorCapacity: number;
+    };
+    const result = await this.service.getWhatIfSimulation(input);
+    sendSuccess(res, {
+      message: 'What-if simulation completed',
+      data: result,
+    });
+  });
+
+  public getBottleneckAnalysis = asyncHandler(async (_req: Request, res: Response) => {
+    const result = await this.service.getBottleneckAnalysis();
+    sendSuccess(res, {
+      message: 'Bottleneck analysis completed',
+      data: result,
+    });
+  });
 }
 
 export const admissionIntelligenceController = new AdmissionIntelligenceController(admissionIntelligenceService);

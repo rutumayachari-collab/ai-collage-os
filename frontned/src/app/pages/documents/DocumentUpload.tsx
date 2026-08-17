@@ -30,11 +30,10 @@ export function DocumentUpload() {
           <HiOutlineCloudArrowUp className="h-12 w-12 text-muted-foreground mb-4" />
           <p className="text-lg font-medium">Document upload service is not configured</p>
           <p className="text-sm text-muted-foreground mb-4">
-            File upload endpoint is not available. Please contact the administration office for assistance with document submission.
+            File upload endpoint is not available. Please contact the administration office for
+            assistance with document submission.
           </p>
-          <Button onClick={() => navigate({ to: "/documents" })}>
-            Back to Documents
-          </Button>
+          <Button onClick={() => navigate({ to: "/documents" })}>Back to Documents</Button>
         </CardContent>
       </Card>
     </div>

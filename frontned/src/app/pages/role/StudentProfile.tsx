@@ -26,7 +26,12 @@ export function StudentProfile() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { data: student, isLoading, error, refetch } = useQuery({
+  const {
+    data: student,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["students", "me"],
     queryFn: () => studentService.getMyProfile(),
   });
@@ -235,9 +240,7 @@ export function StudentProfile() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">Attendance</p>
-                  <p className="text-base">
-                    {student?.attendancePercentage?.toFixed(1) || "N/A"}%
-                  </p>
+                  <p className="text-base">{student?.attendancePercentage?.toFixed(1) || "N/A"}%</p>
                 </div>
                 <div>
                   <p className="text-sm font-medium text-muted-foreground">Semester</p>

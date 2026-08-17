@@ -24,7 +24,15 @@ import { useInquiries } from "@/app/hooks/queries/useInquiries";
 import type { CreateApplicantDto } from "@/app/types/applicant";
 
 const GENDERS = ["MALE", "FEMALE", "OTHER", "PREFER_NOT_TO_SAY"] as const;
-const QUALIFICATIONS = ["HIGH_SCHOOL", "INTERMEDIATE", "DIPLOMA", "BACHELORS", "MASTERS", "PHD", "OTHER"] as const;
+const QUALIFICATIONS = [
+  "HIGH_SCHOOL",
+  "INTERMEDIATE",
+  "DIPLOMA",
+  "BACHELORS",
+  "MASTERS",
+  "PHD",
+  "OTHER",
+] as const;
 const COURSES = [
   "Computer Science",
   "Mechanical Engineering",
@@ -229,14 +237,18 @@ export function ApplicantForm() {
                     <Label htmlFor="gender">Gender</Label>
                     <Select
                       value={formData.gender}
-                      onValueChange={(value) => setFormData({ ...formData, gender: value as CreateApplicantDto["gender"] })}
+                      onValueChange={(value) =>
+                        setFormData({ ...formData, gender: value as CreateApplicantDto["gender"] })
+                      }
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Select gender" />
                       </SelectTrigger>
                       <SelectContent>
                         {GENDERS.map((g) => (
-                          <SelectItem key={g} value={g}>{g.replace(/_/g, " ")}</SelectItem>
+                          <SelectItem key={g} value={g}>
+                            {g.replace(/_/g, " ")}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -265,14 +277,21 @@ export function ApplicantForm() {
                     <Label htmlFor="qualification">Qualification</Label>
                     <Select
                       value={formData.qualification}
-                      onValueChange={(value) => setFormData({ ...formData, qualification: value as CreateApplicantDto["qualification"] })}
+                      onValueChange={(value) =>
+                        setFormData({
+                          ...formData,
+                          qualification: value as CreateApplicantDto["qualification"],
+                        })
+                      }
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Select qualification" />
                       </SelectTrigger>
                       <SelectContent>
                         {QUALIFICATIONS.map((q) => (
-                          <SelectItem key={q} value={q}>{q.replace(/_/g, " ")}</SelectItem>
+                          <SelectItem key={q} value={q}>
+                            {q.replace(/_/g, " ")}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -282,7 +301,9 @@ export function ApplicantForm() {
                     <Input
                       id="boardOrUniversity"
                       value={formData.boardOrUniversity}
-                      onChange={(e) => setFormData({ ...formData, boardOrUniversity: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, boardOrUniversity: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -294,7 +315,12 @@ export function ApplicantForm() {
                       id="passingYear"
                       type="number"
                       value={formData.passingYear}
-                      onChange={(e) => setFormData({ ...formData, passingYear: e.target.value ? Number(e.target.value) : undefined })}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          passingYear: e.target.value ? Number(e.target.value) : undefined,
+                        })
+                      }
                     />
                   </div>
                   <div className="space-y-2">
@@ -305,7 +331,12 @@ export function ApplicantForm() {
                       min="0"
                       max="100"
                       value={formData.percentage}
-                      onChange={(e) => setFormData({ ...formData, percentage: e.target.value ? Number(e.target.value) : undefined })}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          percentage: e.target.value ? Number(e.target.value) : undefined,
+                        })
+                      }
                     />
                   </div>
                   <div className="space-y-2">
@@ -316,7 +347,12 @@ export function ApplicantForm() {
                       min="0"
                       max="10"
                       value={formData.cgpa}
-                      onChange={(e) => setFormData({ ...formData, cgpa: e.target.value ? Number(e.target.value) : undefined })}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          cgpa: e.target.value ? Number(e.target.value) : undefined,
+                        })
+                      }
                     />
                   </div>
                 </div>
@@ -334,14 +370,18 @@ export function ApplicantForm() {
                   <Label htmlFor="preferredCourseId">Preferred Course</Label>
                   <Select
                     value={formData.preferredCourseId}
-                    onValueChange={(value) => setFormData({ ...formData, preferredCourseId: value })}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, preferredCourseId: value })
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select a course" />
                     </SelectTrigger>
                     <SelectContent>
                       {COURSES.map((course) => (
-                        <SelectItem key={course} value={course}>{course}</SelectItem>
+                        <SelectItem key={course} value={course}>
+                          {course}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>

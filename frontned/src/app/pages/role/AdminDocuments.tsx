@@ -47,11 +47,6 @@ export function AdminDocuments() {
       cell: (row: Document) => <StatusBadge status={row.ocrStatus || "PENDING"} />,
     },
     {
-      key: "priority",
-      header: "Priority",
-      cell: (row: Document) => row.priority || "-",
-    },
-    {
       key: "createdAt",
       header: "Uploaded",
       cell: (row: Document) => new Date(row.createdAt).toLocaleDateString(),

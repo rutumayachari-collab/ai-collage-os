@@ -11,9 +11,12 @@ export type ApplicantStatus =
   | "ARCHIVED";
 
 export type ApplicantPriority = "LOW" | "MEDIUM" | "HIGH";
-export type LeadSource = "ONLINE" | "OFFLINE" | "COUNSELOR" | "WEBSITE" | "PHONE" | "WHATSAPP" | "EDUCATION_FAIR";
-export type ApplicationChannel = "ONLINE" | "OFFLINE" | "COUNSELOR" | "WEBSITE" | "PHONE" | "WHATSAPP" | "EDUCATION_FAIR";
-export type AdmissionRound = "CAP_ROUND_1" | "CAP_ROUND_2" | "CAP_ROUND_3" | "SPOT" | "MANAGEMENT" | "INSTITUTIONAL";
+export type LeadSource =
+  "ONLINE" | "OFFLINE" | "COUNSELOR" | "WEBSITE" | "PHONE" | "WHATSAPP" | "EDUCATION_FAIR";
+export type ApplicationChannel =
+  "ONLINE" | "OFFLINE" | "COUNSELOR" | "WEBSITE" | "PHONE" | "WHATSAPP" | "EDUCATION_FAIR";
+export type AdmissionRound =
+  "CAP_ROUND_1" | "CAP_ROUND_2" | "CAP_ROUND_3" | "SPOT" | "MANAGEMENT" | "INSTITUTIONAL";
 
 export interface AdmissionChecklist {
   personalDetailsCompleted: boolean;
@@ -28,7 +31,17 @@ export interface AdmissionChecklist {
 
 export interface ApplicantDocument {
   id: string;
-  type: "PHOTO" | "SIGNATURE" | "MARKSHEET" | "CERTIFICATE" | "ID_PROOF" | "ADDRESS_PROOF" | "ENTRANCE_SCORE" | "TRANSFER_CERTIFICATE" | "MIGRATION" | "OTHER";
+  type:
+    | "PHOTO"
+    | "SIGNATURE"
+    | "MARKSHEET"
+    | "CERTIFICATE"
+    | "ID_PROOF"
+    | "ADDRESS_PROOF"
+    | "ENTRANCE_SCORE"
+    | "TRANSFER_CERTIFICATE"
+    | "MIGRATION"
+    | "OTHER";
   name: string;
   description?: string;
   fileUrl: string;
@@ -115,7 +128,20 @@ export interface EmergencyContact {
 
 export interface TimelineEvent {
   eventId: string;
-  eventType: "APPLICATION_SUBMITTED" | "DOCUMENT_UPLOADED" | "DOCUMENT_VERIFIED" | "ELIGIBILITY_CHECKED" | "INTERVIEW_SCHEDULED" | "INTERVIEW_COMPLETED" | "OFFER_GENERATED" | "OFFER_ACCEPTED" | "FEE_PAID" | "ADMISSION_APPROVED" | "STUDENT_CREATED" | "STATUS_CHANGED" | "NOTE_ADDED";
+  eventType:
+    | "APPLICATION_SUBMITTED"
+    | "DOCUMENT_UPLOADED"
+    | "DOCUMENT_VERIFIED"
+    | "ELIGIBILITY_CHECKED"
+    | "INTERVIEW_SCHEDULED"
+    | "INTERVIEW_COMPLETED"
+    | "OFFER_GENERATED"
+    | "OFFER_ACCEPTED"
+    | "FEE_PAID"
+    | "ADMISSION_APPROVED"
+    | "STUDENT_CREATED"
+    | "STATUS_CHANGED"
+    | "NOTE_ADDED";
   description: string;
   performedBy: string;
   createdAt: string;
@@ -150,7 +176,8 @@ export interface Applicant {
   gender?: "MALE" | "FEMALE" | "OTHER" | "PREFER_NOT_TO_SAY";
   nationality?: string;
   address?: string;
-  qualification?: "HIGH_SCHOOL" | "INTERMEDIATE" | "DIPLOMA" | "BACHELORS" | "MASTERS" | "PHD" | "OTHER";
+  qualification?:
+    "HIGH_SCHOOL" | "INTERMEDIATE" | "DIPLOMA" | "BACHELORS" | "MASTERS" | "PHD" | "OTHER";
   boardOrUniversity?: string;
   passingYear?: number;
   percentage?: number;
@@ -239,7 +266,8 @@ export interface CreateApplicantDto {
   gender?: "MALE" | "FEMALE" | "OTHER" | "PREFER_NOT_TO_SAY";
   nationality?: string;
   address?: string;
-  qualification?: "HIGH_SCHOOL" | "INTERMEDIATE" | "DIPLOMA" | "BACHELORS" | "MASTERS" | "PHD" | "OTHER";
+  qualification?:
+    "HIGH_SCHOOL" | "INTERMEDIATE" | "DIPLOMA" | "BACHELORS" | "MASTERS" | "PHD" | "OTHER";
   boardOrUniversity?: string;
   passingYear?: number;
   percentage?: number;

@@ -16,7 +16,9 @@ function NewDepartment() {
           <CardTitle>Department Form</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground">Department creation form will be implemented here.</p>
+          <p className="text-muted-foreground">
+            Department creation form will be implemented here.
+          </p>
         </CardContent>
       </Card>
     </div>

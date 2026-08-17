@@ -67,7 +67,9 @@ export function StudentDashboard() {
             <CardTitle className="text-sm font-medium">Attendance</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">{student?.attendancePercentage?.toFixed(1) || "N/A"}%</p>
+            <p className="text-2xl font-bold">
+              {student?.attendancePercentage?.toFixed(1) || "N/A"}%
+            </p>
           </CardContent>
         </Card>
       </div>
@@ -79,9 +81,7 @@ export function StudentDashboard() {
               <CardTitle>Upcoming Classes</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                No upcoming classes scheduled.
-              </p>
+              <p className="text-sm text-muted-foreground">No upcoming classes scheduled.</p>
             </CardContent>
           </Card>
 
@@ -90,9 +90,7 @@ export function StudentDashboard() {
               <CardTitle>Upcoming Exams</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                No upcoming exams scheduled.
-              </p>
+              <p className="text-sm text-muted-foreground">No upcoming exams scheduled.</p>
             </CardContent>
           </Card>
 
@@ -101,9 +99,7 @@ export function StudentDashboard() {
               <CardTitle>Pending Assignments</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                No pending assignments.
-              </p>
+              <p className="text-sm text-muted-foreground">No pending assignments.</p>
             </CardContent>
           </Card>
         </div>
@@ -125,9 +121,7 @@ export function StudentDashboard() {
               <CardTitle>Important Notifications</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                No new notifications.
-              </p>
+              <p className="text-sm text-muted-foreground">No new notifications.</p>
             </CardContent>
           </Card>
         </div>

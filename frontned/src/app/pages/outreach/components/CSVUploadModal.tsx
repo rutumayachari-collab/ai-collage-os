@@ -170,8 +170,9 @@ export function CSVUploadModal({
       const valReport = await callingAgentService.validateCSV(parsedRows, campaignId);
       setReport(valReport);
       toast.success(`Validated ${valReport.totalRows} leads (${valReport.validRowsCount} valid)`);
-    } catch (err: any) {
-      toast.error(err?.message || "Failed to parse and validate CSV");
+    } catch (err: unknown) {
+      const error = err as Record<string, unknown>;
+      toast.error((error?.message as string) || "Failed to parse and validate CSV");
     } finally {
       setIsValidating(false);
     }
@@ -183,8 +184,9 @@ export function CSVUploadModal({
       const valReport = await callingAgentService.validateCSV(SAMPLE_CSV_ROWS, campaignId);
       setReport(valReport);
       toast.success(`Loaded and validated ${valReport.totalRows} demo prospective leads`);
-    } catch (err: any) {
-      toast.error(err?.message || "Failed to validate demo data");
+    } catch (err: unknown) {
+      const error = err as Record<string, unknown>;
+      toast.error((error?.message as string) || "Failed to validate demo data");
     } finally {
       setIsValidating(false);
     }
@@ -237,8 +239,9 @@ export function CSVUploadModal({
       );
       onImportSuccess();
       onClose();
-    } catch (err: any) {
-      toast.error(err?.message || "Failed to import student leads");
+    } catch (err: unknown) {
+      const error = err as Record<string, unknown>;
+      toast.error((error?.message as string) || "Failed to import student leads");
     } finally {
       setIsImporting(false);
     }

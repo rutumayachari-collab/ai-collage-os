@@ -92,7 +92,7 @@ export class CallingAgentService extends BaseService {
   }): Promise<{
     callId: string;
     sessionId: string;
-    studentContext: any;
+    studentContext: Record<string, unknown>;
     initialGreeting: string;
     language: SupportedLanguage;
     callState: string;
@@ -108,7 +108,7 @@ export class CallingAgentService extends BaseService {
     campaignId: string;
     studentUtterance: string;
     currentLanguage: SupportedLanguage;
-    transcriptHistory?: any[];
+    transcriptHistory?: Record<string, unknown>[];
   }): Promise<{
     agentResponse: string;
     language: SupportedLanguage;
@@ -140,7 +140,7 @@ export class CallingAgentService extends BaseService {
       actionReasoning?: string;
       callbackTime?: Date | string;
       durationSeconds: number;
-      transcript: any[];
+      transcript: Record<string, unknown>[];
       preferredLanguage?: SupportedLanguage;
       detectedLanguage?: SupportedLanguage;
     },

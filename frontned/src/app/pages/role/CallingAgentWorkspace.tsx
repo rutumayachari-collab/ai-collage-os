@@ -78,7 +78,10 @@ export function CallingAgentWorkspace() {
   });
 
   const { data: history, isLoading: historyLoading } = useQuery({
-    queryKey: ["counsellor-call-history-workspace", selectedCampaign?.campaignId || selectedCampaign?.id],
+    queryKey: [
+      "counsellor-call-history-workspace",
+      selectedCampaign?.campaignId || selectedCampaign?.id,
+    ],
     queryFn: async () => {
       if (!selectedCampaign) return { items: [] as CallOutcomeRecord[], total: 0 };
       const cid = selectedCampaign.campaignId || selectedCampaign.id;
@@ -223,22 +226,20 @@ export function CallingAgentWorkspace() {
       header: "Status",
       cell: (row: CallQueueItem) => {
         const variant =
-              row.status === "PENDING"
-                ? "secondary"
-                : row.status === "COMPLETED"
-                  ? "default"
-                  : row.status === "CALLBACK_SCHEDULED"
-                    ? "outline"
-                    : "outline";
+          row.status === "PENDING"
+            ? "secondary"
+            : row.status === "COMPLETED"
+              ? "default"
+              : row.status === "CALLBACK_SCHEDULED"
+                ? "outline"
+                : "outline";
         return <Badge variant={variant}>{row.status.replace(/_/g, " ")}</Badge>;
       },
     },
     {
       key: "priorityScore",
       header: "Lead Score",
-      cell: (row: CallQueueItem) => (
-        <span className="text-xs font-mono">{row.priorityScore}</span>
-      ),
+      cell: (row: CallQueueItem) => <span className="text-xs font-mono">{row.priorityScore}</span>,
     },
     {
       key: "lastCalledAt",
@@ -271,11 +272,7 @@ export function CallingAgentWorkspace() {
             <HiOutlinePhone className="mr-1 h-4 w-4" />
             Call
           </Button>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={() => navigate({ to: `/inquiries` })}
-          >
+          <Button size="sm" variant="outline" onClick={() => navigate({ to: `/inquiries` })}>
             <HiOutlineDocumentText className="h-4 w-4" />
           </Button>
         </div>
@@ -284,7 +281,9 @@ export function CallingAgentWorkspace() {
   ];
 
   const formatTimer = (secs: number) => {
-    const m = Math.floor(secs / 60).toString().padStart(2, "0");
+    const m = Math.floor(secs / 60)
+      .toString()
+      .padStart(2, "0");
     const s = (secs % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
   };
@@ -313,9 +312,7 @@ export function CallingAgentWorkspace() {
                   className="text-xs border rounded-md px-2 py-1 bg-background"
                   value={selectedCampaign?.campaignId || selectedCampaign?.id || ""}
                   onChange={(e) => {
-                    const camp = campaigns?.find(
-                      (c) => (c.campaignId || c.id) === e.target.value
-                    );
+                    const camp = campaigns?.find((c) => (c.campaignId || c.id) === e.target.value);
                     if (camp) setSelectedCampaign(camp);
                   }}
                 >
@@ -357,7 +354,8 @@ export function CallingAgentWorkspace() {
               <HiOutlinePhone className="h-12 w-12 text-muted-foreground mx-auto opacity-50" />
               <h2 className="text-xl font-display font-semibold">No Active Call</h2>
               <p className="text-sm text-muted-foreground max-w-md mx-auto">
-                Select a candidate from the queue and click Call to start an AI-assisted outreach session.
+                Select a candidate from the queue and click Call to start an AI-assisted outreach
+                session.
               </p>
             </Card>
           ) : (
@@ -381,7 +379,9 @@ export function CallingAgentWorkspace() {
                   </div>
                   <div>
                     <p className="text-muted-foreground">Lead Status</p>
-                    <Badge variant="secondary">{selectedStudent.leadStage.replace(/_/g, " ")}</Badge>
+                    <Badge variant="secondary">
+                      {selectedStudent.leadStage.replace(/_/g, " ")}
+                    </Badge>
                   </div>
                   <div>
                     <p className="text-muted-foreground">Lead Score</p>
@@ -440,10 +440,7 @@ export function CallingAgentWorkspace() {
                         <HiOutlinePlay className="h-4 w-4" />
                         Start Call
                       </Button>
-                      <Button
-                        variant="outline"
-                        onClick={() => navigate({ to: "/outreach" })}
-                      >
+                      <Button variant="outline" onClick={() => navigate({ to: "/outreach" })}>
                         AI Call
                       </Button>
                     </div>
@@ -512,7 +509,9 @@ export function CallingAgentWorkspace() {
               </Card>
 
               {/* AI Intelligence */}
-              {(callState === "CONNECTED" || callState === "RINGING" || callState === "COMPLETED") && (
+              {(callState === "CONNECTED" ||
+                callState === "RINGING" ||
+                callState === "COMPLETED") && (
                 <Card>
                   <CardHeader className="pb-3">
                     <CardTitle className="text-sm font-medium flex items-center gap-2">
@@ -598,14 +597,14 @@ export function CallingAgentWorkspace() {
               {
                 key: "outcome",
                 header: "Outcome",
-                cell: (row: CallOutcomeRecord) => (
-                  <Badge>{row.outcome.replace(/_/g, " ")}</Badge>
-                ),
+                cell: (row: CallOutcomeRecord) => <Badge>{row.outcome.replace(/_/g, " ")}</Badge>,
               },
               {
                 key: "sentiment",
                 header: "Sentiment",
-                cell: (row: CallOutcomeRecord) => <Badge variant="secondary">{row.sentiment}</Badge>,
+                cell: (row: CallOutcomeRecord) => (
+                  <Badge variant="secondary">{row.sentiment}</Badge>
+                ),
               },
               {
                 key: "recommendedAction",

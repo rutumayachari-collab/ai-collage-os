@@ -9,7 +9,15 @@ export type DocumentType =
   | "TRANSFER_CERTIFICATE"
   | "MIGRATION"
   | "OTHER";
-export type DocumentStatus = "NOT_REQUIRED" | "PENDING" | "UPLOADED" | "VERIFIED" | "REJECTED" | "EXPIRED" | "REQUIRES_REUPLOAD" | "UNDER_REVIEW";
+export type DocumentStatus =
+  | "NOT_REQUIRED"
+  | "PENDING"
+  | "UPLOADED"
+  | "VERIFIED"
+  | "REJECTED"
+  | "EXPIRED"
+  | "REQUIRES_REUPLOAD"
+  | "UNDER_REVIEW";
 
 export interface Document {
   id: string;

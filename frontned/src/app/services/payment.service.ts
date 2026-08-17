@@ -7,8 +7,13 @@ export class PaymentService extends BaseService {
     return this.get<PaymentSummary>(`${API_ENDPOINTS.PAYMENTS}/summary`);
   }
 
-  async getAll(params?: Record<string, string | number | boolean | undefined>): Promise<{ items: Payment[]; total: number }> {
-    return this.get<{ items: Payment[]; total: number }>(API_ENDPOINTS.PAYMENTS, params ? { params } : undefined);
+  async getAll(
+    params?: Record<string, string | number | boolean | undefined>,
+  ): Promise<{ items: Payment[]; total: number }> {
+    return this.get<{ items: Payment[]; total: number }>(
+      API_ENDPOINTS.PAYMENTS,
+      params ? { params } : undefined,
+    );
   }
 }
 

@@ -111,11 +111,19 @@ export function CounsellorProfile() {
             <HiOutlineUserGroup className="mr-2 h-4 w-4" />
             My Leads
           </Button>
-          <Button variant="outline" size="sm" onClick={() => navigate({ to: "/counsellor/followups" })}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate({ to: "/counsellor/followups" })}
+          >
             <HiOutlineCalendar className="mr-2 h-4 w-4" />
             Follow-ups
           </Button>
-          <Button variant="outline" size="sm" onClick={() => navigate({ to: "/counsellor/call-history" })}>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate({ to: "/counsellor/call-history" })}
+          >
             <HiOutlinePhone className="mr-2 h-4 w-4" />
             Call History
           </Button>

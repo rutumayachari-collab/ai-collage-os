@@ -4,6 +4,7 @@ import { useState } from "react";
 import { PageHeader } from "@/app/components/common/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { DataTable } from "@/app/components/tables/DataTable";
 import { StatusBadge } from "@/app/components/common/StatusBadge";
 import { ErrorState } from "@/app/components/common/ErrorState";
@@ -94,34 +95,36 @@ export function AdminPayments() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Total Collected</CardTitle>
+              <CardTitle className="text-sm font-medium">Total Fee</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-2xl font-bold">₹{summary.totalCollected.toLocaleString()}</p>
+              <p className="text-2xl font-bold">₹{summary.totalFee.toLocaleString()}</p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Pending</CardTitle>
+              <CardTitle className="text-sm font-medium">Paid Amount</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-2xl font-bold">₹{summary.totalPending.toLocaleString()}</p>
+              <p className="text-2xl font-bold">₹{summary.paidAmount.toLocaleString()}</p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Refunded</CardTitle>
+              <CardTitle className="text-sm font-medium">Pending Amount</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-2xl font-bold">₹{summary.totalRefunded.toLocaleString()}</p>
+              <p className="text-2xl font-bold">₹{summary.pendingAmount.toLocaleString()}</p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">Failed</CardTitle>
+              <CardTitle className="text-sm font-medium">Payment Status</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-2xl font-bold">₹{summary.totalFailed.toLocaleString()}</p>
+              <Badge variant={summary.paymentStatus === "PAID" ? "default" : "secondary"}>
+                {summary.paymentStatus}
+              </Badge>
             </CardContent>
           </Card>
         </div>
@@ -132,7 +135,7 @@ export function AdminPayments() {
           <CardTitle>All Payments</CardTitle>
         </CardHeader>
         <CardContent>
-          <DataTable
+          <DataTable<Payment>
             data={payments}
             columns={columns}
             keyExtractor={(row) => row.paymentId}

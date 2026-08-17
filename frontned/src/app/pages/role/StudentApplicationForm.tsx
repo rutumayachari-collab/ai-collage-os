@@ -39,7 +39,15 @@ const COURSES = [
 ];
 
 const GENDERS = ["MALE", "FEMALE", "OTHER", "PREFER_NOT_TO_SAY"] as const;
-const QUALIFICATIONS = ["HIGH_SCHOOL", "INTERMEDIATE", "DIPLOMA", "BACHELORS", "MASTERS", "PHD", "OTHER"] as const;
+const QUALIFICATIONS = [
+  "HIGH_SCHOOL",
+  "INTERMEDIATE",
+  "DIPLOMA",
+  "BACHELORS",
+  "MASTERS",
+  "PHD",
+  "OTHER",
+] as const;
 
 export function StudentApplicationForm() {
   const navigate = useNavigate();
@@ -157,7 +165,7 @@ export function StudentApplicationForm() {
     };
 
     try {
-      const result = await createMutation.mutateAsync(payload);
+      const result = await createMutation.mutateAsync(payload as Record<string, unknown>);
       toast.success("Application submitted successfully!");
       navigate({ to: "/applicant/application" });
     } catch (error: unknown) {
@@ -249,7 +257,9 @@ export function StudentApplicationForm() {
                       </SelectTrigger>
                       <SelectContent>
                         {GENDERS.map((g) => (
-                          <SelectItem key={g} value={g}>{g.replace(/_/g, " ")}</SelectItem>
+                          <SelectItem key={g} value={g}>
+                            {g.replace(/_/g, " ")}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -285,7 +295,9 @@ export function StudentApplicationForm() {
                       </SelectTrigger>
                       <SelectContent>
                         {QUALIFICATIONS.map((q) => (
-                          <SelectItem key={q} value={q}>{q.replace(/_/g, " ")}</SelectItem>
+                          <SelectItem key={q} value={q}>
+                            {q.replace(/_/g, " ")}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
@@ -295,7 +307,9 @@ export function StudentApplicationForm() {
                     <Input
                       id="boardOrUniversity"
                       value={formData.boardOrUniversity}
-                      onChange={(e) => setFormData({ ...formData, boardOrUniversity: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, boardOrUniversity: e.target.value })
+                      }
                     />
                   </div>
                 </div>
@@ -347,14 +361,18 @@ export function StudentApplicationForm() {
                   <Label htmlFor="preferredCourseId">Preferred Course</Label>
                   <Select
                     value={formData.preferredCourseId}
-                    onValueChange={(value) => setFormData({ ...formData, preferredCourseId: value })}
+                    onValueChange={(value) =>
+                      setFormData({ ...formData, preferredCourseId: value })
+                    }
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select a course" />
                     </SelectTrigger>
                     <SelectContent>
                       {COURSES.map((course) => (
-                        <SelectItem key={course} value={course}>{course}</SelectItem>
+                        <SelectItem key={course} value={course}>
+                          {course}
+                        </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
@@ -367,7 +385,9 @@ export function StudentApplicationForm() {
                 <CardTitle>Application Number</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">Your application number will be generated automatically.</p>
+                <p className="text-sm text-muted-foreground">
+                  Your application number will be generated automatically.
+                </p>
                 <p className="text-lg font-mono font-bold mt-2">{formData.applicationNumber}</p>
               </CardContent>
             </Card>
@@ -375,7 +395,11 @@ export function StudentApplicationForm() {
         </div>
 
         <div className="mt-6 flex justify-end gap-2">
-          <Button type="button" variant="outline" onClick={() => navigate({ to: "/applicant/dashboard" })}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => navigate({ to: "/applicant/dashboard" })}
+          >
             Cancel
           </Button>
           <Button type="submit" disabled={createMutation.isPending}>

@@ -10,9 +10,6 @@ import { ErrorState } from "@/app/components/common/ErrorState";
 import { useNavigate } from "@tanstack/react-router";
 import { useApplicants } from "@/app/hooks/queries/useApplicants";
 import { useAdmissions } from "@/app/hooks/queries/useAdmissions";
-import { useDocuments } from "@/app/hooks/queries/useDocuments";
-import { useEligibilityByApplicant } from "@/app/hooks/queries/useEligibility";
-import { usePayments } from "@/app/hooks/queries/usePayments";
 import { useAuth } from "@/app/hooks/useAuth";
 import {
   HiOutlineEye,
@@ -51,7 +48,6 @@ export function AdminApplicants() {
     },
     { key: "email", header: "Email" },
     { key: "phone", header: "Phone" },
-    { key: "courseName", header: "Course" },
     {
       key: "status",
       header: "Status",
@@ -61,13 +57,13 @@ export function AdminApplicants() {
       key: "eligibilityScore",
       header: "Eligibility",
       cell: (row: Applicant) =>
-        row.eligibilityScore !== undefined ? `${row.eligibilityScore}%` : "Pending",
+        row.aiEligibilityScore !== undefined ? `${row.aiEligibilityScore}%` : "Pending",
     },
     {
       key: "documentsVerified",
       header: "Documents",
       cell: (row: Applicant) => (
-        <StatusBadge status={row.documentsVerified ? "VERIFIED" : "PENDING"} />
+        <StatusBadge status={row.admissionChecklist?.documentsVerified ? "VERIFIED" : "PENDING"} />
       ),
     },
     {
@@ -79,43 +75,35 @@ export function AdminApplicants() {
       },
     },
     {
-      key: "counsellor",
-      header: "Counsellor",
-      cell: () => "-",
-    },
-    {
-      key: "createdAt",
-      header: "Created",
-      cell: (row: Applicant) => new Date(row.createdAt).toLocaleDateString(),
-    },
-    {
-      key: "updatedAt",
-      header: "Updated",
-      cell: (row: Applicant) => new Date(row.updatedAt).toLocaleDateString(),
-    },
-    {
       key: "actions",
       header: "Actions",
       cell: (row: Applicant) => (
-        <div className="flex flex-wrap gap-1">
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={() => navigate({ to: "/applicants/$id", params: { id: row.id } })}
-          >
-            View
-          </Button>
-        </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => navigate({ to: "/applicants/$id", params: { id: row.id } })}
+        >
+          View
+        </Button>
       ),
     },
   ];
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+      </div>
+    );
+  }
+
   if (error) {
     return (
-      <div className="space-y-6">
-        <PageHeader title="Applicants" description="Manage all applications" />
-        <ErrorState title="Failed to load applicants" description={error.message} />
-      </div>
+      <ErrorState
+        title="Unable to load applicants"
+        description="Please try again later."
+        onRetry={() => {}}
+      />
     );
   }
 
@@ -123,87 +111,44 @@ export function AdminApplicants() {
     <div className="space-y-6">
       <PageHeader
         title="Applicants"
-        description="Manage all applications"
+        description="Manage applicant records"
         actions={
-          canCreate ? (
+          canCreate && (
             <Button onClick={() => navigate({ to: "/applicants/new" })}>
               <HiOutlinePlus className="mr-2 h-4 w-4" />
               New Applicant
             </Button>
-          ) : undefined
+          )
         }
       />
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total Applicants</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">{applicants.length}</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Pending</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">
-              {
-                applicants.filter((a) => a.status === "SUBMITTED" || a.status === "UNDER_REVIEW")
-                  .length
-              }
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Admitted</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">
-              {applicants.filter((a) => a.status === "ADMITTED").length}
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Documents Verified</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-2xl font-bold">
-              {applicants.filter((a) => a.documentsVerified).length}
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+      <DataTable<Applicant>
+        data={applicants}
+        columns={columns}
+        keyExtractor={(row) => row.id}
+        searchable
+        searchPlaceholder="Search applicants..."
+        onSearchChange={setSearch}
+      />
 
-      <Card>
-        <CardHeader>
-          <CardTitle>All Applicants</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <DataTable
-            data={applicants}
-            columns={columns}
-            keyExtractor={(row) => row.id}
-            isLoading={isLoading}
-            searchable
-            searchPlaceholder="Search applicants..."
-            onSearchChange={setSearch}
-            emptyState={{
-              title: "No applicants found",
-              description: "Get started by creating a new applicant.",
-              action: canCreate
-                ? {
-                    label: "New Applicant",
-                    onClick: () => navigate({ to: "/applicants/new" }),
-                  }
-                : undefined,
-            }}
-          />
-        </CardContent>
-      </Card>
+      <div className="flex gap-2">
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="rounded-md border px-3 py-1.5 text-sm"
+        >
+          <option value="ALL">All Status</option>
+          <option value="NEW">New</option>
+          <option value="DOCUMENTS_VERIFIED">Documents Verified</option>
+          <option value="ELIGIBLE">Eligible</option>
+          <option value="INTERVIEW_SCHEDULED">Interview Scheduled</option>
+          <option value="INTERVIEWED">Interviewed</option>
+          <option value="SELECTED">Selected</option>
+          <option value="OFFERED">Offered</option>
+          <option value="ADMITTED">Admitted</option>
+          <option value="REJECTED">Rejected</option>
+        </select>
+      </div>
     </div>
   );
 }

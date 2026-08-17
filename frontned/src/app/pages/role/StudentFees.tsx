@@ -21,12 +21,22 @@ import { toast } from "sonner";
 export function StudentFees() {
   const navigate = useNavigate();
 
-  const { data: student, isLoading: studentLoading, error: studentError, refetch: refetchStudent } = useQuery({
+  const {
+    data: student,
+    isLoading: studentLoading,
+    error: studentError,
+    refetch: refetchStudent,
+  } = useQuery({
     queryKey: ["students", "me"],
     queryFn: () => studentService.getMyProfile(),
   });
 
-  const { data: paymentData, isLoading: paymentLoading, error: paymentError, refetch: refetchPayment } = useQuery({
+  const {
+    data: paymentData,
+    isLoading: paymentLoading,
+    error: paymentError,
+    refetch: refetchPayment,
+  } = useQuery({
     queryKey: ["payments"],
     queryFn: () => paymentService.getSummary(),
   });
@@ -40,10 +50,18 @@ export function StudentFees() {
 
   const getStatusVariant = (status: string) => {
     switch (status) {
-      case "COMPLETED": return "default";
-      case "PENDING": return "secondary";
-      case "FAILED": return "destructive";
-      default: return "outline";
+      case "PAID":
+        return "default";
+      case "PENDING":
+        return "secondary";
+      case "PARTIAL":
+        return "secondary";
+      case "REFUNDED":
+        return "destructive";
+      case "CANCELLED":
+        return "destructive";
+      default:
+        return "outline";
     }
   };
 
@@ -75,7 +93,14 @@ export function StudentFees() {
           <CardContent className="flex flex-col items-center justify-center py-12 text-center">
             <HiOutlineExclamationTriangle className="h-10 w-10 text-destructive mb-3" />
             <p className="text-sm font-medium">Failed to load fee details</p>
-            <Button className="mt-4" variant="outline" onClick={() => { refetchStudent(); refetchPayment(); }}>
+            <Button
+              className="mt-4"
+              variant="outline"
+              onClick={() => {
+                refetchStudent();
+                refetchPayment();
+              }}
+            >
               Try Again
             </Button>
           </CardContent>
@@ -89,7 +114,10 @@ export function StudentFees() {
               </CardHeader>
               <CardContent>
                 <p className="text-2xl font-bold">
-                  ₹{((paymentData?.totalCollected || 0) + (paymentData?.totalPending || 0)).toLocaleString()}
+                  ₹
+                  {(
+                    (paymentData?.paidAmount || 0) + (paymentData?.pendingAmount || 0)
+                  ).toLocaleString()}
                 </p>
               </CardContent>
             </Card>
@@ -98,7 +126,9 @@ export function StudentFees() {
                 <CardTitle className="text-sm font-medium">Paid</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-2xl font-bold">₹{paymentData?.totalCollected?.toLocaleString() || "0"}</p>
+                <p className="text-2xl font-bold">
+                  ₹{paymentData?.paidAmount?.toLocaleString() || "0"}
+                </p>
               </CardContent>
             </Card>
             <Card>
@@ -106,7 +136,9 @@ export function StudentFees() {
                 <CardTitle className="text-sm font-medium">Pending</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-2xl font-bold">₹{paymentData?.totalPending?.toLocaleString() || "0"}</p>
+                <p className="text-2xl font-bold">
+                  ₹{paymentData?.pendingAmount?.toLocaleString() || "0"}
+                </p>
               </CardContent>
             </Card>
             <Card>
@@ -114,8 +146,8 @@ export function StudentFees() {
                 <CardTitle className="text-sm font-medium">Fee Status</CardTitle>
               </CardHeader>
               <CardContent>
-                <Badge variant={(paymentData?.totalPending || 0) > 0 ? "secondary" : "default"}>
-                  {(paymentData?.totalPending || 0) > 0 ? "Pending Payment" : "Fully Paid"}
+                <Badge variant={(paymentData?.pendingAmount || 0) > 0 ? "secondary" : "default"}>
+                  {(paymentData?.pendingAmount || 0) > 0 ? "Pending Payment" : "Fully Paid"}
                 </Badge>
               </CardContent>
             </Card>
@@ -134,48 +166,36 @@ export function StudentFees() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between rounded-md border p-3">
                     <div>
-                      <p className="font-medium">Tuition Fee - Semester {student?.semester || "Current"}</p>
-                      <p className="text-sm text-muted-foreground">Status: {student?.feeStatus || "Pending"}</p>
+                      <p className="font-medium">Tuition Fee</p>
+                      <p className="text-sm text-muted-foreground">
+                        Status: {paymentData?.paymentStatus || "Pending"}
+                      </p>
                     </div>
                     <div className="text-right">
                       <p className="font-medium">
-                        ₹{((paymentData?.totalCollected || 0) / 2).toLocaleString()}
+                        ₹{((paymentData?.paidAmount || 0) / 2).toLocaleString()}
                       </p>
-                      <Badge variant={student?.feeStatus === "PAID" ? "default" : "secondary"}>
-                        {student?.feeStatus || "PENDING"}
+                      <Badge
+                        variant={paymentData?.paymentStatus === "PAID" ? "default" : "secondary"}
+                      >
+                        {paymentData?.paymentStatus || "PENDING"}
                       </Badge>
                     </div>
                   </div>
-                  {paymentData && paymentData.totalPending > 0 && (
+                  {paymentData && paymentData.pendingAmount > 0 && (
                     <div className="flex items-center justify-between rounded-md border p-3">
                       <div>
                         <p className="font-medium">Remaining Balance</p>
                         <p className="text-sm text-muted-foreground">Due for current semester</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-medium">₹{paymentData.totalPending.toLocaleString()}</p>
+                        <p className="font-medium">₹{paymentData.pendingAmount.toLocaleString()}</p>
                         <Badge variant="secondary">PENDING</Badge>
                       </div>
                     </div>
                   )}
                 </div>
               )}
-            </CardContent>
-          </Card>
-
-          <Card className="border-dashed">
-            <CardContent className="flex items-start gap-3 py-4">
-              <HiOutlineExclamationTriangle className="h-5 w-5 text-amber-500 mt-0.5 shrink-0" />
-              <div>
-                <p className="text-sm font-medium">Backend integration needed</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Detailed fee breakdown, individual payment records, and receipt generation require implementation of{" "}
-                  <code className="rounded bg-muted px-1 py-0.5 text-xs">
-                    GET /students/me/fees, GET /payments/student/:id
-                  </code>
-                  .
-                </p>
-              </div>
             </CardContent>
           </Card>
 

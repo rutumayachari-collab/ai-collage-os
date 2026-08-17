@@ -49,7 +49,10 @@ export function AdmissionStatus() {
               <CardTitle>Admission Details</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">Detailed stage tracking will be available when the backend provides admission stage data.</p>
+              <p className="text-muted-foreground">
+                Detailed stage tracking will be available when the backend provides admission stage
+                data.
+              </p>
             </CardContent>
           </Card>
         </div>

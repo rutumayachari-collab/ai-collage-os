@@ -52,8 +52,9 @@ export function DNCRegistryView({ dncList, onRefresh }: DNCRegistryViewProps) {
       setNewPhone("");
       setNewReason("");
       onRefresh();
-    } catch (err: any) {
-      toast.error(err?.message || "Failed to add to DNC registry");
+    } catch (err: unknown) {
+      const error = err as Record<string, unknown>;
+      toast.error((error?.message as string) || "Failed to add to DNC registry");
     } finally {
       setIsAdding(false);
     }

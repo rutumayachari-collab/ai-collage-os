@@ -19,7 +19,8 @@ export function ApplicantHelp() {
   const faqs = [
     {
       question: "How do I submit my application?",
-      answer: "Go to the Application page and fill in all required details. Upload your documents and submit the form.",
+      answer:
+        "Go to the Application page and fill in all required details. Upload your documents and submit the form.",
     },
     {
       question: "How can I check my eligibility?",
@@ -27,7 +28,8 @@ export function ApplicantHelp() {
     },
     {
       question: "What documents do I need to upload?",
-      answer: "You need to upload your photo, ID proof, marksheets, and certificates. Check the Documents page for a complete list.",
+      answer:
+        "You need to upload your photo, ID proof, marksheets, and certificates. Check the Documents page for a complete list.",
     },
     {
       question: "How do I make a payment?",
@@ -40,7 +42,10 @@ export function ApplicantHelp() {
       <PageHeader title="Help & Support" description="Get help and support for your application" />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => navigate({ to: "/inquiries" })}>
+        <Card
+          className="hover:shadow-md transition-shadow cursor-pointer"
+          onClick={() => navigate({ to: "/inquiries" })}
+        >
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Contact Support</CardTitle>
           </CardHeader>
@@ -49,7 +54,10 @@ export function ApplicantHelp() {
             <p className="text-xs text-muted-foreground">Reach out to our support team</p>
           </CardContent>
         </Card>
-        <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => navigate({ to: "/applicant/counsellor" })}>
+        <Card
+          className="hover:shadow-md transition-shadow cursor-pointer"
+          onClick={() => navigate({ to: "/applicant/counsellor" })}
+        >
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">My Counsellor</CardTitle>
           </CardHeader>
@@ -58,7 +66,10 @@ export function ApplicantHelp() {
             <p className="text-xs text-muted-foreground">Talk to your assigned counsellor</p>
           </CardContent>
         </Card>
-        <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => navigate({ to: "/ai/copilot" })}>
+        <Card
+          className="hover:shadow-md transition-shadow cursor-pointer"
+          onClick={() => navigate({ to: "/ai/copilot" })}
+        >
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">AI Assistant</CardTitle>
           </CardHeader>
@@ -67,7 +78,10 @@ export function ApplicantHelp() {
             <p className="text-xs text-muted-foreground">Get AI-powered assistance</p>
           </CardContent>
         </Card>
-        <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={() => window.open("mailto:support@nexora.edu")}>
+        <Card
+          className="hover:shadow-md transition-shadow cursor-pointer"
+          onClick={() => window.open("mailto:support@nexora.edu")}
+        >
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Email Support</CardTitle>
           </CardHeader>
